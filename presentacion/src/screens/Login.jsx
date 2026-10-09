@@ -4,6 +4,7 @@ import Button from '../components/Button.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import { GoogleIcon, AppleIcon } from '../components/BrandIcons.jsx'
 import heroLogin from '../assets/images/login.png'
+import fondoLogin from '../assets/images/comenzar1.png'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -11,7 +12,12 @@ export default function Login() {
   return (
     <PhoneFrame title="Login">
       <div className="login">
-        <div className="login__bg" aria-hidden="true" />
+        <img
+          className="login__fondo"
+          src={fondoLogin}
+          alt=""
+          aria-hidden="true"
+        />
 
         <div className="login__content">
           <StatusBar />
