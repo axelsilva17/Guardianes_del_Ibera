@@ -26,19 +26,44 @@ Plain JavaScript (JSX) — no TypeScript. Styles are plain CSS driven by the des
 | `express`  | ^4.21.2 | prod | HTTP transport for the API.                          |
 | `cors`     | ^2.8.5  | prod | Lets the Vite dev server call the API cross-origin.  |
 
-### Requirements
+### Prerequisites — the only thing installed globally
 
-- **Node.js 18+ (LTS)** and npm — required by Vite 5 and Express 4.
+The app's libraries (React, Vite, Express...) are **not** installed globally. They are declared in each `package.json` and downloaded into that package's `node_modules/` by the install command below. So the only thing a teammate needs on their machine is **Node.js 18+ (LTS)** — npm comes bundled with it.
+
+Check what you already have:
+
+```bash
+node -v    # must print v18.x or newer
+npm -v
+```
+
+If `node -v` fails, or prints v16 or older, install Node 18+ LTS **before** continuing:
+
+| OS            | How to install                                                         |
+| ------------- | ---------------------------------------------------------------------- |
+| Windows       | `winget install OpenJS.NodeJS.LTS`                                      |
+| Windows (nvm) | `winget install CoreyButler.NVMforWindows`, then `nvm install lts`      |
+| macOS         | `brew install node@20` — or the LTS installer from <https://nodejs.org> |
+| Linux         | your distro's package, or nvm                                           |
+
+Then **close and reopen the terminal** (so `node` and `npm` land on the PATH) and check `node -v` again.
+
 - No database: the server keeps an in-memory dataset seeded from `server/src/data/seed.js`.
-
-Dependencies are pinned in each package's `package-lock.json`, so `npm install` (or `npm ci`) resolves the same versions for everyone.
+- Dependency versions are pinned in each package's `package-lock.json`, so everyone resolves the same versions.
 
 ## Install and run
 
 ### Fast path (from the repo root)
 
+Run this **once after cloning** — it downloads the whole stack (React, React Router, lucide-react, Vite, Express, cors...) into `client/node_modules/` and `server/node_modules/`:
+
 ```bash
-npm run install:all   # installs client/ and server/ dependencies
+npm run install:all
+```
+
+Then start each side, in two terminals:
+
+```bash
 npm run dev           # Terminal 1 -> frontend on http://localhost:5173
 npm run dev:server    # Terminal 2 -> backend  on http://localhost:3000
 ```
