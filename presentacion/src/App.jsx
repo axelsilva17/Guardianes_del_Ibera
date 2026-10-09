@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Bienvenida from './screens/Bienvenida.jsx'
 import Login from './screens/Login.jsx'
 import Inicio from './screens/Inicio.jsx'
@@ -10,7 +10,7 @@ import Perfil from './screens/Perfil.jsx'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Bienvenida />} />
         <Route path="/login" element={<Login />} />
@@ -22,6 +22,6 @@ export default function App() {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
