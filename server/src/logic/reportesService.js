@@ -1,0 +1,101 @@
+/**
+ * LOGIC layer — reportes service.
+ *
+ * Owns the business rules and input validation for reports.
+ * It never touches the raw collection directly: all persistence goes
+ * through the data layer (reportesRepository).
+ */
+
+import { randomUUID } from 'node:crypto'
+import * as reportesRepository from '../data/reportesRepository.js'
+
+/** Allowed report types (domain contract). */
+export const REPORTE_TIPOS = ['fuego', 'basura', 'caza_furtiva', 'tala', 'otro']
+
+/** Allowed report states (domain contract). */
+export const REPORTE_ESTADOS = ['pendiente', 'en_revision', 'resuelto']
+
+/** Thrown when input fails validation. */
+export class ValidationError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'ValidationError'
+  }
+}
+
+/** Thrown when a report does not exist. */
+export class NotFoundError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'NotFoundError'
+  }
+}
+
+const LAT_MIN = -90
+const LAT_MAX = 90
+const LNG_MIN = -180
+const LNG_MAX = 180
+
+/**
+ * List every report.
+ * @returns {import('../data/seed.js').Reporte[]}
+ */
+export function getReportes() {
+  return reportesRepository.list()
+}
+
+/**
+ * Get one report by id.
+ * @param {string} id
+ * @returns {import('../data/seed.js').Reporte}
+ * @throws {NotFoundError}
+ */
+export function getReporteById(id) {
+  const reporte = reportesRepository.findById(id)
+  if (!reporte) {
+    throw new NotFoundError(`Reporte "${id}" not found`)
+  }
+  return reporte
+}
+
+/**
+ * Validate input and create a report.
+ * @param {object} input
+ * @returns {import('../data/seed.js').Reporte}
+ * @throws {ValidationError}
+ */
+export function createReporte(input = {}) {
+  const { titulo, tipo, descripcion, lat, lng, autor } = input ?? {}
+
+  if (typeof titulo !== 'string' || titulo.trim() === '') {
+    throw new ValidationError('Field "titulo" is required and must be a non-empty string')
+  }
+
+  if (!REPORTE_TIPOS.includes(tipo)) {
+    throw new ValidationError(`Field "tipo" must be one of: ${REPORTE_TIPOS.join(', ')}`)
+  }
+
+  const latNum = Number(lat)
+  if (!Number.isFinite(latNum) || latNum < LAT_MIN || latNum > LAT_MAX) {
+    throw new ValidationError(`Field "lat" must be a number between ${LAT_MIN} and ${LAT_MAX}`)
+  }
+
+  const lngNum = Number(lng)
+  if (!Number.isFinite(lngNum) || lngNum < LNG_MIN || lngNum > LNG_MAX) {
+    throw new ValidationError(`Field "lng" must be a number between ${LNG_MIN} and ${LNG_MAX}`)
+  }
+
+  const reporte = {
+    id: randomUUID(),
+    titulo: titulo.trim(),
+    tipo,
+    descripcion: typeof descripcion === 'string' ? descripcion.trim() : '',
+    lat: latNum,
+    lng: lngNum,
+    estado: 'pendiente',
+    fecha: new Date().toISOString().slice(0, 10),
+    autor: typeof autor === 'string' && autor.trim() !== '' ? autor.trim() : 'Anonimo',
+  }
+
+  return reportesRepository.create(reporte)
+}
