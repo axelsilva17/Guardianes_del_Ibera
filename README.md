@@ -1,6 +1,6 @@
 # Guardianes del Ibera
 
-Prototipo desarrollado por estudiantes para reportar incidentes ambientales en los Esteros del Ibera. Es una interfaz mobile-first (390x844) reconstruida a partir de un prototipo de Figma y organizada como una **arquitectura cliente-servidor con capas separadas y explicitas**.
+Prototipo desarrollado por estudiantes para reportar incidentes ambientales en los Esteros del Ibera..
 
 > **Nota sobre la arquitectura:** la separacion en capas con un cliente y un servidor es la arquitectura **elegida por el momento**. Es una decision de primera version para el prototipo y puede evolucionar a medida que el proyecto crezca.
 
@@ -140,14 +140,6 @@ Ver [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) para la explicacion completa.
 
 El backend escucha en `process.env.PORT` (por defecto `3000`). En desarrollo el frontend corre en `5173` y alcanza la API en `3000`.
 
-## Como agregar una pantalla nueva
-
-1. **Crear el archivo de la pantalla** en `presentacion/src/screens/`, por ejemplo `presentacion/src/screens/MiPantalla.jsx`. Reutilizar el shell compartido (`PhoneFrame`, `TopBar`, `BottomNav`) para que combine con las otras pantallas.
-2. **Registrar la ruta** en `presentacion/src/App.jsx` con `<Route path="/mi-pantalla" element={<MiPantalla />} />`.
-3. **Agregar la navegacion** desde una pantalla existente (`BottomNav`, `TopBar` o un boton) si la pantalla es alcanzable en el flujo.
-4. **Agregar estilos** en `presentacion/src/styles/` usando los design tokens existentes de `presentacion/src/styles/tokens.css` en lugar de colores escritos a mano.
-5. **Si la pantalla necesita datos**, llamar a un endpoint del backend; no leer el dataset desde el cliente. Si el endpoint todavia no existe, agregar primero la regla de negocio en `logica/src/reportesService.js` y el acceso a la coleccion en `datos/reportesRepository.js`.
-6. **Verificar** con `npm run build` (raiz) o `npm run build` dentro de `presentacion/`.
 
 ## Documentacion
 
