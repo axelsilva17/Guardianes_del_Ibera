@@ -2,14 +2,14 @@
   "name": "guardianes-del-ibera",
   "private": true,
   "version": "0.1.0",
-  "description": "Guardianes del Ibera prototype. client = presentation layer, server = logic + data layers.",
+  "description": "Guardianes del Ibera prototype. presentacion = presentation layer, logica = logic layer, datos = data layer.",
   "scripts": {
-    "dev": "npm --prefix client run dev",
-    "dev:client": "npm --prefix client run dev",
-    "dev:server": "npm --prefix server run dev",
-    "build": "npm --prefix client run build",
-    "preview": "npm --prefix client run preview",
-    "start": "npm --prefix server run start",
-    "install:all": "npm --prefix client install && npm --prefix server install"
+    "dev": "npm --prefix presentacion run dev",
+    "dev:presentacion": "npm --prefix presentacion run dev",
+    "dev:logica": "npm --prefix logica run dev",
+    "build": "npm --prefix presentacion run build",
+    "preview": "npm --prefix presentacion run preview",
+    "start": "npm --prefix logica run start",
+    "install:all": "npm --prefix presentacion install && npm --prefix logica install && npm --prefix datos install"
   }
 }

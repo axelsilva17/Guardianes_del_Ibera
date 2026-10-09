@@ -13,7 +13,7 @@ import {
   createReporte,
   ValidationError,
   NotFoundError,
-} from './logic/reportesService.js'
+} from './reportesService.js'
 
 const app = express()
 

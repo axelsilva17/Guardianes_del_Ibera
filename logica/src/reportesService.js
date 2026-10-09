@@ -7,7 +7,7 @@
  */
 
 import { randomUUID } from 'node:crypto'
-import * as reportesRepository from '../data/reportesRepository.js'
+import * as reportesRepository from '../../datos/reportesRepository.js'
 
 /** Allowed report types (domain contract). */
 export const REPORTE_TIPOS = ['fuego', 'basura', 'caza_furtiva', 'tala', 'otro']
@@ -38,7 +38,7 @@ const LNG_MAX = 180
 
 /**
  * List every report.
- * @returns {import('../data/seed.js').Reporte[]}
+ * @returns {import('../../datos/seed.js').Reporte[]}
  */
 export function getReportes() {
   return reportesRepository.list()
@@ -47,7 +47,7 @@ export function getReportes() {
 /**
  * Get one report by id.
  * @param {string} id
- * @returns {import('../data/seed.js').Reporte}
+ * @returns {import('../../datos/seed.js').Reporte}
  * @throws {NotFoundError}
  */
 export function getReporteById(id) {
@@ -61,7 +61,7 @@ export function getReporteById(id) {
 /**
  * Validate input and create a report.
  * @param {object} input
- * @returns {import('../data/seed.js').Reporte}
+ * @returns {import('../../datos/seed.js').Reporte}
  * @throws {ValidationError}
  */
 export function createReporte(input = {}) {

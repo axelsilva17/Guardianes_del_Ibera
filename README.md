@@ -1,153 +1,155 @@
 # Guardianes del Ibera
 
-A student-built prototype for reporting environmental incidents in the Ibera wetlands. It is a mobile-first interface (390x844) reverse-engineered from a Figma prototype, organized as a **client-server architecture with explicit, separated layers**.
+Prototipo desarrollado por estudiantes para reportar incidentes ambientales en los Esteros del Ibera. Es una interfaz mobile-first (390x844) reconstruida a partir de un prototipo de Figma y organizada como una **arquitectura cliente-servidor con capas separadas y explicitas**.
 
-> **Note on the architecture:** the client/server split with separated layers is the architecture **chosen for now**. It is a first-cut decision for the prototype and may evolve as the project grows.
+> **Nota sobre la arquitectura:** la separacion en capas con un cliente y un servidor es la arquitectura **elegida por el momento**. Es una decision de primera version para el prototipo y puede evolucionar a medida que el proyecto crezca.
 
-## Stack and dependencies
+## Stack y dependencias
 
-Plain JavaScript (JSX) — no TypeScript. Styles are plain CSS driven by the design tokens in `client/src/styles/tokens.css`.
+JavaScript plano (JSX), sin TypeScript. Los estilos son CSS plano manejado por los design tokens de `presentacion/src/styles/tokens.css`.
 
-### Frontend — `client/`
+### Presentacion — `presentacion/`
 
-| Dependency          | Version  | Type | Why it is here                                    |
-| ------------------- | -------- | ---- | ------------------------------------------------- |
-| `react`             | ^18.3.1  | prod | UI runtime for the screens.                       |
-| `react-dom`         | ^18.3.1  | prod | Renders React into the browser.                   |
-| `react-router-dom`  | ^6.26.2  | prod | Client-side routing; one route per screen.        |
-| `lucide-react`      | ^0.441.0 | prod | Icon set used across the screens.                 |
-| `vite`              | ^5.4.8   | dev  | Dev server (port 5173) and production build.      |
-| `@vitejs/plugin-react` | ^4.3.1 | dev | JSX transform and React fast refresh for Vite.    |
+| Dependencia             | Version  | Tipo | Por que esta                                         |
+| ----------------------- | -------- | ---- | ---------------------------------------------------- |
+| `react`                 | ^18.3.1  | prod | Runtime de UI para las pantallas.                    |
+| `react-dom`             | ^18.3.1  | prod | Renderiza React en el navegador.                     |
+| `react-router-dom`      | ^6.26.2  | prod | Ruteo del lado del cliente; una ruta por pantalla.   |
+| `lucide-react`          | ^0.441.0 | prod | Set de iconos usado en las pantallas.                |
+| `vite`                  | ^5.4.8   | dev  | Servidor de desarrollo (puerto 5173) y build.        |
+| `@vitejs/plugin-react`  | ^4.3.1   | dev  | Transform de JSX y fast refresh de React para Vite.  |
 
-### Backend — `server/`
+### Logica — `logica/`
 
-| Dependency | Version | Type | Why it is here                                       |
-| ---------- | ------- | ---- | ---------------------------------------------------- |
-| `express`  | ^4.21.2 | prod | HTTP transport for the API.                          |
-| `cors`     | ^2.8.5  | prod | Lets the Vite dev server call the API cross-origin.  |
+| Dependencia | Version | Tipo | Por que esta                                        |
+| ----------- | ------- | ---- | --------------------------------------------------- |
+| `express`   | ^4.21.2 | prod | Transporte HTTP de la API.                          |
+| `cors`      | ^2.8.5  | prod | Permite que el servidor de Vite llame a la API cross-origin. |
 
-### Prerequisites — the only thing installed globally
+### Requisitos — lo unico que se instala de forma global
 
-The app's libraries (React, Vite, Express...) are **not** installed globally. They are declared in each `package.json` and downloaded into that package's `node_modules/` by the install command below. So the only thing a teammate needs on their machine is **Node.js 18+ (LTS)** — npm comes bundled with it.
+Las librerias de la aplicacion (React, Vite, Express...) **no** se instalan de forma global. Estan declaradas en cada `package.json` y se descargan dentro de la carpeta `node_modules/` de cada paquete con el comando de instalacion de mas abajo. Por lo tanto, lo unico que necesita una persona en su maquina es **Node.js 18+ (LTS)**; npm viene incluido.
 
-Check what you already have:
+Verificar que ya esta instalado:
 
 ```bash
-node -v    # must print v18.x or newer
+node -v    # debe imprimir v18.x o superior
 npm -v
 ```
 
-If `node -v` fails, or prints v16 or older, install Node 18+ LTS **before** continuing:
+Si `node -v` falla, o imprime v16 o anterior, instalar Node 18+ LTS **antes** de continuar:
 
-| OS            | How to install                                                         |
-| ------------- | ---------------------------------------------------------------------- |
-| Windows       | `winget install OpenJS.NodeJS.LTS`                                      |
-| Windows (nvm) | `winget install CoreyButler.NVMforWindows`, then `nvm install lts`      |
-| macOS         | `brew install node@20` — or the LTS installer from <https://nodejs.org> |
-| Linux         | your distro's package, or nvm                                           |
+| Sistema operativo | Como instalar                                                          |
+| ----------------- | ---------------------------------------------------------------------- |
+| Windows           | `winget install OpenJS.NodeJS.LTS`                                      |
+| Windows (nvm)     | `winget install CoreyButler.NVMforWindows`, luego `nvm install lts`     |
+| macOS             | `brew install node@20` — o el instalador LTS de <https://nodejs.org>    |
+| Linux             | el paquete de tu distribucion, o nvm                                    |
 
-Then **close and reopen the terminal** (so `node` and `npm` land on the PATH) and check `node -v` again.
+Luego **cerrar y volver a abrir la terminal** (para que `node` y `npm` queden en el PATH) y verificar `node -v` de nuevo.
 
-- No database: the server keeps an in-memory dataset seeded from `server/src/data/seed.js`.
-- Dependency versions are pinned in each package's `package-lock.json`, so everyone resolves the same versions.
+- Sin base de datos: el backend mantiene un dataset en memoria sembrado desde `datos/seed.js`.
+- Las versiones de las dependencias quedan fijadas en el `package-lock.json` de cada paquete, de modo que todos resuelven las mismas versiones.
 
-## Install and run
+## Instalacion y ejecucion
 
-### Fast path (from the repo root)
+### Camino rapido (desde la raiz del repositorio)
 
-Run this **once after cloning** — it downloads the whole stack (React, React Router, lucide-react, Vite, Express, cors...) into `client/node_modules/` and `server/node_modules/`:
+Ejecutar esto **una vez despues de clonar**: descarga todo el stack (React, React Router, lucide-react, Vite, Express, cors...) dentro de `presentacion/node_modules/` y `logica/node_modules/`:
 
 ```bash
 npm run install:all
 ```
 
-Then start each side, in two terminals:
+Luego arrancar cada lado, en dos terminales:
 
 ```bash
-npm run dev           # Terminal 1 -> frontend on http://localhost:5173
-npm run dev:server    # Terminal 2 -> backend  on http://localhost:3000
+npm run dev           # Terminal 1 -> frontend en http://localhost:5173
+npm run dev:logica    # Terminal 2 -> backend  en http://localhost:3000
 ```
 
-The root `package.json` is only a launcher: every script delegates with `npm --prefix <dir> run <script>`. **npm workspaces are intentionally not used**, so each package keeps its own `node_modules/` and the two apps stay independently runnable.
+El `package.json` de la raiz es solo un lanzador: cada script delega con `npm --prefix <dir> run <script>`. **No se usan npm workspaces a proposito**, para que cada paquete conserve su propio `node_modules/` y las dos aplicaciones se puedan ejecutar de forma independiente.
 
-### Equivalent, per package
+### Equivalente, por paquete
 
 ```bash
 # Terminal 1 — backend (API)
-cd server
+cd logica
 npm install
-npm start          # or: npm run dev  (restarts on change)
+npm start          # o: npm run dev  (reinicia al detectar cambios)
 
-# Terminal 2 — frontend (screens)
-cd client
+# Terminal 2 — frontend (pantallas)
+cd presentacion
 npm install
 npm run dev
 ```
 
-### Other root scripts
+### Otros scripts de la raiz
 
-| Script                 | What it does                                  |
-| ---------------------- | --------------------------------------------- |
-| `npm run dev`          | Frontend dev server (Vite, port 5173).        |
-| `npm run dev:client`   | Same as `npm run dev`.                        |
-| `npm run dev:server`   | Backend with `node --watch` (port 3000).      |
-| `npm run build`        | Production build of the frontend into `client/dist`. |
-| `npm run preview`      | Serves the built frontend locally.            |
-| `npm run start`        | Runs the backend without watch mode.          |
-| `npm run install:all`  | Installs both packages.                       |
+| Script                     | Que hace                                             |
+| -------------------------- | ---------------------------------------------------- |
+| `npm run dev`              | Servidor de desarrollo del frontend (Vite, puerto 5173). |
+| `npm run dev:presentacion` | Igual que `npm run dev`.                             |
+| `npm run dev:logica`       | Backend con `node --watch` (puerto 3000).            |
+| `npm run build`            | Build de produccion del frontend en `presentacion/dist`. |
+| `npm run preview`          | Sirve localmente el frontend compilado.              |
+| `npm run start`            | Ejecuta el backend sin modo watch.                   |
+| `npm run install:all`      | Instala los tres paquetes (presentacion, logica, datos). |
 
-## Structure
+## Estructura
 
 ```text
 .
-  client/                        # PRESENTATION layer (React + Vite)
+  presentacion/                  # capa PRESENTACION (React + Vite)
     src/
-      screens/                   # one file per screen
-      components/                # shared UI pieces
+      screens/                   # un archivo por pantalla
+      components/                # piezas de UI compartidas
       styles/                    # design tokens + CSS
-      App.jsx                    # routes
-  server/                        # LOGIC + DATA layers (Express)
+      App.jsx                    # rutas
+  logica/                        # capa LOGICA (transporte + reglas de negocio)
     src/
-      index.js                   # HTTP entrypoint (routes -> logic)
-      logic/                     # business rules and validation
-      data/                      # in-memory store + seed dataset
+      index.js                   # entrypoint HTTP (rutas -> logica)
+      reportesService.js         # reglas de negocio y validacion
+  datos/                         # capa DATOS
+    reportesRepository.js        # acceso a la coleccion en memoria
+    seed.js                      # dataset de ejemplo
   docs/
-    ARCHITECTURE.md              # how the layers fit together
+    ARCHITECTURE.md              # como encajan las capas
 ```
 
-## Layers at a glance
+## Las capas de un vistazo
 
-| Layer        | Lives in            | Responsibility                                  |
-| ------------ | ------------------- | ----------------------------------------------- |
-| Presentation | `client/`           | Render screens, handle user interaction.        |
-| Logic        | `server/src/logic/` | Business rules, validation, orchestration.      |
-| Data         | `server/src/data/`  | Read/write the underlying data store.           |
+| Capa         | Vive en         | Responsabilidad                                 |
+| ------------ | --------------- | ----------------------------------------------- |
+| Presentacion | `presentacion/` | Renderizar pantallas, manejar la interaccion.   |
+| Logica       | `logica/`       | Reglas de negocio, validacion, orquestacion.    |
+| Datos        | `datos/`        | Leer y escribir el almacen de datos subyacente. |
 
-**Rule of thumb:** a screen never talks to data directly. The flow is **presentation -> logic -> data**.
+**Regla general:** una pantalla nunca lee los datos directo. El flujo es **presentacion -> logica -> datos**.
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full explanation.
+Ver [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) para la explicacion completa.
 
-## API endpoints
+## Endpoints de la API
 
-| Method | Path                 | Purpose                     |
+| Metodo | Ruta                 | Proposito                   |
 | ------ | -------------------- | --------------------------- |
-| GET    | `/api/health`        | Liveness check.             |
-| GET    | `/api/reportes`      | List all reports.           |
-| GET    | `/api/reportes/:id`  | Fetch one report.           |
-| POST   | `/api/reportes`      | Create a report.            |
+| GET    | `/api/health`        | Chequeo de liveness.        |
+| GET    | `/api/reportes`      | Lista todos los reportes.   |
+| GET    | `/api/reportes/:id`  | Obtiene un reporte.         |
+| POST   | `/api/reportes`      | Crea un reporte.            |
 
-The server listens on `process.env.PORT` (default `3000`). In development the frontend runs on `5173` and reaches the API on `3000`.
+El backend escucha en `process.env.PORT` (por defecto `3000`). En desarrollo el frontend corre en `5173` y alcanza la API en `3000`.
 
-## How to add a new screen
+## Como agregar una pantalla nueva
 
-1. **Create the screen file** in `client/src/screens/`, e.g. `client/src/screens/MiPantalla.jsx`. Reuse the shared shell (`PhoneFrame`, `TopBar`, `BottomNav`) so it matches the other screens.
-2. **Register the route** in `client/src/App.jsx` with a `<Route path="/mi-pantalla" element={<MiPantalla />} />`.
-3. **Add navigation** from an existing screen (`BottomNav`, `TopBar`, or a button) if the screen is reachable in the flow.
-4. **Add styles** in `client/src/styles/` using the existing design tokens in `client/src/styles/tokens.css` instead of hard-coded colors.
-5. **If the screen needs data**, call a server endpoint; do not read the dataset from the client. If the endpoint does not exist yet, add the business rule in `server/src/logic/` and the collection access in `server/src/data/` first.
-6. **Verify** with `npm run build` (root) or `npm run build` inside `client/`.
+1. **Crear el archivo de la pantalla** en `presentacion/src/screens/`, por ejemplo `presentacion/src/screens/MiPantalla.jsx`. Reutilizar el shell compartido (`PhoneFrame`, `TopBar`, `BottomNav`) para que combine con las otras pantallas.
+2. **Registrar la ruta** en `presentacion/src/App.jsx` con `<Route path="/mi-pantalla" element={<MiPantalla />} />`.
+3. **Agregar la navegacion** desde una pantalla existente (`BottomNav`, `TopBar` o un boton) si la pantalla es alcanzable en el flujo.
+4. **Agregar estilos** en `presentacion/src/styles/` usando los design tokens existentes de `presentacion/src/styles/tokens.css` en lugar de colores escritos a mano.
+5. **Si la pantalla necesita datos**, llamar a un endpoint del backend; no leer el dataset desde el cliente. Si el endpoint todavia no existe, agregar primero la regla de negocio en `logica/src/reportesService.js` y el acceso a la coleccion en `datos/reportesRepository.js`.
+6. **Verificar** con `npm run build` (raiz) o `npm run build` dentro de `presentacion/`.
 
-## Documentation
+## Documentacion
 
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — layer model, responsibilities, and the data-flow rule.
-- [`server/README.md`](server/README.md) — how to run the API and the endpoint list.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — modelo de capas, responsabilidades y la regla de flujo de datos.
+- [`logica/README.md`](logica/README.md) — como ejecutar la API y la lista de endpoints.

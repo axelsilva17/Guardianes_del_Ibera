@@ -1,62 +1,70 @@
-# Architecture
+# Arquitectura
 
-Guardianes del Ibera is split into a **client** (what the user sees) and a **server** (what the app knows and stores). Inside the server, logic and data are separated so each concern can change on its own.
+Guardianes del Ibera separa la **presentacion** (lo que el usuario ve), la **logica** (lo que la aplicacion sabe) y los **datos** (lo que la aplicacion guarda) en tres carpetas de nivel superior. Cada capa puede cambiar por su cuenta sin arrastrar a las demas.
 
-## Quick path
+## Ruta rapida
 
-1. Find the change you need in the table below.
-2. Edit only the layer that owns it.
-3. Respect the flow: **presentation -> logic -> data**.
+1. Ubicar el cambio en la tabla de capas.
+2. Editar solo la capa responsable del concepto.
+3. Respetar el flujo: **presentacion -> logica -> datos**.
 
-## The split
+## La separacion
 
 ```text
 +-----------------------------+        HTTP        +-----------------------------+
-|            client/          |  <-------------->  |            server/          |
-|      PRESENTATION layer     |   fetch / JSON     |      LOGIC + DATA layers    |
+|       presentacion/         |  <-------------->  |          logica/            |
+|    capa PRESENTACION        |   fetch / JSON     |       capa LOGICA           |
 |                             |                    |                             |
 |  screens/  components/      |                    |  src/index.js               |
 |  styles/   App.jsx          |                    |    |                        |
 +-----------------------------+                    |    v                        |
-                                                   |  src/logic/    (rules)      |
+                                                   |  src/reportesService.js     |
                                                    |    |                        |
                                                    |    v                        |
-                                                   |  src/data/     (store)      |
+                                                   +--------------+--------------+
+                                                                  |
+                                                                  v
+                                                   +-----------------------------+
+                                                   |           datos/            |
+                                                   |        capa DATOS           |
+                                                   |                             |
+                                                   |  reportesRepository.js      |
+                                                   |  seed.js                    |
                                                    +-----------------------------+
 ```
 
-## Layer mapping and responsibilities
+## Capas y responsabilidades
 
-| Layer        | Location            | Responsibility                                          | Must not                          |
-| ------------ | ------------------- | ------------------------------------------------------- | --------------------------------- |
-| Presentation | `client/`           | Render screens, capture input, show state, call the API. | Read or mutate the dataset directly. |
-| Logic        | `server/src/logic/` | Business rules, validation, orchestration, error typing. | Touch the raw collection directly.  |
-| Data         | `server/src/data/`  | Own the store; read/write records.                       | Contain business rules.             |
+| Capa         | Ubicacion      | Responsabilidad                                          | No debe                              |
+| ------------ | -------------- | -------------------------------------------------------- | ------------------------------------ |
+| Presentacion | `presentacion/`| Renderizar pantallas, capturar la entrada, mostrar estado y llamar a la API. | Leer o modificar el dataset directamente. |
+| Logica       | `logica/`      | Reglas de negocio, validacion, orquestacion, errores tipados y transporte HTTP. | Tocar la coleccion cruda directamente. |
+| Datos        | `datos/`       | Ser duena del almacen; leer y escribir los registros.    | Contener reglas de negocio.          |
 
-### Presentation — `client/`
+### Presentacion — `presentacion/`
 
-React + Vite. `App.jsx` defines the routes, `screens/` holds one file per screen, `components/` holds shared UI, and `styles/` holds the design tokens. Screens may call the server over HTTP, but they never import server files and never hold the canonical dataset.
+React + Vite. `App.jsx` define las rutas, `screens/` guarda un archivo por pantalla, `components/` reune los componentes de UI compartidos y `styles/` contiene los design tokens. Las pantallas pueden llamar a la API por HTTP, pero nunca importan archivos de la logica ni de los datos, y nunca guardan el dataset canonico.
 
-### Logic — `server/src/logic/`
+### Logica — `logica/`
 
-`reportesService.js` is the only place where rules live: it validates input (`titulo`, `tipo`, coordinate ranges), assigns defaults (`estado`, `fecha`, `id`), and throws typed errors (`ValidationError`, `NotFoundError`). It reads and writes through the repository — never the raw array.
+`src/reportesService.js` es el unico lugar donde viven las reglas: valida la entrada (`titulo`, `tipo`, rangos de coordenadas), asigna los valores por defecto (`estado`, `fecha`, `id`) y lanza errores tipados (`ValidationError`, `NotFoundError`). Lee y escribe a traves del repositorio, nunca de la coleccion cruda.
 
-### Data — `server/src/data/`
+### Datos — `datos/`
 
-`reportesRepository.js` is the **only** module that touches the underlying collection. It exposes `list()`, `findById(id)`, and `create(data)`, returning copies so callers cannot mutate stored records. `seed.js` provides the initial mock dataset. Swapping the in-memory array for a real database means changing this layer only.
+`reportesRepository.js` es el **unico** modulo que toca la coleccion subyacente. Expone `list()`, `findById(id)` y `create(data)`, y devuelve copias para que quien lo llama no pueda modificar los registros guardados. `seed.js` aporta el dataset de ejemplo inicial. Cambiar el arreglo en memoria por una base de datos real implica modificar solo esta capa.
 
-### Transport — `server/src/index.js`
+### Transporte — `logica/src/index.js`
 
-The entrypoint wires Express to the logic layer. Routes are thin: they call a service function and let the typed-error middleware map `ValidationError` to `400` and `NotFoundError` to `404`. Adding a new endpoint means adding a route here and a service function in logic — not putting rules in the route.
+El entrypoint conecta Express con la capa de logica. Las rutas son delgadas: llaman a una funcion del servicio y dejan que el middleware de errores tipados traduzca `ValidationError` a `400` y `NotFoundError` a `404`. Agregar un endpoint significa sumar una ruta aqui y una funcion de servicio en la logica, no meter reglas dentro de la ruta.
 
-## The rule
+## La regla
 
-> A screen never talks to data directly. The flow is **presentation -> logic -> data**.
+> Una pantalla nunca lee los datos directo: el flujo es **presentacion -> logica -> datos**.
 
-Concretely:
+En concreto:
 
-- A **presentation** file (`client/`) calls an HTTP endpoint.
-- A **logic** file (`server/src/logic/`) applies rules and calls the repository.
-- A **data** file (`server/src/data/`) reads or writes the store.
+- Un archivo de **presentacion** (`presentacion/`) llama a un endpoint HTTP.
+- Un archivo de **logica** (`logica/`) aplica reglas y llama al repositorio.
+- Un archivo de **datos** (`datos/`) lee o escribe el almacen.
 
-If a change crosses layers, walk the flow in order and stop at the layer that owns the concern.
+Si un cambio cruza capas, recorrer el flujo en orden y detenerse en la capa duena del concepto.
