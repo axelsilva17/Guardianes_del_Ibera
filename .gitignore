@@ -17,3 +17,6 @@ yarn-error.log*
 
 # Orchestrator task tracking
 odd
+
+# Local docs (not published)
+/docs
