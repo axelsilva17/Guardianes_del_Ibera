@@ -584,3 +584,154 @@
 .learn-card__link:hover {
   color: var(--color-primary-dark);
 }
+
+/* ---------- Bienvenida (onboarding splash) ---------- */
+.bienvenida {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bienvenida__bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-primary-deep);
+  background-image:
+    radial-gradient(120% 80% at 80% 0%, rgba(132, 190, 77, 0.4), rgba(132, 190, 77, 0) 55%),
+    radial-gradient(90% 60% at 10% 6%, rgba(50, 183, 216, 0.28), rgba(50, 183, 216, 0) 60%),
+    linear-gradient(180deg, #0e6a57 0%, #0a5344 46%, #04352c 100%);
+}
+
+/* Layered wetland silhouette anchoring the composition to the Iberá landscape. */
+.bienvenida__landscape {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 46%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bienvenida__sun {
+  position: absolute;
+  top: 4%;
+  right: 12%;
+  width: 132px;
+  height: 132px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, rgba(255, 240, 205, 0.5), rgba(255, 240, 205, 0) 70%);
+}
+
+.bienvenida__hill {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.bienvenida__hill--back {
+  left: -15%;
+  width: 130%;
+  height: 62%;
+  background: rgba(19, 133, 72, 0.55);
+}
+
+.bienvenida__hill--mid {
+  left: -30%;
+  width: 150%;
+  height: 52%;
+  background: rgba(10, 83, 68, 0.9);
+}
+
+.bienvenida__hill--front {
+  left: -20%;
+  width: 140%;
+  height: 44%;
+  background: #04352c;
+}
+
+.bienvenida__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bienvenida .statusbar {
+  color: var(--white);
+}
+
+.bienvenida__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.bienvenida__emblem {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(160deg, var(--color-leaf), var(--color-primary));
+  color: var(--white);
+  box-shadow: 0 12px 30px rgba(4, 53, 44, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.bienvenida__brand {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: var(--weight-bold);
+  line-height: 1.06;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: 0 2px 14px rgba(4, 53, 44, 0.5);
+}
+
+.bienvenida__brand-line {
+  font-size: 0.72em;
+  letter-spacing: 0.16em;
+  color: var(--color-border-strong);
+  text-shadow: none;
+}
+
+.bienvenida__tagline {
+  max-width: 268px;
+  font-family: var(--font-alt);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-normal);
+  color: var(--color-border-strong);
+}
+
+.bienvenida__actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-6) var(--space-6) var(--space-10);
+}
+
+.bienvenida__cta {
+  width: 100%;
+  min-height: 54px;
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  background: var(--surface-raised);
+  color: var(--color-primary-deep);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  box-shadow: var(--shadow-md);
+}
+
+.bienvenida__cta:hover {
+  background: var(--surface-mist);
+}
