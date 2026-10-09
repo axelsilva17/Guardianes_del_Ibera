@@ -1,13 +1,26 @@
 import { useNavigate } from 'react-router-dom'
-import { Leaf } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
-import Button from '../components/Button.jsx'
 import StatusBar from '../components/StatusBar.jsx'
+import fondo from '../assets/images/comenzar1.png'
+import frente from '../assets/images/comenzar2.png'
 
 /**
- * Onboarding splash (screen "01 Bienvenida").
- * Dark Iberá hero with layered wetland silhouettes and a single CTA that
- * starts the flow on the login screen.
+ * Onboarding splash (screen "01 Bienvenida", Figma node 22:34016).
+ *
+ * The screen is a two-layer composition exported from Figma:
+ *
+ *   - comenzar1.png (429x720): the wetland photograph. It fills the whole
+ *     390x844 frame with `object-fit: cover`.
+ *   - comenzar2.png (390x800): the foreground layer with the logo, the
+ *     wordmark and the CTA. It is a transparent PNG whose width already
+ *     matches the frame, and its height (800) is exactly the frame height
+ *     minus the 44px status bar, so it starts right below it.
+ *
+ * The CTA is part of the artwork, so the real interactive element is a
+ * transparent button laid exactly over the drawn one. Its geometry was
+ * measured from the PNG (20px sides, 697px from the top of the layer,
+ * 350x52 with rounded corners) so the visual stays faithful while keeping
+ * navigation, focus and keyboard access working.
  */
 export default function Bienvenida() {
   const navigate = useNavigate()
@@ -15,40 +28,19 @@ export default function Bienvenida() {
   return (
     <PhoneFrame title="Bienvenida">
       <div className="bienvenida">
-        <div className="bienvenida__bg" aria-hidden="true" />
-        <div className="bienvenida__landscape" aria-hidden="true">
-          <span className="bienvenida__sun" />
-          <span className="bienvenida__hill bienvenida__hill--back" />
-          <span className="bienvenida__hill bienvenida__hill--mid" />
-          <span className="bienvenida__hill bienvenida__hill--front" />
+        <img className="bienvenida__fondo" src={fondo} alt="" aria-hidden="true" />
+
+        <div className="bienvenida__scene">
+          <img className="bienvenida__arte" src={frente} alt="Guardianes del Iberá" />
+          <button
+            type="button"
+            className="bienvenida__cta"
+            onClick={() => navigate('/login')}
+            aria-label="Comenzar"
+          />
         </div>
 
-        <div className="bienvenida__content">
-          <StatusBar />
-
-          <div className="bienvenida__hero">
-            <span className="bienvenida__emblem" aria-hidden="true">
-              <Leaf size={32} strokeWidth={1.9} />
-            </span>
-            <h1 className="bienvenida__brand">
-              Guardianes
-              <span className="bienvenida__brand-line">del Iberá</span>
-            </h1>
-            <p className="bienvenida__tagline">
-              Reportá, aprendé y cuidá los humedales junto a nuestra comunidad.
-            </p>
-          </div>
-
-          <div className="bienvenida__actions">
-            <Button
-              variant="secondary"
-              className="bienvenida__cta"
-              onClick={() => navigate('/login')}
-            >
-              Comenzar
-            </Button>
-          </div>
-        </div>
+        <StatusBar />
       </div>
     </PhoneFrame>
   )

@@ -585,153 +585,72 @@
   color: var(--color-primary-dark);
 }
 
-/* ---------- Bienvenida (onboarding splash) ---------- */
+/* ---------- Bienvenida (onboarding splash) ----------
+ * The screen is a two-layer Figma export:
+ *   - comenzar1.png fills the frame (photograph, 429x720 -> cover).
+ *   - comenzar2.png is the 390x800 transparent foreground (logo + wordmark +
+ *     CTA). Its height is the frame height minus the 44px status bar, so it
+ *     starts right below the status bar.
+ * The CTA is drawn inside the artwork, so `.bienvenida__cta` is a transparent
+ * button positioned exactly over it (measured from the PNG: 20px sides,
+ * 697px from the top of the layer, 350x52). */
 .bienvenida {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  background: var(--color-primary-deep);
 }
 
-.bienvenida__bg {
+.bienvenida__fondo {
   position: absolute;
   inset: 0;
-  background-color: var(--color-primary-deep);
-  background-image:
-    radial-gradient(120% 80% at 80% 0%, rgba(132, 190, 77, 0.4), rgba(132, 190, 77, 0) 55%),
-    radial-gradient(90% 60% at 10% 6%, rgba(50, 183, 216, 0.28), rgba(50, 183, 216, 0) 60%),
-    linear-gradient(180deg, #0e6a57 0%, #0a5344 46%, #04352c 100%);
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Layered wetland silhouette anchoring the composition to the Iberá landscape. */
-.bienvenida__landscape {
+/* Sits below the 44px status bar; 800px tall, matching the exported layer. */
+.bienvenida__scene {
   position: absolute;
-  inset: auto 0 0 0;
-  height: 46%;
-  overflow: hidden;
+  top: 44px;
+  left: 0;
+  z-index: 1;
+  width: 390px;
+  height: 800px;
+}
+
+.bienvenida__arte {
+  display: block;
+  width: 390px;
+  height: 800px;
   pointer-events: none;
 }
 
-.bienvenida__sun {
+/* Transparent hotspot over the CTA artwork, same box as the drawn button. */
+.bienvenida__cta {
   position: absolute;
-  top: 4%;
-  right: 12%;
-  width: 132px;
-  height: 132px;
-  border-radius: var(--radius-full);
-  background: radial-gradient(circle, rgba(255, 240, 205, 0.5), rgba(255, 240, 205, 0) 70%);
+  top: 697px;
+  left: 20px;
+  width: 350px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
 }
 
-.bienvenida__hill {
-  position: absolute;
-  bottom: 0;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-}
-
-.bienvenida__hill--back {
-  left: -15%;
-  width: 130%;
-  height: 62%;
-  background: rgba(19, 133, 72, 0.55);
-}
-
-.bienvenida__hill--mid {
-  left: -30%;
-  width: 150%;
-  height: 52%;
-  background: rgba(10, 83, 68, 0.9);
-}
-
-.bienvenida__hill--front {
-  left: -20%;
-  width: 140%;
-  height: 44%;
-  background: #04352c;
-}
-
-.bienvenida__content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.bienvenida__cta:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
 }
 
 .bienvenida .statusbar {
+  position: relative;
+  z-index: 2;
   color: var(--white);
-}
-
-.bienvenida__hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-12);
-  padding: 0 var(--space-6);
-  text-align: center;
-}
-
-.bienvenida__emblem {
-  display: grid;
-  place-items: center;
-  width: 76px;
-  height: 76px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(160deg, var(--color-leaf), var(--color-primary));
-  color: var(--white);
-  box-shadow: 0 12px 30px rgba(4, 53, 44, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-}
-
-.bienvenida__brand {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: var(--weight-bold);
-  line-height: 1.06;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--white);
-  text-shadow: 0 2px 14px rgba(4, 53, 44, 0.5);
-}
-
-.bienvenida__brand-line {
-  font-size: 0.72em;
-  letter-spacing: 0.16em;
-  color: var(--color-border-strong);
-  text-shadow: none;
-}
-
-.bienvenida__tagline {
-  max-width: 268px;
-  font-family: var(--font-alt);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-normal);
-  color: var(--color-border-strong);
-}
-
-.bienvenida__actions {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--space-6) var(--space-6) var(--space-10);
-}
-
-.bienvenida__cta {
-  width: 100%;
-  min-height: 54px;
-  border-color: transparent;
-  border-radius: var(--radius-full);
-  background: var(--surface-raised);
-  color: var(--color-primary-deep);
-  font-size: var(--text-md);
-  font-weight: var(--weight-bold);
-  box-shadow: var(--shadow-md);
-}
-
-.bienvenida__cta:hover {
-  background: var(--surface-mist);
 }
