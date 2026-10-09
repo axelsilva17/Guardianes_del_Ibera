@@ -653,3 +653,211 @@
   z-index: 2;
   color: var(--white);
 }
+
+/* ---------- Inicio ---------- */
+.inicio {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+}
+
+.inicio__content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-6) var(--space-6);
+}
+
+/* Greeting header: the screen has no top bar, so the greeting sits right
+ * under the status bar (per the Figma export). */
+.inicio__hello {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.inicio__hint {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+/* Level card: white panel with a green bottom accent */
+.level-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm), inset 0 -3px 0 var(--color-primary);
+}
+
+.level-card__thumb {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.level-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.level-card__label {
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  color: var(--color-muted);
+}
+
+.level-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.level-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.level-card__track {
+  width: 140px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-track);
+}
+
+.level-card__points {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-muted);
+}
+
+/* Carousel: the novedades artwork carries all its copy baked into the PNG,
+ * so one cover-fit image inside a padded white card is enough. */
+.carousel-card {
+  padding: 8px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+}
+
+.carousel-card__img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Benefits: three equal cards with a colored icon chip and two-line copy */
+.benefits {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-5);
+}
+
+.benefits__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.benefits__title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.benefits__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: #7abb98;
+}
+
+.benefits__link:hover {
+  color: var(--color-primary-dark);
+}
+
+.benefits__subtitle {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.benefits__row {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-3);
+}
+
+.benefit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  padding: 20px 8px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+}
+
+.benefit-card__chip {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+.benefit-card__chip--gastronomia {
+  background: var(--color-sand-soft);
+  color: var(--color-amber);
+}
+
+.benefit-card__chip--turismo {
+  background: var(--mint-300);
+  color: var(--color-primary);
+}
+
+.benefit-card__chip--beneficio {
+  background: var(--color-error-soft);
+  color: #9a5f59;
+}
+
+.benefit-card__title {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.benefit-card__subtitle {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: var(--leading-tight);
+  text-align: center;
+  color: var(--color-muted);
+}
