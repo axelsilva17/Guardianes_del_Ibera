@@ -1,7 +1,10 @@
-import { Recycle, Sprout, Bird, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import StatusBar from '../components/StatusBar.jsx'
+import lobito from '../assets/images/lobito.png'
+import ciervito from '../assets/images/ciervito.png'
+import melito from '../assets/images/melito.png'
 
 const TOPICS = [
   {
@@ -9,21 +12,21 @@ const TOPICS = [
     title: 'Aprendé a separar',
     description: 'Descubrí junto a Lobito dónde va cada residuo y còmo clasificarlo',
     mediaClass: 'learn-card__media--water',
-    icon: Recycle,
+    image: lobito,
   },
   {
     id: 'compost',
     title: 'Aprendé a compostar',
     description: 'Transformá tus residuos organicos junto a Ciervito en algo útil para la tierra',
     mediaClass: 'learn-card__media--leaf',
-    icon: Sprout,
+    image: ciervito,
   },
   {
     id: 'ibera',
     title: 'Cuidemos el Iberá',
     description: 'Conoce con Melito pequeños hábitos que ayudan a proteger a nuestro entorno',
     mediaClass: 'learn-card__media--sand',
-    icon: Bird,
+    image: melito,
   },
 ]
 
@@ -49,10 +52,10 @@ export default function Aprender() {
         </header>
 
         <div className="aprender__list">
-          {TOPICS.map(({ id, title, description, mediaClass, icon: Icon }) => (
+          {TOPICS.map(({ id, title, description, mediaClass, image }) => (
             <article className="learn-card" key={id}>
               <div className={`learn-card__media ${mediaClass}`} aria-hidden="true">
-                <Icon size={34} strokeWidth={1.9} />
+                <img className="learn-card__img" src={image} alt="" />
               </div>
               <div className="learn-card__body">
                 <h2 className="learn-card__title">{title}</h2>

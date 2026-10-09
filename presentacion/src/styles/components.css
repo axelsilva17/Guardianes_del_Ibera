@@ -541,6 +541,14 @@
   background: var(--color-sand-soft);
 }
 
+.learn-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
 .learn-card__body {
   display: flex;
   flex-direction: column;
