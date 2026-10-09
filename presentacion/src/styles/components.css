@@ -258,19 +258,11 @@
   text-align: center;
 }
 
-.login__title {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.03em;
-  color: var(--white);
-  text-shadow: 0 2px 12px rgba(4, 53, 44, 0.45);
-}
-
-.login__subtitle {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--color-border-strong);
+.login__hero-art {
+  display: block;
+  width: 100%;
+  max-width: 342px;
+  height: auto;
 }
 
 .login__access {
