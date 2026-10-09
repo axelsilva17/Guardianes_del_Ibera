@@ -1,0 +1,115 @@
+/* Webfonts for this prototype (loaded through CSS to keep the marker self-contained) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Nunito+Sans:wght@700&display=swap');
+
+/* Design tokens — three layers: primitive -> semantic -> component */
+
+:root {
+  /* ---------- Primitive: palette ---------- */
+  --green-500: #138548;
+  --teal-600: #145c4a;
+  --teal-700: #135b4b;
+  --teal-800: #005747;
+  --teal-900: #054d40;
+  --leaf-500: #84be4d;
+  --leaf-400: #81b55a;
+  --orange-500: #d97736;
+  --amber-500: #e3a436;
+  --amber-100: #fff0cd;
+  --info-500: #32b7d8;
+  --info-400: #4daecd;
+  --info-100: #e2f4fa;
+  --red-500: #e53935;
+  --track-500: #e5efeb;
+  --white: #ffffff;
+  --surface-1: #fbfdfb;
+  --surface-2: #f4f9f6;
+  --text-900: #294e49;
+  --text-500: #75908f;
+  --ink-900: #1e1e1e;
+  --mint-300: #bddbd0;
+  --mist-50: #f0f6f4;
+  --sand-100: #f7f0dd;
+  --leaf-100: #e6f3e4;
+  --green-100: #eaf5e5;
+  --red-100: #feeced;
+  --red-400: #e56d6c;
+
+  /* ---------- Semantic: color ---------- */
+  --color-primary: var(--green-500);
+  --color-primary-dark: var(--teal-700);
+  --color-primary-deep: var(--teal-900);
+  --color-leaf: var(--leaf-500);
+  --color-leaf-alt: var(--leaf-400);
+  --color-accent-warm: var(--orange-500);
+  --color-amber: var(--amber-500);
+  --color-amber-soft: var(--amber-100);
+  --color-info: var(--info-500);
+  --color-info-alt: var(--info-400);
+  --color-info-soft: var(--info-100);
+  --color-error: var(--red-500);
+  --color-error-soft: var(--red-100);
+  --color-error-mid: var(--red-400);
+  --color-ink: var(--ink-900);
+  --color-border-strong: var(--mint-300);
+  --color-green-soft: var(--green-100);
+  --color-leaf-soft: var(--leaf-100);
+  --color-sand-soft: var(--sand-100);
+
+  --surface: var(--surface-1);
+  --surface-raised: var(--white);
+  --surface-sunken: var(--surface-2);
+  --surface-mist: var(--mist-50);
+  --color-text: var(--text-900);
+  --color-muted: var(--text-500);
+  --color-track: var(--track-500);
+  --color-border: rgba(41, 78, 73, 0.12);
+
+  /* ---------- Desktop canvas (outside the phone) ---------- */
+  --desktop-bg: radial-gradient(circle at 50% 0%, #eef4f1 0%, #e3e9e6 60%, #d8e0dc 100%);
+  --desktop-label: #6b7d79;
+
+  /* ---------- Component ---------- */
+  --button-radius: var(--radius-full);
+  --button-min-height: 48px;
+
+  /* ---------- Spacing scale ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ---------- Radius scale ---------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 999px;
+
+  /* ---------- Typography ---------- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Montserrat', var(--font-sans);
+  --font-alt: 'Nunito Sans', var(--font-sans);
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---------- Elevation ---------- */
+  --shadow-sm: 0 1px 2px rgba(5, 77, 64, 0.06);
+  --shadow-md: 0 8px 24px rgba(5, 77, 64, 0.1);
+  --shadow-frame: 0 24px 60px rgba(5, 77, 64, 0.28), 0 0 0 1px rgba(5, 77, 64, 0.06);
+}
