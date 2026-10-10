@@ -7,6 +7,7 @@ import Reportar from './screens/Reportar.jsx'
 import Aprender from './screens/Aprender.jsx'
 import MisReportes from './screens/MisReportes.jsx'
 import Perfil from './screens/Perfil.jsx'
+import Juego from './screens/Juego.jsx'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/aprender" element={<Aprender />} />
         <Route path="/mis-reportes" element={<MisReportes />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/juego" element={<Juego />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

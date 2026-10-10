@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ChevronRight, Percent, Compass, Utensils } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
@@ -38,6 +39,9 @@ export default function Inicio() {
         <main className="inicio__content">
           <header className="inicio__greeting">
             <h1 className="inicio__hello">Hola, Sofía</h1>
+            <Link className="inicio__juego" to="/juego" aria-label="Ir al juego Desafío Guardián">
+              Juego
+            </Link>
             <p className="inicio__hint">¿Qué querés hacer hoy por el Iberá?</p>
           </header>
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
@@ -5,6 +6,7 @@ import StatusBar from '../components/StatusBar.jsx'
 import lobito from '../assets/images/lobito.png'
 import ciervito from '../assets/images/ciervito.png'
 import melito from '../assets/images/melito.png'
+import capiCard from '../assets/images/capi-card.png'
 
 const TOPICS = [
   {
@@ -52,6 +54,28 @@ export default function Aprender() {
         </header>
 
         <div className="aprender__list">
+          {/* Promo de descubrimiento del juego: va primero porque al final
+              queda bajo el scroll de las tres tarjetas altas. El card entero
+              es el enlace, as que la píldora "Jugar" es decorativa (aria-hidden).
+              No se usa JuegoFlotante.png como <img>: su botón quedaría
+              horneado en el bitmap y dejaría de ser un control real. */}
+          <Link
+            className="juego-cta"
+            to="/juego"
+            aria-label="Desafío Guardián: poné a prueba tus conocimientos sobre cuidados con Capi y ganá puntos"
+          >
+            <img className="juego-cta__art" src={capiCard} alt="" aria-hidden="true" />
+            <span className="juego-cta__body">
+              <span className="juego-cta__title">Desafío Guardián</span>
+              <span className="juego-cta__desc">
+                Poné a prueba tus conocimientos sobre cuidados con Capi y ganá puntos!
+              </span>
+            </span>
+            <span className="juego-cta__pill" aria-hidden="true">
+              Jugar
+            </span>
+          </Link>
+
           {TOPICS.map(({ id, title, description, mediaClass, image }) => (
             <article className="learn-card" key={id}>
               <div className={`learn-card__media ${mediaClass}`} aria-hidden="true">

@@ -20,3 +20,6 @@ odd
 
 # Local docs (not published)
 /docs
+
+# Reference PNGs exported from Figma for measurement only, never shipped.
+/design-refs/

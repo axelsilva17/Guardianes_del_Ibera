@@ -29,6 +29,10 @@
   --mint-300: #bddbd0;
   --mist-50: #f0f6f4;
   --sand-100: #f7f0dd;
+  /* Caja Recordatorio de la pantalla "Jugá con Capi" (medido en design-refs/Juego.png) */
+  --sand-050: #f6ebc5;
+  /* Fondo del card "Desafío Guardián" (medido en design-refs/JuegoFlotante.png) */
+  --sand-025: #faf3df;
   --leaf-100: #e6f3e4;
   --green-100: #eaf5e5;
   --red-100: #feeced;
@@ -54,6 +58,8 @@
   --color-green-soft: var(--green-100);
   --color-leaf-soft: var(--leaf-100);
   --color-sand-soft: var(--sand-100);
+  --color-sand-note: var(--sand-050);
+  --color-sand-cta: var(--sand-025);
 
   --surface: var(--surface-1);
   --surface-raised: var(--white);
