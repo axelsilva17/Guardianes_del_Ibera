@@ -1,36 +1,16 @@
-import LessonLayout from './LessonLayout.jsx'
-import { useNavigate } from 'react-router-dom'
+import LessonLayout, { Intro, Note, Sprite } from './LessonLayout.jsx'
+import listo from '../../assets/compostar/listo.png'
+import ciervo from '../../assets/compostar/ciervo.png'
+import check from '../../assets/separar/check.svg'
+import line from '../../assets/compostar/line.svg'
+
+const USES = ['En macetas y huertas', 'En jardines y canteros', 'Mejora la calidad del suelo']
 
 export default function Listo() {
-  const n = useNavigate()
-  return (
-    <LessonLayout
-      title="5. ¡Tu compost está listo!"
-      step={5}
-      onBack={() => n('/compostar')}
-      onNext={() => n('/compostar/6')}
-    >
-      <div style={{ textAlign: 'center', marginTop: '16px' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌱</div>
-        <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '8px' }}>
-          ¡Así se ve el compost maduro!
-        </h2>
-      </div>
-
-      <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--color-primary)', margin: '24px 0 12px' }}>
-        ¿Para qué lo podés usar?
-      </h3>
-      <ul className="comp-list">
-        <li className="comp-list__item"><span className="comp-list__mark">✓</span> Enriquecer la tierra de macetas y huertos</li>
-        <li className="comp-list__item"><span className="comp-list__mark">✓</span> Mejorar la retención de agua en suelos arenosos</li>
-        <li className="comp-list__item"><span className="comp-list__mark">✓</span> Reducir la necesidad de fertilizantes químicos</li>
-      </ul>
-
-      <div style={{ background: 'var(--color-sand-note)', border: '1px solid var(--color-sand-soft)', borderRadius: '12px', padding: '16px', marginTop: '24px' }}>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: '1.5', color: 'var(--color-text)' }}>
-          <strong>Tiempo de descomposición:</strong> Con los cuidados adecuados, tu compost estará listo en 2 a 4 meses, dependiendo de la época del año y los materiales usados.
-        </p>
-      </div>
-    </LessonLayout>
-  )
+  return <LessonLayout step={5}>
+    <Intro number={5} title="¡Tu compost está listo!">Cuando el material se ve oscuro, tiene olor a tierra, y no se reconocen los restos originales, está listo para usar.</Intro>
+    <div className="compostar__scene compostar__scene--ready"><img src={listo} alt="Manos sosteniendo compost maduro con un brote: ¡Así se ve el compost maduro!" /></div>
+    <section className="separar__list"><h2>¿Dónde usarlo?</h2><img src={line} alt="" aria-hidden="true" /><ul>{USES.map(text => <li key={text}><img src={check} alt="" aria-hidden="true" /><span>{text}</span></li>)}</ul></section>
+    <div className="compostar__spacer"><Note art={<Sprite src={ciervo} box={{ width: 96, height: 103 }} crop={{ width: '143.16%', height: '100%', left: '-22.58%', top: 0 }} />}>El tiempo de descomposición varía según los materiales y las condiciones. No hay una fecha exacta que sirva para todos los casos</Note></div>
+  </LessonLayout>
 }

@@ -1,29 +1,20 @@
-import LessonLayout from './LessonLayout.jsx'
-import { useNavigate } from 'react-router-dom'
+import LessonLayout, { Intro } from './LessonLayout.jsx'
+import lugar from '../../assets/compostar/lugar.png'
+import sun from '../../assets/compostar/sun.svg'
+import water from '../../assets/compostar/water.svg'
+import pin from '../../assets/compostar/pin.svg'
+
+const TIPS = [
+  { icon: sun, title: 'Con sombra', text: 'Evitá el sol directo' },
+  { icon: water, title: 'Protegelo de la lluvia', text: 'Podés usar un techo o ponerlo bajo un árbol' },
+  { icon: pin, title: 'Cerca de tu hogar', text: 'Así es más fácil usarlo y mantenerlo' },
+]
 
 export default function Lugar() {
-  const n = useNavigate()
-  return (
-    <LessonLayout
-      title="2. Prepará el lugar"
-      step={2}
-      onBack={() => n('/compostar')}
-      onNext={() => n('/compostar/3')}
-    >
-      <div className="comp-cards">
-        <div className="comp-card">
-          <h3 className="comp-card__title" style={{ color: 'var(--comp-gold)' }}>Con sombra</h3>
-          <p className="comp-card__desc">Elegí un lugar con luz indirecta o sombra parcial. La luz solar directa puede secar demasiado el compost y matar a los microorganismos beneficiosos.</p>
-        </div>
-        <div className="comp-card">
-          <h3 className="comp-card__title" style={{ color: 'var(--comp-gold)' }}>Protegelo de la lluvia</h3>
-          <p className="comp-card__desc">El exceso de lluvia puede encharcar el compost y crear condiciones anaeróbicas. Usá una tapa o cubierto para protegerlo, pero asegurá también circulación de aire.</p>
-        </div>
-        <div className="comp-card">
-          <h3 className="comp-card__title" style={{ color: 'var(--comp-gold)' }}>Cerca de tu hogar</h3>
-          <p className="comp-card__desc">Ubicá la compostera a menos de 10 metros de tu cocina o área de generación de residuos orgánicos. Cuanto más cerca, más seguido la usarás.</p>
-        </div>
-      </div>
-    </LessonLayout>
-  )
+  return <LessonLayout step={2}>
+    <Intro number={2} title="Prepará el lugar">Elegí un sitio cómodo y accesible, con las condiciones adecuadas para que tu compostera funcione bien.</Intro>
+    <div className="compostar__scene"><img src={lugar} alt="Compostera de madera a la sombra de un árbol, junto a una pared" /></div>
+    {TIPS.map(({ icon, title, text }) => <article key={title} className="compostar__card compostar__card--tip"><span className="compostar__icon"><img src={icon} alt="" aria-hidden="true" /></span><div><h3>{title}</h3><p>{text}</p></div></article>)}
+    <div className="compostar__spacer" />
+  </LessonLayout>
 }

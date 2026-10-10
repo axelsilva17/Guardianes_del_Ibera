@@ -1,83 +1,30 @@
-import PhoneFrame from '../../components/PhoneFrame.jsx'
-import StatusBar from '../../components/StatusBar.jsx'
-import BottomNav from '../../components/BottomNav.jsx'
-import BackButton from '../../components/BackButton.jsx'
+import { Link } from 'react-router-dom'
+import SepararLayout from '../Separar/SepararLayout.jsx'
+import '../../styles/Compostar.css'
 
-export default function LessonLayout({
-  title,
-  step,
-  total = 6,
-  children,
-  onNext,
-  onBack,
-  showNext = true,
-  backLabel = 'Volver',
-  nextLabel = 'Siguiente',
-}) {
-  return (
-    <PhoneFrame title={title || 'Compostaje'}>
-      <div className="compostar">
-        <StatusBar />
-        <header className="compostar__header" style={{ paddingTop: '8px' }}>
-          <BackButton className="compostar__back" />
-          <h1 className="compostar__title">{title}</h1>
-        </header>
+export const TOTAL_STEPS = 6
 
-        {step ? (
-          <div className="comp-progress" aria-label={`Paso ${step} de ${total}`}>
-            <div className="comp-progress__track">
-              <div
-                className="comp-progress__fill"
-                style={{ width: `${(step / total) * 100}%` }}
-              />
-            </div>
-            <span className="comp-progress__label">{step} de {total}</span>
-          </div>
-        ) : null}
+/* Recorte de una ilustración compartida (sprite): `box` es el tamaño del hueco
+   en el diseño y `crop` la posición de la imagen dentro de él, ambos medidos en Figma. */
+export function Sprite({ src, box, crop }) {
+  return <div className="compostar__sprite" style={box}><img src={src} alt="" aria-hidden="true" style={crop} /></div>
+}
 
-        <main className="comp-body">{children}</main>
+export function Intro({ number, title, children }) {
+  return <section className="compostar__intro"><h2>{number ? `${number}. ${title}` : title}</h2><p>{children}</p></section>
+}
 
-        <footer
-          className="comp-lesson__footer"
-          style={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'space-between',
-            padding: '16px 24px',
-          }}
-        >
-          {onBack ? (
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault()
-                onBack()
-              }}
-              className="button button--ghost"
-              aria-label={backLabel}
-            >
-              {backLabel}
-            </a>
-          ) : (
-            <span />
-          )}
-          {showNext && onNext ? (
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault()
-                onNext()
-              }}
-              className="button button--primary"
-              aria-label={nextLabel}
-            >
-              {nextLabel}
-            </a>
-          ) : null}
-        </footer>
+export function Note({ children, art }) {
+  return <aside className="compostar__note"><div className="compostar__note-text">{children}</div>{art}</aside>
+}
 
-        <BottomNav />
-      </div>
-    </PhoneFrame>
-  )
+/* Paso N de la lección: encabezado, barra de progreso, contenido y botones Volver / Siguiente. */
+export default function LessonLayout({ step, children, footer }) {
+  const prev = step === 1 ? '/compostar' : `/compostar/${step - 1}`
+  const next = `/compostar/${step + 1}`
+  return <SepararLayout title="Aprendé a Compostar" backTo={prev} className="compostar">
+    <div className="compostar__progress" aria-label={`Paso ${step} de ${TOTAL_STEPS}`}><progress max={TOTAL_STEPS} value={step} /><span>{step} de {TOTAL_STEPS}</span></div>
+    {children}
+    {footer ?? <div className="compostar__actions"><Link to={prev} className="compostar__btn compostar__btn--ghost">Volver</Link><Link to={next} className="compostar__btn">Siguiente</Link></div>}
+  </SepararLayout>
 }

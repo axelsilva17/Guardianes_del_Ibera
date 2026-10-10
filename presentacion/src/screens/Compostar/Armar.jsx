@@ -1,35 +1,18 @@
-import LessonLayout from './LessonLayout.jsx'
-import { useNavigate } from 'react-router-dom'
+import LessonLayout, { Intro, Sprite } from './LessonLayout.jsx'
+import armar from '../../assets/compostar/armar.jpg'
+
+const STEPS = [
+  { title: 'Separá los residuos orgánicos', text: 'Frutas, verduras, yerba, café, etc', box: { width: 50, height: 38 }, crop: { width: '322.64%', height: '630.17%', left: '-113.95%', top: '-32.76%' } },
+  { title: 'Cortá en trozos pequeños', text: 'Así se descomponen más rápido', box: { width: 50, height: 39 }, crop: { width: '296.5%', height: '577.17%', left: '-97.55%', top: '-133.33%' } },
+  { title: 'Agregá material seco', text: 'Hojas, ramas, cartón sin tinta', box: { width: 50, height: 37 }, crop: { width: '323.66%', height: '648.21%', left: '-112.98%', top: '-276.41%' } },
+  { title: 'Sumá restos húmedos', text: 'Cáscaras, frutas, verduras', box: { width: 50, height: 46 }, crop: { width: '390.78%', height: '625.74%', left: '-146.08%', top: '-378.22%' } },
+  { title: 'Alterná y mezclá', text: 'Repetí las capas y revolvé un poco', box: { width: 50, height: 38 }, crop: { width: '328.68%', height: '632%', left: '-114.92%', top: '-499%' } },
+]
 
 export default function Armar() {
-  const n = useNavigate()
-  const steps = [
-    { num: '1', title: 'Separá los residuos orgánicos', desc: 'Recibí los restos de frutas, verduras, cáscaras de huevo y hojas secas. Separá de carne, lácteos, plásticos y aceites.' },
-    { num: '2', title: 'Agregá en capas alternas', desc: 'Alterná capas de materiales verdes (resto de cocina húmedo) y marrones (hojas secas, papel, cartón). Esto equilibra la humedad y el carbono.' },
-    { num: '3', title: 'Mantené la humedad adecuada', desc: 'El compost debe estar tan húmedo como una esponja bien escurrida. Si está seco, agregá agua; si está empapado, agregá material seco.' },
-    { num: '4', title: 'Aireá cada semana', desc: 'Volvé o aireá el compost una vez por semana para proporcionar oxígeno a los microorganismos y acelerar la descomposición.' },
-    { num: '5', title: 'Alterná y mezclá', desc: 'Cada vez que agregues nuevos residuos, mezclá suavemente el contenido para integrar los materiales frescos con los ya en descomposición.' },
-  ]
-  return (
-    <LessonLayout
-      title="3. Armá tu compost"
-      step={3}
-      onBack={() => n('/compostar')}
-      onNext={() => n('/compostar/4')}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}>
-        {steps.map((s) => (
-          <div key={s.num} className="comp-card" style={{ borderLeft: '4px solid var(--color-primary)' }}>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-              <span style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', minWidth: '24px' }}>{s.num}</span>
-              <div>
-                <h4 className="comp-card__title" style={{ marginBottom: '4px' }}>{s.title}</h4>
-                <p className="comp-card__desc" style={{ margin: 0 }}>{s.desc}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </LessonLayout>
-  )
+  return <LessonLayout step={3}>
+    <Intro number={3} title="Armá tu compost">Alterná capas de materiales verdes (húmedos) y marrones (secos) para lograr un buen equilibrio.</Intro>
+    <ol className="compostar__steps">{STEPS.map(({ title, text, box, crop }, index) => <li key={title} className="compostar__card compostar__card--tip"><Sprite src={armar} box={box} crop={crop} /><div><h3>{index + 1}. {title}</h3><p>{text}</p></div></li>)}</ol>
+    <div className="compostar__spacer" />
+  </LessonLayout>
 }

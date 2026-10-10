@@ -1,50 +1,12 @@
-import LessonLayout from './LessonLayout.jsx'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import LessonLayout, { Intro } from './LessonLayout.jsx'
+import cierre from '../../assets/compostar/cierre.jpg'
+import capi from '../../assets/separar/capi-promo.png'
 
 export default function Cierre() {
-  const n = useNavigate()
-  return (
-    <LessonLayout
-      title="¡Listo! Ya sabés cómo compostar"
-      step={6}
-      total={6}
-      showNext={false}
-      onBack={() => n('/compostar')}
-    >
-      <div className="desafio-card" style={{ background: '#FAF3DF', borderRadius: '12px', border: '1px solid #EFE5C5', padding: '20px', marginTop: '16px' }}>
-        <h2 style={{ fontSize: '14px', fontWeight: 600, color: '#1a2e26', margin: '0 0 4px', letterSpacing: '0.2px' }}>
-          ¡Vamos! Ahora que sabés compostar, podría interesarte...
-        </h2>
-        <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#138548', margin: '0 0 4px' }}>
-          Desafío Compost
-        </h3>
-        <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#45534d', margin: '0 0 12px' }}>
-          Poné a prueba tus conocimientos sobre compost con Capi y ganá puntos.
-        </p>
-        <Link
-          to="/juego"
-          style={{
-            display: 'inline-block',
-            background: '#138548',
-            color: '#fff',
-            padding: '8px 16px',
-            borderRadius: '999px',
-            textDecoration: 'none',
-            fontWeight: 700,
-            fontSize: '13px',
-            letterSpacing: '0.3px',
-          }}
-        >
-          JUGAR
-        </Link>
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        <p style={{ fontSize: '16px', fontWeight: 600, color: 'var(--color-ink)' }}>
-          Cada pequeño gesto hace una gran diferencia
-        </p>
-      </div>
-    </LessonLayout>
-  )
+  return <LessonLayout step={6} footer={<div className="compostar__actions compostar__actions--single"><Link to="/aprender" className="compostar__btn">Volver</Link></div>}>
+    <Intro title="¡Listo! Ya sabés cómo compostar">Ahora podés empezar a transformar tus residuos en un abono natural y ayudar al ambiente.</Intro>
+    <div className="compostar__closing"><img src={cierre} alt="Ciervito recostado entre plantas dice: ¡Cada pequeño gesto hace una gran diferencia!" /></div>
+    <div className="compostar__spacer"><Link to="/juego" className="separar__promo compostar__promo"><div className="separar__capi"><img src={capi} alt="" aria-hidden="true" /></div><div><h2>Desafío Compost</h2><p>Poné a prueba tus conocimientos sobre compost con Capi y ganá puntos!</p><span>JUGAR</span></div></Link></div>
+  </LessonLayout>
 }

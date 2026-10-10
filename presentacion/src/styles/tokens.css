@@ -37,6 +37,7 @@
   --green-100: #eaf5e5;
   --red-100: #feeced;
   --red-400: #e56d6c;
+  --earth-700: #805719;
 
   /* ---------- Semantic: color ---------- */
   --color-primary: var(--green-500);
@@ -60,6 +61,7 @@
   --color-sand-soft: var(--sand-100);
   --color-sand-note: var(--sand-050);
   --color-sand-cta: var(--sand-025);
+  --color-earth: var(--earth-700);
 
   --surface: var(--surface-1);
   --surface-raised: var(--white);
