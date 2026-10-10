@@ -17,7 +17,9 @@ export default function TopBar({
 
   const handleBack = () => {
     if (onBack) onBack()
-    else navigate(-1)
+    // Sin pantalla anterior en la app (se entró directo por URL): volver a Inicio.
+    else if (window.history.state?.idx > 0) navigate(-1)
+    else navigate('/inicio', { replace: true })
   }
 
   return (

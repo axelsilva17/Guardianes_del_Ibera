@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
+import useBack from '../hooks/useBack.js'
 import '../styles/Reportar.css'
 import ReporteEnviado from './ReporteEnviado.jsx'
 
@@ -10,7 +10,7 @@ const CATEGORIES = [['general', 'Residuos generales', 'trash'], ['plastico', 'Pl
 function Icon({ name }) { return <img src={icons[`../assets/reportar/${name}.svg`]} alt="" aria-hidden="true" /> }
 
 export default function Reportar() {
-  const navigate = useNavigate()
+  const goBack = useBack('/inicio')
   const fileInput = useRef(null)
   const [photo, setPhoto] = useState('')
   const [reading, setReading] = useState(false)
@@ -75,7 +75,7 @@ export default function Reportar() {
       <div className="reportar">
         <div className="reportar__status" aria-hidden="true"><span>9:41</span><div><Icon name="signal" /><Icon name="wifi" /><Icon name="battery" /></div></div>
         {sent ? <ReporteEnviado reporte={sent} /> : <form className="reportar__form" onSubmit={submit}>
-          <header className="reportar__header"><button type="button" aria-label="Volver a Inicio" onClick={() => navigate('/inicio')}><Icon name="back" /></button><h1>Reportar un problema</h1></header>
+          <header className="reportar__header"><button type="button" aria-label="Volver" onClick={goBack}><Icon name="back" /></button><h1>Reportar un problema</h1></header>
           <>
             <div className="reportar__steps" aria-label="Foto, ubicación y tipo"><span><Icon name="camera-step" />Foto</span><span><Icon name="pin-step" />Ubicación</span><span><Icon name="clipboard" />Tipo</span></div>
             <input ref={fileInput} className="reportar__file" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} disabled={sending || reading} aria-label="Fotografía del problema" />

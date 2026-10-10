@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import useBack from '../hooks/useBack.js'
 import { Flag } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
@@ -16,6 +18,8 @@ const MARKERS = [
 const CONTENT_TOP = 44
 
 export default function Mapa() {
+  const goBack = useBack('/inicio')
+  const [filter, setFilter] = useState('green')
   return (
     <PhoneFrame title="Mapa">
       <div className="mapa">
@@ -25,7 +29,7 @@ export default function Mapa() {
           <div className="mapa__surface" aria-hidden="true" />
 
           <header className="mapa__header">
-            <button type="button" className="mapa__back" aria-label="Volver">
+            <button type="button" className="mapa__back" aria-label="Volver" onClick={goBack}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M15 5 8 12l7 7"
@@ -40,10 +44,10 @@ export default function Mapa() {
           </header>
 
           <div className="mapa__filters" role="group" aria-label="Filtrar puntos en el mapa">
-            <button type="button" className="mapa__filter mapa__filter--active" aria-pressed="true">
+            <button type="button" className={`mapa__filter${filter === 'green' ? ' mapa__filter--active' : ''}`} aria-pressed={filter === 'green'} onClick={() => setFilter('green')}>
               Puntos verdes
             </button>
-            <button type="button" className="mapa__filter" aria-pressed="false">
+            <button type="button" className={`mapa__filter${filter === 'report' ? ' mapa__filter--active' : ''}`} aria-pressed={filter === 'report'} onClick={() => setFilter('report')}>
               Reportes
             </button>
           </div>
@@ -59,7 +63,7 @@ export default function Mapa() {
             </span>
           </div>
 
-          {MARKERS.map((m) => (
+          {MARKERS.filter((m) => m.variant === filter).map((m) => (
             <MapMarker
               key={m.id}
               variant={m.variant}

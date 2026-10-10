@@ -1,0 +1,16 @@
+/* Aprender — Figma, Page 3: "07 · Aprender". Usa el armazón de Separar (SepararLayout). */
+.aprender-hub .separar__content { gap: 20px; padding: 16px 24px 24px; }
+.aprender-hub .separar__content > * { flex: none; }
+
+.aprender-hub__card { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius-md); color: var(--color-text); }
+.aprender-hub__card--water { background: #e2f3f6; }
+.aprender-hub__card--leaf { background: var(--color-leaf-soft); }
+.aprender-hub__card--sand { background: var(--color-sand-soft); }
+
+.aprender-hub__art { position: relative; flex: none; width: 84px; height: 100px; overflow: hidden; }
+.aprender-hub__art img { position: absolute; max-width: none; pointer-events: none; }
+
+.aprender-hub__body { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; padding: 5px 0 0; }
+.aprender-hub__body strong { font-size: 14px; line-height: 1.4; }
+.aprender-hub__body > span:not(.aprender-hub__more) { font-size: 12px; line-height: 1.4; color: var(--color-muted); }
+.aprender-hub__more { padding: 10px 0; font-family: var(--font-alt); font-size: 11px; font-weight: 700; line-height: 1.4; color: var(--color-primary); }

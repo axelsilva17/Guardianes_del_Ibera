@@ -24,6 +24,8 @@ import Ibera from './screens/Ibera/Ibera.jsx'
 import TemaIbera from './screens/Ibera/TemaIbera.jsx'
 import JuegoIbera from './screens/Ibera/JuegoIbera.jsx'
 import QuizIbera from './screens/Ibera/QuizIbera.jsx'
+import Recompensas from './screens/Recompensas.jsx'
+import Nivel from './screens/Nivel.jsx'
 
 export default function App() {
   return (
@@ -45,6 +47,8 @@ export default function App() {
         <Route path="/aprender/ibera/:tema" element={<TemaIbera />} />
         <Route path="/mis-reportes" element={<MisReportes />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/recompensas" element={<Recompensas />} />
+        <Route path="/nivel" element={<Nivel />} />
         <Route path="/juego" element={<Juego />} />
         <Route path="/juego/compostar" element={<QuizCompostar />} />
         <Route path="/compostar" element={<CompostarIntro />} />

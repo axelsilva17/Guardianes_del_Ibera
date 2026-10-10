@@ -31,18 +31,18 @@ export default function Login() {
           </div>
 
           <div className="login__access">
-            <button type="button" className="login__oauth">
+            <button type="button" className="login__oauth" onClick={() => navigate('/inicio')}>
               <GoogleIcon size={20} />
               <span>Continuar con Google</span>
             </button>
-            <button type="button" className="login__oauth">
+            <button type="button" className="login__oauth" onClick={() => navigate('/inicio')}>
               <AppleIcon size={20} />
               <span>Continuar con Apple</span>
             </button>
             <button
               type="button"
               className="login__register"
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/inicio')}
             >
               Crear cuenta
             </button>
