@@ -18,7 +18,7 @@ const MARKERS = [
 const CONTENT_TOP = 44
 
 export default function Mapa() {
-  const goBack = useBack('/inicio')
+  const goBack = useBack('/inicio', { section: true })
   const [filter, setFilter] = useState('green')
   return (
     <PhoneFrame title="Mapa">

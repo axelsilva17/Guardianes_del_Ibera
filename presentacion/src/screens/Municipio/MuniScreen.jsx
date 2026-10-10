@@ -35,11 +35,12 @@ export function ReportRow({ r }) {
 }
 
 /**
- * Armazón de las pantallas municipales. `back`: muestra la flecha (vuelve a la pantalla anterior,
- * o a `back` si se entró directo por URL). `nav`: barra inferior; marca activa la pestaña `tab`.
+ * Armazón de las pantallas municipales. `back`: muestra la flecha, que vuelve a la pantalla anterior
+ * (o a `back` si se entró directo por URL). `section`: pestaña de la barra; la flecha va siempre al Panel.
+ * `nav`: barra inferior; marca activa la pestaña `tab`.
  */
-export default function MuniScreen({ title, back, nav = true, tab, className = '', action, children }) {
-  const goBack = useBack(typeof back === 'string' ? back : '/municipio/panel')
+export default function MuniScreen({ title, back, section, nav = true, tab, className = '', action, children }) {
+  const goBack = useBack(typeof back === 'string' ? back : '/municipio/panel', { section })
   return <PhoneFrame title={title || 'Municipio'}>
     <div className={`muni ${className}`}>
       <StatusBar />

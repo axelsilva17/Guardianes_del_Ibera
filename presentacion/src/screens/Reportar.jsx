@@ -10,7 +10,7 @@ const CATEGORIES = [['general', 'Residuos generales', 'trash'], ['plastico', 'Pl
 function Icon({ name }) { return <img src={icons[`../assets/reportar/${name}.svg`]} alt="" aria-hidden="true" /> }
 
 export default function Reportar() {
-  const goBack = useBack('/inicio')
+  const goBack = useBack('/inicio', { section: true })
   const fileInput = useRef(null)
   const [photo, setPhoto] = useState('')
   const [reading, setReading] = useState(false)

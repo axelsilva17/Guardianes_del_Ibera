@@ -26,7 +26,7 @@ const DETAILS = {
 function Icon({ name }) { return <img src={asset(name)} alt="" aria-hidden="true" /> }
 
 export default function Perfil() {
-  const goBack = useBack('/inicio')
+  const goBack = useBack('/inicio', { section: true })
   const [detail, setDetail] = useState(null)
   const dialog = useRef(null)
   useEffect(() => {

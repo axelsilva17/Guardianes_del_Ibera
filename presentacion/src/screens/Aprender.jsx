@@ -33,7 +33,7 @@ const TOPICS = [
 
 export default function Aprender() {
   return (
-    <SepararLayout title="Aprendé" backTo="/inicio" nav className="aprender-hub">
+    <SepararLayout title="Aprendé" backTo="/inicio" section nav className="aprender-hub">
       {TOPICS.map(({ id, title, description, to, tone, crop }) => (
         <Link key={id} to={to} className={`aprender-hub__card aprender-hub__card--${tone}`}>
           <span className="aprender-hub__art" aria-hidden="true"><img src={mascotas} alt="" style={crop} /></span>

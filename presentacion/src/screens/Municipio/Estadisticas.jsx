@@ -33,7 +33,7 @@ export default function Estadisticas() {
   })
   const max = Math.max(...RESOLUCION_MENSUAL.map(m => m.dias))
   const actual = RESOLUCION_MENSUAL.at(-1)
-  return <MuniScreen title="Estadísticas" back className="muni-stats">
+  return <MuniScreen title="Estadísticas" back section className="muni-stats">
     <div className="muni-field" aria-label="Período: este mes"><Icon as={CalendarDays} color="#75908f" size={18} /><span>Este mes</span></div>
     <h2 className="muni__subtitle">Reportes por tipo</h2>
     <div className="muni-stats__dist">

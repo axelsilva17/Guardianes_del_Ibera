@@ -14,7 +14,7 @@ export default function Mapa() {
   const { reportes, puntos } = useMunicipio()
   const [estado, setEstado] = useState('todos')
   const shown = reportes.filter(r => estado === 'todos' || r.estado === estado)
-  return <MuniScreen title="Mapa" back className="muni-mapa">
+  return <MuniScreen title="Mapa" back section className="muni-mapa">
     <img className="muni-mapa__bg" src={mapa} alt="" aria-hidden="true" />
     <Filtros value={estado} onChange={setEstado} />
     <div className="muni-mapa__legend"><Chip tone="green">● Punto verde</Chip><Chip tone="red">● Reporte</Chip></div>
