@@ -1,0 +1,2 @@
+/* Los títulos reciben el foco por código (para lectores de pantalla) al cambiar de pregunta: sin recuadro. */
+.quiz [tabindex="-1"]:focus { outline: none; }

@@ -84,7 +84,7 @@ export default function Aprender() {
               <div className="learn-card__body">
                 <h2 className="learn-card__title">{title}</h2>
                 <p className="learn-card__desc">{description}</p>
-                <Link className="learn-card__link" to={id === 'residuos' ? '/aprender/separar' : id === 'compost' ? '/compostar' : '#aprender'}>
+                <Link className="learn-card__link" to={id === 'residuos' ? '/aprender/separar' : id === 'compost' ? '/compostar' : '/aprender/ibera'}>
                   Explorar tema
                   <ChevronRight size={14} strokeWidth={2.6} aria-hidden="true" />
                 </Link>

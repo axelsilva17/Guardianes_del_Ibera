@@ -1,0 +1,23 @@
+/* Cuidemos el Iberá — medido en Figma, Page 3. Se apoya en Separar.css y Compostar.css
+   (armazón, `.compostar__spacer`, `.compostar__sprite` y la card de Capi). */
+.ibera--hub .separar__content { gap: 20px; }
+.ibera--topic .separar__content { gap: 10px; }
+
+.ibera__lead { padding: 0 10px 10px; font-size: 12px; line-height: 1.4; }
+
+.ibera__topic { display: flex; align-items: center; gap: 5px; padding: 10px 5px; border-radius: var(--radius-md); background: var(--surface-raised); box-shadow: 0 1px 4px rgba(0, 0, 0, .25); }
+.ibera__topic > div { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; padding-bottom: 5px; }
+.ibera__topic h2 { font-size: 14px; line-height: 1.4; }
+.ibera__topic p { font-size: 12px; line-height: 1.4; color: var(--color-muted); }
+.ibera__topic > img { flex: none; }
+
+.ibera__intro { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px; }
+.ibera__intro h2 { align-self: stretch; padding: 0 10px; font-family: var(--font-display); font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--color-earth); }
+.ibera__intro p { align-self: stretch; font-size: 12px; line-height: 1.4; }
+
+.ibera__tips { position: relative; display: flex; flex-direction: column; gap: 5px; margin: 24px 0 40px; padding: 10px 20px; border-radius: var(--radius-lg); background: var(--surface-raised); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.ibera__tips h2 { display: flex; align-items: center; height: 30px; padding: 0 10px; font-family: var(--font-display); font-size: 16px; font-weight: 500; font-style: italic; line-height: 1.4; }
+.ibera__tips ul { padding-right: 40px; }
+.ibera__tips li { display: flex; align-items: center; gap: 5px; min-height: 25px; font-size: 14px; line-height: 1.4; color: var(--color-muted); }
+.ibera__tips li img { flex: none; }
+.ibera__oso { position: absolute; right: -10px; bottom: -24px; width: 115px; height: 86px; object-fit: cover; pointer-events: none; }

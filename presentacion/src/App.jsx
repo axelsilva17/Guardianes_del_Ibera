@@ -20,6 +20,10 @@ import Armar from './screens/Compostar/Armar.jsx'
 import Cuidar from './screens/Compostar/Cuidar.jsx'
 import Listo from './screens/Compostar/Listo.jsx'
 import Cierre from './screens/Compostar/Cierre.jsx'
+import Ibera from './screens/Ibera/Ibera.jsx'
+import TemaIbera from './screens/Ibera/TemaIbera.jsx'
+import JuegoIbera from './screens/Ibera/JuegoIbera.jsx'
+import QuizIbera from './screens/Ibera/QuizIbera.jsx'
 
 export default function App() {
   return (
@@ -35,6 +39,10 @@ export default function App() {
         <Route path="/aprender/separar/:categoria" element={<CategoriaResiduo />} />
         <Route path="/aprender/separar/juego" element={<JuegoSeparar />} />
         <Route path="/aprender/separar/desafio" element={<QuizSeparar />} />
+        <Route path="/aprender/ibera" element={<Ibera />} />
+        <Route path="/aprender/ibera/juego" element={<JuegoIbera />} />
+        <Route path="/aprender/ibera/desafio" element={<QuizIbera />} />
+        <Route path="/aprender/ibera/:tema" element={<TemaIbera />} />
         <Route path="/mis-reportes" element={<MisReportes />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/juego" element={<Juego />} />
