@@ -1,0 +1,57 @@
+/* Mapa del ciudadano — Figma, Page 3: "04 · Mapa ciudadano" (misma ilustración que el Mapa de gestión). */
+.mapa-c { display: flex; flex-direction: column; height: 100%; background: var(--surface); }
+.mapa-c__content { position: relative; display: flex; flex-direction: column; gap: 20px; flex: 1; min-height: 0; overflow: hidden; padding: 16px 18px 24px; }
+.mapa-c__content > * { flex: none; }
+/* El mapa ocupa todo el contenido; encabezado, filtros y leyenda flotan encima. */
+.mapa-c__bg { position: absolute; top: -26px; left: -26px; width: calc(100% + 52px); height: calc(100% + 52px); max-width: none; object-fit: cover; pointer-events: none; }
+.mapa-c__header { position: relative; display: flex; align-items: center; gap: 12px; }
+.mapa-c__header h1 { flex: 1; font-size: 20px; line-height: 1.4; color: var(--color-text); text-shadow: 0 0 6px var(--surface), 0 0 2px var(--surface); }
+.mapa-c__back { position: relative; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--radius-full); background: var(--surface-raised); box-shadow: var(--shadow-md); color: var(--color-text); }
+.mapa-c__back::after { content: ''; position: absolute; inset: -4px; }
+.mapa-c__filters { position: relative; display: flex; gap: 6px; }
+.mapa-c__filters button { flex: 1; height: 34px; border: 0; border-radius: var(--radius-full); background: var(--surface-mist); color: var(--color-muted); font-size: 11px; font-weight: 600; }
+.mapa-c__filters button.is-active { background: var(--color-primary-dark); color: var(--white); }
+.mapa-c__legend { position: relative; display: flex; justify-content: space-between; }
+.mapa-c__chip { padding: 5px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; }
+.mapa-c__chip--green { background: var(--color-green-soft); color: var(--color-primary); }
+.mapa-c__chip--red { background: var(--color-error-soft); color: var(--color-error-mid); }
+.mapa-c__pin { position: absolute; width: 23px; height: 30px; padding: 0; border: 0; background: none; transition: transform .15s; transform-origin: bottom center; }
+.mapa-c__pin::after { content: ''; position: absolute; inset: -8px -10px; }
+.mapa-c__pin.is-selected { transform: scale(1.3); }
+.mapa-c__pin img { display: block; width: 23px; height: 30px; }
+.mapa-c__pin .mapa-c__pin-icon { position: absolute; left: 5px; top: 2px; width: 14px; height: 14px; }
+.mapa-c__header, .mapa-c__filters, .mapa-c__legend, .mapa-c__pin { z-index: 1; }
+
+/* Tarjetas "Info punto" e "Info reporte" (Figma, Page 3): suben desde abajo al tocar un pin. */
+.mapa-info { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; flex-direction: column; gap: 16px; padding: 10px 20px 16px; border-radius: 20px 20px 0 0; background: var(--white); box-shadow: 0 -6px 20px rgba(5, 77, 64, .18); animation: mapa-info-in .2s ease-out; }
+@keyframes mapa-info-in { from { transform: translateY(24px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .mapa-info { animation: none; } .mapa-c__pin { transition: none; } }
+.mapa-info__head { display: flex; align-items: center; gap: 15px; padding: 10px 0 0; }
+.mapa-info__head > img { width: 40px; height: 40px; flex: none; }
+.mapa-info__alert { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 20px; background: var(--color-error); }
+.mapa-info__alert img { width: 20px; height: 20px; }
+.mapa-info__title { flex: 1; min-width: 0; line-height: 1.4; }
+.mapa-info__title h2 { font-size: 14px; }
+.mapa-info__title p { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--color-muted); }
+.mapa-info__title p img { width: 15px; height: 15px; flex: none; }
+.mapa-info__dist, .mapa-info__estado { display: flex; align-items: center; justify-content: center; gap: 1px; flex: none; height: 22px; padding: 0 7px; border-radius: 15px; font-size: 9px; font-weight: 700; }
+.mapa-info__dist { background: var(--color-green-soft); color: var(--color-text); }
+.mapa-info__dist img { width: 16px; height: 16px; }
+.mapa-info__estado { background: var(--color-error-mid); color: var(--surface); }
+.mapa-info__line { width: 100%; height: 1px; margin-top: -9px; }
+.mapa-info h3 { font-family: var(--font-alt); font-size: 14px; line-height: 1.4; }
+.mapa-info__recibe ul { display: flex; justify-content: center; gap: 20px; margin-top: 8px; }
+.mapa-info__recibe li { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 70px; height: 60px; border-radius: var(--radius-sm); background: var(--color-green-soft); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); text-align: center; font-family: var(--font-alt); font-size: 10px; font-weight: 700; line-height: 1; color: var(--color-primary-dark); }
+.mapa-info__recibe li img { max-height: 25px; }
+.mapa-info__horario { display: flex; align-items: center; gap: 6px; font-family: var(--font-alt); font-size: 12px; color: var(--color-muted); }
+.mapa-info__horario strong { color: var(--color-text); }
+.mapa-info__desc p { margin-top: 3px; font-family: var(--font-alt); font-size: 12px; line-height: 1.4; color: var(--color-muted); }
+.mapa-info__actions { display: flex; gap: 12px; }
+.mapa-info__btn { position: relative; display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1; height: 30px; border-radius: var(--radius-md); background: var(--color-primary); color: var(--white); font-family: var(--font-alt); font-size: 12px; font-weight: 500; }
+.mapa-info__btn::after { content: ''; position: absolute; inset: -7px 0; }
+.mapa-info__btn--red { background: var(--color-error); }
+.mapa-info__btn img { width: 20px; height: 20px; }
+.mapa-info__share { position: relative; display: grid; place-items: center; width: 30px; height: 30px; flex: none; padding: 0; border: 0; border-radius: var(--radius-md); background: var(--color-green-soft); }
+.mapa-info__share::after { content: ''; position: absolute; inset: -7px; }
+.mapa-info__aviso { min-height: 0; margin-top: -10px; text-align: center; font-size: 11px; color: var(--color-primary); }
+.mapa-info__aviso:empty { display: none; }

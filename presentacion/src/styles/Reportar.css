@@ -5,9 +5,12 @@
 .reportar__header { display: flex; gap: 12px; align-items: center; }
 .reportar__header button { display: grid; place-items: center; border: 0; background: transparent; padding: 0; min-height: 28px; flex: none; }
 .reportar__header h1 { font-size: 20px; line-height: 1.4; }
-.reportar__steps { display: flex; gap: 8px; font-size: 12px; color: var(--color-muted); }
-.reportar__steps span { display: flex; align-items: center; gap: 7px; flex: 1; }
-.reportar__steps span:first-child { color: var(--color-primary); }
+/* Cada paso pasa a verde cuando se completa (foto cargada, ubicación obtenida, tipo elegido). */
+.reportar__steps { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 12px; color: var(--color-muted); }
+.reportar__steps li { display: flex; align-items: center; gap: 7px; flex: 1; transition: color .2s ease; }
+.reportar__steps li.is-done { color: var(--color-primary); font-weight: 600; }
+.reportar__steps .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .reportar__steps li { transition: none; } }
 .reportar__file { display: none; }
 .reportar__photo { position: relative; flex: none; height: 205px; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 0; border-radius: var(--radius-md); background: #3d6562; color: var(--white); overflow: hidden; font-size: 13px; line-height: 1.4; }
 .reportar__preview { width: 100%; height: 100%; object-fit: cover; }
@@ -17,13 +20,16 @@
 .reportar__location strong { font-size: 14px; line-height: 1.4; }
 .reportar__location small { font-size: 12px; color: var(--color-muted); line-height: 1.4; }
 .reportar__description { display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700; }
-.reportar__description textarea { width: 100%; min-height: 48px; height: 48px; resize: vertical; border: 0; border-radius: var(--radius-sm); padding: 12px; background: #f0f5f3; color: var(--color-text); font: 400 14px/1.4 var(--font-sans); }
+/* Sin el control de estirar del navegador: el campo crece solo al escribir (ver Reportar.jsx). */
+.reportar__description textarea { width: 100%; min-height: 48px; height: 48px; max-height: 140px; resize: none; overflow-y: auto; border: 0; border-radius: var(--radius-sm); padding: 12px; background: #f0f5f3; color: var(--color-text); font: 400 14px/1.4 var(--font-sans); }
 .reportar__description textarea::placeholder { color: var(--color-muted); }
 .reportar__categories { border: 0; padding: 0; margin: 0; min-width: 0; }
 .reportar__categories legend { font-size: 14px; font-weight: 700; margin-bottom: 20px; }
 .reportar__categories > div { display: flex; justify-content: space-between; gap: 8px; }
-.reportar__categories button { width: 48px; height: 48px; display: grid; place-items: center; border: 0; border-radius: var(--radius-sm); background: var(--color-track); }
-.reportar__categories button.is-selected { background: var(--color-primary); }
+.reportar__categories button { width: 48px; height: 48px; display: grid; place-items: center; border: 0; border-radius: var(--radius-sm); background: var(--color-track); color: var(--color-muted); transition: background-color .18s ease, color .18s ease, transform .12s ease; }
+.reportar__categories button:active { transform: scale(.94); }
+.reportar__categories button.is-selected { background: var(--color-primary); color: var(--white); }
+@media (prefers-reduced-motion: reduce) { .reportar__categories button { transition: none; } .reportar__categories button:active { transform: none; } }
 .reportar__submit { flex: none; width: 100%; min-height: 52px; border-radius: var(--radius-md); margin-top: auto; font-size: 15px; font-weight: 700; }
 .reportar button:disabled { cursor: wait; opacity: .65; }
 .reportar__error { color: var(--color-error); font-size: 13px; }

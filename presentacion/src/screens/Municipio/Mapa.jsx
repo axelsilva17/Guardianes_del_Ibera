@@ -4,10 +4,10 @@ import MuniScreen, { Chip } from './MuniScreen.jsx'
 import Filtros from './Filtros.jsx'
 import { useMunicipio } from './MunicipioContext.jsx'
 import { numero } from './data.js'
-import mapa from '../../assets/municipio/mapa.png'
-import pinReporte from '../../assets/municipio/pin-reporte.svg'
-import pinReporteIcono from '../../assets/municipio/pin-reporte-icono.svg'
-import pinVerde from '../../assets/municipio/pin-verde.svg'
+import mapa from '../../assets/mapa/mapa.png'
+import pinReporte from '../../assets/mapa/pin-reporte.svg'
+import pinReporteIcono from '../../assets/mapa/pin-reporte-icono.svg'
+import pinVerde from '../../assets/mapa/pin-verde.svg'
 
 // Figma, Page 3: "18 · Mapa de gestion". Los filtros de estado afectan solo a los reportes.
 export default function Mapa() {
