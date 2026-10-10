@@ -26,6 +26,17 @@ import JuegoIbera from './screens/Ibera/JuegoIbera.jsx'
 import QuizIbera from './screens/Ibera/QuizIbera.jsx'
 import Recompensas from './screens/Recompensas.jsx'
 import Nivel from './screens/Nivel.jsx'
+import { MunicipioRoot } from './screens/Municipio/MunicipioContext.jsx'
+import MuniLogin from './screens/Municipio/Login.jsx'
+import MuniPanel from './screens/Municipio/Panel.jsx'
+import MuniMapa from './screens/Municipio/Mapa.jsx'
+import MuniReportes from './screens/Municipio/Reportes.jsx'
+import MuniDetalle from './screens/Municipio/Detalle.jsx'
+import MuniAsignacion from './screens/Municipio/Asignacion.jsx'
+import MuniResuelto from './screens/Municipio/Resuelto.jsx'
+import MuniEstadisticas from './screens/Municipio/Estadisticas.jsx'
+import MuniPuntosVerdes from './screens/Municipio/PuntosVerdes.jsx'
+import MuniPerfil from './screens/Municipio/Perfil.jsx'
 
 export default function App() {
   return (
@@ -49,6 +60,18 @@ export default function App() {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/recompensas" element={<Recompensas />} />
         <Route path="/nivel" element={<Nivel />} />
+        <Route path="/municipio" element={<MunicipioRoot />}>
+          <Route index element={<MuniLogin />} />
+          <Route path="panel" element={<MuniPanel />} />
+          <Route path="mapa" element={<MuniMapa />} />
+          <Route path="reportes" element={<MuniReportes />} />
+          <Route path="reportes/:id" element={<MuniDetalle />} />
+          <Route path="reportes/:id/asignacion" element={<MuniAsignacion />} />
+          <Route path="reportes/:id/resuelto" element={<MuniResuelto />} />
+          <Route path="estadisticas" element={<MuniEstadisticas />} />
+          <Route path="puntos-verdes" element={<MuniPuntosVerdes />} />
+          <Route path="perfil" element={<MuniPerfil />} />
+        </Route>
         <Route path="/juego" element={<Juego />} />
         <Route path="/juego/compostar" element={<QuizCompostar />} />
         <Route path="/compostar" element={<CompostarIntro />} />
