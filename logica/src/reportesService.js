@@ -65,7 +65,7 @@ export function getReporteById(id) {
  * @throws {ValidationError}
  */
 export function createReporte(input = {}) {
-  const { titulo, tipo, descripcion, lat, lng, autor } = input ?? {}
+  const { titulo, tipo, descripcion, lat, lng, autor, categoriaResiduo, foto } = input ?? {}
 
   if (typeof titulo !== 'string' || titulo.trim() === '') {
     throw new ValidationError('Field "titulo" is required and must be a non-empty string')
@@ -75,6 +75,16 @@ export function createReporte(input = {}) {
     throw new ValidationError(`Field "tipo" must be one of: ${REPORTE_TIPOS.join(', ')}`)
   }
 
+  const validCoordinate = (value) => typeof value === 'number' || (typeof value === 'string' && value.trim() !== '')
+  if (!validCoordinate(lat) || !validCoordinate(lng)) {
+    throw new ValidationError('Las coordenadas son obligatorias')
+  }
+  if (categoriaResiduo !== undefined && !['general', 'plastico', 'papel', 'vidrio', 'organico'].includes(categoriaResiduo)) {
+    throw new ValidationError('Categoría de residuo inválida')
+  }
+  if (foto !== undefined && foto !== '' && (typeof foto !== 'string' || foto.length > 2800000 || !/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(foto))) {
+    throw new ValidationError('Fotografía inválida: usá JPG, PNG o WebP de hasta 2 MB')
+  }
   const latNum = Number(lat)
   if (!Number.isFinite(latNum) || latNum < LAT_MIN || latNum > LAT_MAX) {
     throw new ValidationError(`Field "lat" must be a number between ${LAT_MIN} and ${LAT_MAX}`)
@@ -87,6 +97,7 @@ export function createReporte(input = {}) {
 
   const reporte = {
     id: randomUUID(),
+    numero: reportesRepository.list().length + 1,
     titulo: titulo.trim(),
     tipo,
     descripcion: typeof descripcion === 'string' ? descripcion.trim() : '',
@@ -97,5 +108,7 @@ export function createReporte(input = {}) {
     autor: typeof autor === 'string' && autor.trim() !== '' ? autor.trim() : 'Anonimo',
   }
 
+  if (categoriaResiduo !== undefined) reporte.categoriaResiduo = categoriaResiduo
+  if (foto) reporte.foto = foto
   return reportesRepository.create(reporte)
 }

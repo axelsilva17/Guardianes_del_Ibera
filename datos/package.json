@@ -2,5 +2,8 @@
   "name": "guardianes-datos",
   "version": "0.1.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "guardianes-del-ibera": "file:.."
+  }
 }

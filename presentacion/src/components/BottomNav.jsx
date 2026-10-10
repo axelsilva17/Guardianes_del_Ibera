@@ -9,9 +9,9 @@ const ITEMS = [
   { to: '/perfil', label: 'Perfil', Icon: User },
 ]
 
-export default function BottomNav() {
+export default function BottomNav({ className = '', icons = {} }) {
   return (
-    <nav className="bottomnav" aria-label="Navegacion principal">
+    <nav className={`bottomnav${className ? ` ${className}` : ''}`} aria-label="Navegacion principal">
       {ITEMS.map(({ to, label, Icon }) => (
         <NavLink
           key={to}
@@ -20,7 +20,7 @@ export default function BottomNav() {
             `bottomnav__item${isActive ? ' is-active' : ''}`
           }
         >
-          <Icon size={22} strokeWidth={2} aria-hidden="true" />
+          <>{icons[to] ? <img src={icons[to]} alt="" aria-hidden="true" /> : <Icon size={22} strokeWidth={2} aria-hidden="true" />}</>
           <span className="bottomnav__label">{label}</span>
         </NavLink>
       ))}

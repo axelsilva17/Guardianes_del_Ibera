@@ -9,6 +9,10 @@ import MisReportes from './screens/MisReportes.jsx'
 import Perfil from './screens/Perfil.jsx'
 import Juego from './screens/Juego.jsx'
 import QuizCompostar from './screens/QuizCompostar.jsx'
+import Separar from './screens/Separar/Separar.jsx'
+import CategoriaResiduo from './screens/Separar/CategoriaResiduo.jsx'
+import JuegoSeparar from './screens/Separar/JuegoSeparar.jsx'
+import QuizSeparar from './screens/Separar/QuizSeparar.jsx'
 import CompostarIntro from './screens/Compostar/Intro.jsx'
 import Recipiente from './screens/Compostar/Recipiente.jsx'
 import Lugar from './screens/Compostar/Lugar.jsx'
@@ -27,6 +31,10 @@ export default function App() {
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/reportar" element={<Reportar />} />
         <Route path="/aprender" element={<Aprender />} />
+        <Route path="/aprender/separar" element={<Separar />} />
+        <Route path="/aprender/separar/:categoria" element={<CategoriaResiduo />} />
+        <Route path="/aprender/separar/juego" element={<JuegoSeparar />} />
+        <Route path="/aprender/separar/desafio" element={<QuizSeparar />} />
         <Route path="/mis-reportes" element={<MisReportes />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/juego" element={<Juego />} />

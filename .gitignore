@@ -1,3 +1,4 @@
+.vs/
 # Dependencies
 node_modules
 
@@ -23,3 +24,4 @@ odd
 
 # Reference PNGs exported from Figma for measurement only, never shipped.
 /design-refs/
+

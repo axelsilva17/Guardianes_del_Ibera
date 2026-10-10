@@ -1,18 +1,95 @@
+import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
-import TopBar from '../components/TopBar.jsx'
-import BottomNav from '../components/BottomNav.jsx'
+import Button from '../components/Button.jsx'
+import '../styles/Reportar.css'
+import ReporteEnviado from './ReporteEnviado.jsx'
+
+const icons = import.meta.glob('../assets/reportar/*.svg', { eager: true, query: '?url', import: 'default' })
+const CATEGORIES = [['general', 'Residuos generales', 'trash'], ['plastico', 'Plástico', 'milk'], ['papel', 'Papel y cartón', 'paper'], ['vidrio', 'Vidrio', 'glass'], ['organico', 'Orgánicos', 'leaf']]
+function Icon({ name }) { return <img src={icons[`../assets/reportar/${name}.svg`]} alt="" aria-hidden="true" /> }
 
 export default function Reportar() {
+  const navigate = useNavigate()
+  const fileInput = useRef(null)
+  const [photo, setPhoto] = useState('')
+  const [reading, setReading] = useState(false)
+  const [description, setDescription] = useState('')
+  const [category, setCategory] = useState('general')
+  const [location, setLocation] = useState(null)
+  const [locating, setLocating] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
+  const [sent, setSent] = useState(null)
+
+  function selectPhoto(event) {
+    const file = event.target.files?.[0]
+    if (!file) return
+    setError('')
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 2 * 1024 * 1024) {
+      setError('Elegí una imagen JPG, PNG o WebP de hasta 2 MB.')
+      event.target.value = ''
+      return
+    }
+    setReading(true)
+    const reader = new FileReader()
+    reader.onload = () => { setPhoto(reader.result); setReading(false) }
+    reader.onerror = () => { setError('No pudimos leer la imagen. Intentá con otra.'); setReading(false) }
+    reader.readAsDataURL(file)
+  }
+
+  function locate() {
+    setError('')
+    if (!navigator.geolocation) { setError('Tu navegador no permite obtener la ubicación.'); return }
+    setLocating(true)
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => { setLocation({ lat: coords.latitude, lng: coords.longitude }); setLocating(false) },
+      () => { setError('No pudimos obtener tu ubicación. Habilitá el permiso e intentá de nuevo.'); setLocating(false) },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
+    )
+  }
+
+  async function submit(event) {
+    event.preventDefault()
+    if (sending || reading) return
+    setError('')
+    if (!description.trim()) { setError('Contanos qué está pasando.'); return }
+    if (!location) { setError('Tocá “Mi ubicación actual” para indicar dónde está el problema.'); return }
+    setSending(true)
+    try {
+      const base = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+      const response = await fetch(`${base}/api/reportes`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo: description.trim().slice(0, 100), descripcion: description.trim(), tipo: 'basura', categoriaResiduo: category, foto: photo, ...location }),
+      })
+      if (!response.ok) throw new Error('No pudimos enviar el reporte. Intentá de nuevo.')
+      const result = await response.json()
+      if (!result.id) throw new Error('El servidor no confirmó el reporte.')
+      setSent(result)
+    } catch (err) { setError(err.message === 'Failed to fetch' ? 'No se pudo conectar con el servidor. Verificá que esté encendido e intentá de nuevo.' : err.message) }
+    finally { setSending(false) }
+  }
+
   return (
-    <PhoneFrame title="Reportar">
-      <TopBar title="Reportar" />
-      <main className="screen-body">
-        <div className="placeholder">
-          <h2 className="placeholder__title">Reportar</h2>
-          <p className="placeholder__note">TODO: flujo para reportar un incidente.</p>
-        </div>
-      </main>
-      <BottomNav />
+    <PhoneFrame title={sent ? 'Reporte enviado' : 'Reportar'}>
+      <div className="reportar">
+        <div className="reportar__status" aria-hidden="true"><span>9:41</span><div><Icon name="signal" /><Icon name="wifi" /><Icon name="battery" /></div></div>
+        {sent ? <ReporteEnviado reporte={sent} /> : <form className="reportar__form" onSubmit={submit}>
+          <header className="reportar__header"><button type="button" aria-label="Volver a Inicio" onClick={() => navigate('/inicio')}><Icon name="back" /></button><h1>Reportar un problema</h1></header>
+          <>
+            <div className="reportar__steps" aria-label="Foto, ubicación y tipo"><span><Icon name="camera-step" />Foto</span><span><Icon name="pin-step" />Ubicación</span><span><Icon name="clipboard" />Tipo</span></div>
+            <input ref={fileInput} className="reportar__file" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} disabled={sending || reading} aria-label="Fotografía del problema" />
+            <button className="reportar__photo" type="button" disabled={sending || reading} onClick={() => fileInput.current?.click()} aria-label={photo ? 'Cambiar fotografía' : 'Sacar una foto o subir una imagen'}>
+              {photo ? <><img className="reportar__preview" src={photo} alt="Fotografía seleccionada del problema" /><span className="reportar__change">Cambiar foto</span></> : <><Icon name="camera" /><span>Tocá para sacar una foto o subir<br />una imagen de tu galería</span></>}
+            </button>
+            <button className="reportar__location" type="button" onClick={locate} disabled={locating || sending}><Icon name="pin" /><span><strong>Mi ubicación actual</strong><small>{locating ? 'Obteniendo ubicación…' : location ? `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}` : 'Tocá para obtener tu ubicación'}</small></span></button>
+            <label className="reportar__description">Descripción<textarea required maxLength={2000} value={description} disabled={sending} onChange={(e) => setDescription(e.target.value)} placeholder="Contanos qué está pasando…" /></label>
+            <fieldset className="reportar__categories" disabled={sending}><legend>Tipo de residuo</legend><div>{CATEGORIES.map(([value, label, name]) => <button key={value} type="button" aria-label={label} title={label} aria-pressed={category === value} className={category === value ? 'is-selected' : ''} onClick={() => setCategory(value)}><Icon name={name} /></button>)}</div></fieldset>
+            {error && <p className="reportar__error" role="alert">{error}</p>}
+            <Button type="submit" className="reportar__submit" disabled={sending || locating || reading}>{sending ? 'Enviando…' : reading ? 'Leyendo imagen…' : 'Enviar reporte'}</Button>
+          </>
+        </form>}
+      </div>
     </PhoneFrame>
   )
 }

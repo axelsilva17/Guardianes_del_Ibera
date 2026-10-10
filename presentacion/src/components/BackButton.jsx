@@ -17,6 +17,7 @@ export default function BackButton({
   label = 'Volver',
   onBack,
   size = 22,
+  iconSrc,
 }) {
   const navigate = useNavigate()
 
@@ -32,7 +33,7 @@ export default function BackButton({
       onClick={handleBack}
       aria-label={label}
     >
-      <ChevronLeft size={size} aria-hidden="true" />
+      {iconSrc ? <img src={iconSrc} alt="" aria-hidden="true" /> : <ChevronLeft size={size} aria-hidden="true" />}
     </button>
   )
 }
