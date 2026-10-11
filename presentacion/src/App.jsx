@@ -2,11 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Bienvenida from './screens/Bienvenida.jsx'
 import Login from './screens/Login.jsx'
 import Inicio from './screens/Inicio.jsx'
+import Recoleccion from './screens/Recoleccion.jsx'
 import Mapa from './screens/Mapa.jsx'
 import Reportar from './screens/Reportar.jsx'
 import Aprender from './screens/Aprender.jsx'
 import MisReportes from './screens/MisReportes.jsx'
 import Perfil from './screens/Perfil.jsx'
+import { MiCuenta, Notificaciones, Ayuda } from './screens/PerfilOpciones.jsx'
 import Juego from './screens/Juego.jsx'
 import QuizCompostar from './screens/QuizCompostar.jsx'
 import Separar from './screens/Separar/Separar.jsx'
@@ -45,6 +47,7 @@ export default function App() {
         <Route path="/" element={<Bienvenida />} />
         <Route path="/login" element={<Login />} />
         <Route path="/inicio" element={<Inicio />} />
+        <Route path="/recoleccion" element={<Recoleccion />} />
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/reportar" element={<Reportar />} />
         <Route path="/aprender" element={<Aprender />} />
@@ -58,6 +61,9 @@ export default function App() {
         <Route path="/aprender/ibera/:tema" element={<TemaIbera />} />
         <Route path="/mis-reportes" element={<MisReportes />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/perfil/mi-cuenta" element={<MiCuenta />} />
+        <Route path="/perfil/notificaciones" element={<Notificaciones />} />
+        <Route path="/perfil/ayuda" element={<Ayuda />} />
         <Route path="/recompensas" element={<Recompensas />} />
         <Route path="/nivel" element={<Nivel />} />
         <Route path="/municipio" element={<MunicipioRoot />}>

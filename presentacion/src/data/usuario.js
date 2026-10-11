@@ -5,7 +5,7 @@ import activo from '../assets/nivel/guardian-activo.png'
 import ibera from '../assets/nivel/guardian-ibera.png'
 import protector from '../assets/nivel/protector.png'
 
-export const USER = { name: 'Sofía', points: 650 }
+export const USER = { id: 'sofia-demo', name: 'Sofía', points: 650 }
 
 export const LEVELS = [
   { name: 'Explorador', min: 0, max: 99, image: explorador },

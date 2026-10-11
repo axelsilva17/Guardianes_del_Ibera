@@ -5,6 +5,8 @@ import StatusBar from '../components/StatusBar.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import { USER, getProgress } from '../data/usuario.js'
 import novedadesibera from '../assets/images/novedadesibera.png'
+import '../styles/Recoleccion.css'
+import guacamayo from '../assets/recoleccion/guacamayo-listo.png'
 
 const BENEFITS = [
   {
@@ -89,6 +91,14 @@ export default function Inicio() {
               ))}
             </div>
           </section>
+          <Link className="recoleccion-card" to="/recoleccion">
+            <img className="recoleccion-card__art" src={guacamayo} alt="" aria-hidden="true" />
+            <div className="recoleccion-card__body">
+              <h2>Recolección de Residuos</h2>
+              <p>Consultá días, horarios y recorridos de tu barrio</p>
+              <span className="recoleccion-card__cta">Consultar recorrido</span>
+            </div>
+          </Link>
         </main>
 
         <BottomNav />

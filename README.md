@@ -48,7 +48,8 @@ Si `node -v` falla, o imprime v16 o anterior, instalar Node 18+ LTS **antes** de
 
 Luego **cerrar y volver a abrir la terminal** (para que `node` y `npm` queden en el PATH) y verificar `node -v` de nuevo.
 
-- Sin base de datos: el backend mantiene un dataset en memoria sembrado desde `datos/seed.js`.
+- Sin base de datos: el backend guarda los reportes en `datos/storage/reportes.json`, creado a partir de `datos/seed.js` la primera vez. Los envíos, incluidas las fotos, sobreviven a los reinicios. Este archivo local no se incluye en Git: conservá una copia si movés el proyecto.
+- El prototipo usa una sola cuenta de ejemplo (Sofía). `Mis reportes` consulta sus envíos; no hay autenticación real ni aislamiento de usuarios para producción. La persistencia en archivo está pensada para una sola instancia del servidor.
 - Las versiones de las dependencias quedan fijadas en el `package-lock.json` de cada paquete, de modo que todos resuelven las mismas versiones.
 
 ## Instalacion y ejecucion

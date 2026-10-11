@@ -1,6 +1,7 @@
 .vs/
 # Dependencies
 node_modules
+/datos/storage/
 
 # Build output
 dist

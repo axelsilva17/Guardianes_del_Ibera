@@ -1,6 +1,6 @@
 # Guardianes — capa Logica
 
-Capa de logica del prototipo Guardianes del Ibera. Expone una API REST en memoria sobre reportes ambientales de ejemplo y concentra las reglas de negocio y la validacion. La persistencia queda delegada por completo a la capa de datos (`datos/`).
+Capa de logica del prototipo Guardianes del Ibera. Expone una API REST con persistencia local en JSON sobre reportes ambientales de ejemplo y concentra las reglas de negocio y la validacion. La persistencia queda delegada por completo a la capa de datos (`datos/`).
 
 ## Ruta rapida
 
@@ -69,8 +69,9 @@ logica/
     index.js               # transporte HTTP: rutas -> logica
     reportesService.js     # reglas de negocio + validacion
 datos/
-  reportesRepository.js     # acceso a la coleccion en memoria
+  reportesRepository.js     # acceso al archivo JSON local
   seed.js                   # dataset de ejemplo
 ```
 
-La logica nunca toca la coleccion cruda: todo pasa por `datos/reportesRepository.js`. Los datos viven solo en memoria y se reinician cada vez que la API se reinicia.
+La logica nunca toca la coleccion cruda: todo pasa por `datos/reportesRepository.js`. Los datos se guardan en `datos/storage/reportes.json` y sobreviven a los reinicios. Se usa una cuenta de ejemplo (Sofía), sin autenticación real.
+

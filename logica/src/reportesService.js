@@ -40,8 +40,9 @@ const LNG_MAX = 180
  * List every report.
  * @returns {import('../../datos/seed.js').Reporte[]}
  */
-export function getReportes() {
-  return reportesRepository.list()
+export function getReportes(autorId) {
+  const reportes = reportesRepository.list()
+  return autorId ? reportes.filter(r => r.autorId === autorId) : reportes
 }
 
 /**
@@ -65,7 +66,7 @@ export function getReporteById(id) {
  * @throws {ValidationError}
  */
 export function createReporte(input = {}) {
-  const { titulo, tipo, descripcion, lat, lng, autor, categoriaResiduo, foto } = input ?? {}
+  const { titulo, tipo, descripcion, lat, lng, categoriaResiduo, foto } = input ?? {}
 
   if (typeof titulo !== 'string' || titulo.trim() === '') {
     throw new ValidationError('Field "titulo" is required and must be a non-empty string')
@@ -97,7 +98,7 @@ export function createReporte(input = {}) {
 
   const reporte = {
     id: randomUUID(),
-    numero: reportesRepository.list().length + 1,
+    numero: Math.max(0, ...reportesRepository.list().map(r => Number(r.numero) || 0)) + 1,
     titulo: titulo.trim(),
     tipo,
     descripcion: typeof descripcion === 'string' ? descripcion.trim() : '',
@@ -105,7 +106,8 @@ export function createReporte(input = {}) {
     lng: lngNum,
     estado: 'pendiente',
     fecha: new Date().toISOString().slice(0, 10),
-    autor: typeof autor === 'string' && autor.trim() !== '' ? autor.trim() : 'Anonimo',
+    autor: 'Sofía Martínez',
+    autorId: 'sofia-demo', // Prototype account; replace with authenticated identity later.
   }
 
   if (categoriaResiduo !== undefined) reporte.categoriaResiduo = categoriaResiduo

@@ -25,7 +25,7 @@ app.get('/api/health', (req, res) => {
 })
 
 app.get('/api/reportes', (req, res) => {
-  res.json(getReportes())
+  res.json(getReportes(req.query.autorId))
 })
 
 app.get('/api/reportes/:id', (req, res) => {

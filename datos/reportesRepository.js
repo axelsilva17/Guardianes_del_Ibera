@@ -1,40 +1,36 @@
-/**
- * DATA layer — in-memory repository.
- *
- * This is the ONLY module allowed to touch the raw collection.
- * Every read returns a copy so callers cannot mutate stored records.
- */
-
+/** Local JSON persistence for the single-process prototype. */
+import { mkdirSync, readFileSync, writeFileSync, renameSync } from 'node:fs'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { seedReportes } from './seed.js'
-
-/** Raw in-memory collection. Start from a shallow copy of the seed. */
-const reportes = seedReportes.map((reporte) => ({ ...reporte }))
-
-/**
- * Return all reports.
- * @returns {import('./seed.js').Reporte[]}
- */
-export function list() {
-  return reportes.map((reporte) => ({ ...reporte }))
+const file = process.env.REPORTES_FILE || fileURLToPath(new URL('./storage/reportes.json', import.meta.url))
+function persist(records) {
+  mkdirSync(dirname(file), { recursive: true })
+  writeFileSync(`${file}.tmp`, JSON.stringify(records, null, 2), 'utf8')
+  renameSync(`${file}.tmp`, file)
 }
-
-/**
- * Find a report by id.
- * @param {string} id
- * @returns {import('./seed.js').Reporte | null}
- */
-export function findById(id) {
-  const match = reportes.find((reporte) => reporte.id === id)
-  return match ? { ...match } : null
+function load() {
+  let records
+  try {
+    records = JSON.parse(readFileSync(file, 'utf8').replace(/^\uFEFF/, ''))
+    if (!Array.isArray(records) || records.some(r => !r || typeof r.id !== 'string')) throw new Error('Archivo de reportes inválido')
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+    records = seedReportes.map(r => ({ ...r }))
+  }
+  records = records.map((r, index) => ({ ...r, numero: r.numero || index + 1,
+    ...(!r.autorId && !seedReportes.some(seed => seed.id === r.id) && ['Anonimo', 'Anónimo', 'Sofía Martínez'].includes(r.autor) ? { autorId: 'sofia-demo', autor: 'Sofía Martínez' } : {}),
+  }))
+  persist(records)
+  return records
 }
-
-/**
- * Store a new report.
- * @param {import('./seed.js').Reporte} data - already-built record (id and defaults resolved by the logic layer)
- * @returns {import('./seed.js').Reporte}
- */
+let reportes = load()
+export function list() { return reportes.map(r => ({ ...r })) }
+export function findById(id) { const r = reportes.find(r => r.id === id); return r ? { ...r } : null }
 export function create(data) {
   const record = { ...data }
-  reportes.push(record)
+  const next = [...reportes, record]
+  persist(next)
+  reportes = next
   return { ...record }
 }
