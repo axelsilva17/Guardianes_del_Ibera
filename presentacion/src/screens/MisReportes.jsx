@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ScreenLayout from '../components/ScreenLayout.jsx'
 import { USER } from '../data/usuario.js'
+import { API_URL } from '../data/api.js'
 import '../styles/MisReportes.css'
 const FILTERS = [['todos', 'Todos'], ['proceso', 'En proceso'], ['resuelto', 'Resueltos']]
 const STATES = { pendiente: 'Pendiente', en_revision: 'En proceso', resuelto: 'Resuelto' }
-const base = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+const base = API_URL
 export default function MisReportes() {
   const [reports, setReports] = useState([])
   const [filter, setFilter] = useState('todos')

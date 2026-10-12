@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
 import useBack from '../hooks/useBack.js'
+import { API_URL } from '../data/api.js'
 import '../styles/Reportar.css'
 import ReporteEnviado from './ReporteEnviado.jsx'
 
@@ -64,7 +65,7 @@ export default function Reportar() {
     if (!location) { setError('Tocá “Mi ubicación actual” para indicar dónde está el problema.'); return }
     setSending(true)
     try {
-      const base = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+      const base = API_URL
       const response = await fetch(`${base}/api/reportes`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ titulo: description.trim().slice(0, 100), descripcion: description.trim(), tipo: 'basura', categoriaResiduo: category, foto: photo, ...location }),
