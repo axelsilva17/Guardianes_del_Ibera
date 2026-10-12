@@ -3,7 +3,7 @@ import SepararLayout from '../Separar/SepararLayout.jsx'
 import check from '../../assets/separar/check.svg'
 import x from '../../assets/compostar/x.svg'
 import line from '../../assets/compostar/line.svg'
-import compost from '../../assets/compostar/compost-intro.jpg'
+import compost from '../../assets/compostar/compost-intro.webp'
 import '../../styles/Compostar.css'
 
 function List({ title, items, icon }) {

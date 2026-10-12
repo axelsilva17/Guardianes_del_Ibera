@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import SepararLayout, { WasteArt } from './SepararLayout.jsx'
 import { CATEGORIES } from './data.js'
-import lobito from '../../assets/images/lobito.png'
+import lobito from '../../assets/images/lobito.webp'
 import check from '../../assets/separar/check.svg'
 const lines = import.meta.glob('../../assets/separar/line-*.svg', { eager: true, query: '?url', import: 'default' })
 

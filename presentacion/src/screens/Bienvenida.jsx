@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import fondo from '../assets/images/comenzar1.png'
-import frente from '../assets/images/comenzar2.png'
+import fondo from '../assets/images/comenzar1.webp'
+import frente from '../assets/images/comenzar2.webp'
 
 /**
  * Onboarding splash (screen "01 Bienvenida", Figma node 22:34016).
  *
  * The screen is a two-layer composition exported from Figma:
  *
- *   - comenzar1.png (429x720): the wetland photograph. It fills the whole
+ *   - comenzar1.webp (429x720): the wetland photograph. It fills the whole
  *     390x844 frame with `object-fit: cover`.
- *   - comenzar2.png (390x800): the foreground layer with the logo, the
+ *   - comenzar2.webp (390x800): the foreground layer with the logo, the
  *     wordmark and the CTA. It is a transparent PNG whose width already
  *     matches the frame, and its height (800) is exactly the frame height
  *     minus the 44px status bar, so it starts right below it.

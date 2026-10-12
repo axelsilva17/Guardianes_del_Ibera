@@ -586,8 +586,8 @@
 
 /* ---------- Bienvenida (onboarding splash) ----------
  * The screen is a two-layer Figma export:
- *   - comenzar1.png fills the frame (photograph, 429x720 -> cover).
- *   - comenzar2.png is the 390x800 transparent foreground (logo + wordmark +
+ *   - comenzar1.webp fills the frame (photograph, 429x720 -> cover).
+ *   - comenzar2.webp is the 390x800 transparent foreground (logo + wordmark +
  *     CTA). Its height is the frame height minus the 44px status bar, so it
  *     starts right below the status bar.
  * The CTA is drawn inside the artwork, so `.bienvenida__cta` is a transparent
@@ -1062,7 +1062,7 @@
 /* ---------- Promo del juego: card "Desafío Guardián" (Aprender) ----------
  * Medido en design-refs/JuegoFlotante.png (card 342x82 sobre un export de
  * 342x100 con 9px de padding transparente arriba y abajo). El PNG es sólo
- * referencia de medición: el capybara se recorta aparte (capi-card.png) y el
+ * referencia de medición: el capybara se recorta aparte (capi-card.webp) y el
  * resto del card se construye en DOM/CSS, para que la píldora sea texto real
  * y el card entero sea un enlace navegable y accesible. */
 .juego-cta {

@@ -3,7 +3,7 @@ import { MapPin, ClipboardList, TriangleAlert, CircleAlert } from 'lucide-react'
 import MuniScreen, { Chip, Icon } from './MuniScreen.jsx'
 import { useMunicipio } from './MunicipioContext.jsx'
 import { ESTADOS, PRIORIDADES, TIPOS, numero } from './data.js'
-import foto from '../../assets/municipio/reporte-foto.jpg'
+import foto from '../../assets/municipio/reporte-foto.webp'
 
 // Figma, Page 3: "19 · Detalle de reporte". La foto es de ejemplo para todos los reportes.
 export default function Detalle() {

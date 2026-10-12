@@ -1,9 +1,9 @@
 // Usuario de ejemplo del prototipo: única fuente de nombre, puntos y nivel para todas las pantallas.
-import explorador from '../assets/images/imagennivel.png'
-import inicial from '../assets/nivel/guardian-inicial.png'
-import activo from '../assets/nivel/guardian-activo.png'
-import ibera from '../assets/nivel/guardian-ibera.png'
-import protector from '../assets/nivel/protector.png'
+import explorador from '../assets/images/imagennivel.webp'
+import inicial from '../assets/nivel/guardian-inicial.webp'
+import activo from '../assets/nivel/guardian-activo.webp'
+import ibera from '../assets/nivel/guardian-ibera.webp'
+import protector from '../assets/nivel/protector.webp'
 
 export const USER = { id: 'sofia-demo', name: 'Sofía', points: 650 }
 

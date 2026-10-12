@@ -1,6 +1,6 @@
 // Contenido de "Cuidemos el Iberá" (Figma, Page 3: "Cuidemos Ibera", "Cuidar Humedales",
 // "Fauna Nativa", "Turismo Responsable" y "Acciones"). `thumb` y `hero` recortan la misma
-// ilustración de cuatro escenas (assets/ibera/temas.png).
+// ilustración de cuatro escenas (assets/ibera/temas.webp).
 export const TOPICS = [
   {
     id: 'humedales', card: 'Humedales', cardText: 'Conocé por qué son importantes', title: 'Humedales',

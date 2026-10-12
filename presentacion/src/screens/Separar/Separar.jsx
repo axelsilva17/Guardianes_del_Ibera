@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import SepararLayout, { WasteArt } from './SepararLayout.jsx'
 import { CATEGORIES } from './data.js'
-import capi from '../../assets/separar/capi-promo.png'
+import capi from '../../assets/separar/capi-promo.webp'
 
 export default function Separar() {
   return <SepararLayout title="¿Dónde va cada residuo?" backTo="/aprender" nav className="separar--hub">

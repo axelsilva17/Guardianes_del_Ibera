@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { MapPin, Search, ChevronRight, CalendarDays, Clock3, Bell } from 'lucide-react'
 import ScreenLayout from '../components/ScreenLayout.jsx'
 import '../styles/Recoleccion.css'
-import guacamayoListo from '../assets/recoleccion/guacamayo-listo.png'
+import guacamayoListo from '../assets/recoleccion/guacamayo-listo.webp'
 
 const STORAGE_KEY = 'guardianes-recoleccion-avisos'
 const BARRIOS = ['Centro', 'Barrio Norte']

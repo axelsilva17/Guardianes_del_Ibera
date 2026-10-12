@@ -1,5 +1,5 @@
 import LessonLayout, { Intro, Sprite } from './LessonLayout.jsx'
-import cuidar from '../../assets/compostar/cuidar.jpg'
+import cuidar from '../../assets/compostar/cuidar.webp'
 
 const CARE = [
   { title: 'Humedad', text: 'Debe estar húmedo pero no empapado', box: { width: 94, height: 96 }, crop: { width: '198.82%', height: '347.47%', left: '-49.1%', top: '-20.2%' } },

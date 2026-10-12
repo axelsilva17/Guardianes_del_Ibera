@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import LessonLayout, { Intro } from './LessonLayout.jsx'
-import cierre from '../../assets/compostar/cierre.jpg'
-import capi from '../../assets/separar/capi-promo.png'
+import cierre from '../../assets/compostar/cierre.webp'
+import capi from '../../assets/separar/capi-promo.webp'
 
 export default function Cierre() {
   return <LessonLayout step={6} footer={<div className="compostar__actions compostar__actions--single"><Link to="/aprender" className="compostar__btn">Volver</Link></div>}>

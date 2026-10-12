@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import SepararLayout from '../Separar/SepararLayout.jsx'
 import { Sprite } from '../Compostar/LessonLayout.jsx'
 import { TOPICS } from './data.js'
-import temas from '../../assets/ibera/temas.png'
+import temas from '../../assets/ibera/temas.webp'
 import arrow from '../../assets/ibera/arrow-right.svg'
-import capi from '../../assets/separar/capi-promo.png'
+import capi from '../../assets/separar/capi-promo.webp'
 import '../../styles/Ibera.css'
 
 export default function Ibera() {

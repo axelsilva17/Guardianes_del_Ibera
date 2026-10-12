@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserRound, Bell, HelpCircle, ChevronRight, Leaf, MapPin, BookOpen } from 'lucide-react'
 import ScreenLayout from '../components/ScreenLayout.jsx'
-import avatar from '../assets/images/imagennivel.png'
+import avatar from '../assets/images/imagennivel.webp'
 import '../styles/PerfilOpciones.css'
 
 function Layout({ title, children }) {

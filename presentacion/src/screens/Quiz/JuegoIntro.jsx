@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import ScreenLayout from '../../components/ScreenLayout.jsx'
 import Card from '../../components/Card.jsx'
-import capi from '../../assets/separar/capi-juego.png'
+import capi from '../../assets/separar/capi-juego.webp'
 import question from '../../assets/separar/question.svg'
 import coins from '../../assets/separar/coins.svg'
 import game from '../../assets/separar/game.svg'

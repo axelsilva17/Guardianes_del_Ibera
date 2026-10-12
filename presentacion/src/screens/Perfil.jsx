@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import useBack from '../hooks/useBack.js'
-import avatar from '../assets/images/imagennivel.png'
+import avatar from '../assets/images/imagennivel.webp'
 import '../styles/Perfil.css'
 
 const assets = import.meta.glob('../assets/perfil/*.svg', { eager: true, query: '?url', import: 'default' })

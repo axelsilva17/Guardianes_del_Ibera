@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import SepararLayout from './Separar/SepararLayout.jsx'
-import mascotas from '../assets/images/aprender-mascotas.png'
+import mascotas from '../assets/images/aprender-mascotas.webp'
 import '../styles/Aprender.css'
 
 // Figma, Page 3: "07 · Aprender". Las tres ilustraciones son recortes de la misma imagen.

@@ -1,5 +1,5 @@
 import LessonLayout, { Intro } from './LessonLayout.jsx'
-import lugar from '../../assets/compostar/lugar.png'
+import lugar from '../../assets/compostar/lugar.webp'
 import sun from '../../assets/compostar/sun.svg'
 import water from '../../assets/compostar/water.svg'
 import pin from '../../assets/compostar/pin.svg'

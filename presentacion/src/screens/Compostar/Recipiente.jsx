@@ -1,6 +1,6 @@
 import LessonLayout, { Intro, Note, Sprite } from './LessonLayout.jsx'
-import recipientes from '../../assets/compostar/recipientes.png'
-import ciervo from '../../assets/compostar/ciervo.png'
+import recipientes from '../../assets/compostar/recipientes.webp'
+import ciervo from '../../assets/compostar/ciervo.webp'
 
 const OPTIONS = [
   { title: 'Balde con tapa', points: ['Ideal para espacios pequeños', 'Con orificios de ventilación y drenaje'], box: { width: 95, height: 96 }, crop: { width: '148.45%', height: '363.64%', left: '-17.01%', top: '-21.83%' } },

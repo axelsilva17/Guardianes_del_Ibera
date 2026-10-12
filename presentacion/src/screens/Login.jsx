@@ -3,8 +3,8 @@ import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import { GoogleIcon, AppleIcon } from '../components/BrandIcons.jsx'
-import heroLogin from '../assets/images/login.png'
-import fondoLogin from '../assets/images/comenzar1.png'
+import heroLogin from '../assets/images/login.webp'
+import fondoLogin from '../assets/images/comenzar1.webp'
 
 export default function Login() {
   const navigate = useNavigate()

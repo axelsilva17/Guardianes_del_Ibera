@@ -4,9 +4,9 @@ import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import { USER, getProgress } from '../data/usuario.js'
-import novedadesibera from '../assets/images/novedadesibera.png'
+import novedadesibera from '../assets/images/novedadesibera.webp'
 import '../styles/Recoleccion.css'
-import guacamayo from '../assets/recoleccion/guacamayo-listo.png'
+import guacamayo from '../assets/recoleccion/guacamayo-listo.webp'
 
 const BENEFITS = [
   {

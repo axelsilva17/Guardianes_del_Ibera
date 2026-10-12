@@ -1,6 +1,6 @@
 import LessonLayout, { Intro, Note, Sprite } from './LessonLayout.jsx'
-import listo from '../../assets/compostar/listo.png'
-import ciervo from '../../assets/compostar/ciervo.png'
+import listo from '../../assets/compostar/listo.webp'
+import ciervo from '../../assets/compostar/ciervo.webp'
 import check from '../../assets/separar/check.svg'
 import line from '../../assets/compostar/line.svg'
 

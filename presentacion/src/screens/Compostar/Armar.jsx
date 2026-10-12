@@ -1,5 +1,5 @@
 import LessonLayout, { Intro, Sprite } from './LessonLayout.jsx'
-import armar from '../../assets/compostar/armar.jpg'
+import armar from '../../assets/compostar/armar.webp'
 
 const STEPS = [
   { title: 'Separá los residuos orgánicos', text: 'Frutas, verduras, yerba, café, etc', box: { width: 50, height: 38 }, crop: { width: '322.64%', height: '630.17%', left: '-113.95%', top: '-32.76%' } },

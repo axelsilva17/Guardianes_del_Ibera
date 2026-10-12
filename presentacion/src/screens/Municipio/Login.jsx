@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../../components/PhoneFrame.jsx'
 import { StatusBar } from './MuniScreen.jsx'
-import fondo from '../../assets/municipio/login-fondo.png'
+import fondo from '../../assets/municipio/login-fondo.webp'
 import emblema from '../../assets/municipio/emblema.svg'
 
 // Figma, Page 3: "Login municipal". Prototipo: cualquier usuario entra al panel.

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Plus, ChevronRight } from 'lucide-react'
 import MuniScreen, { Chip } from './MuniScreen.jsx'
 import { useMunicipio } from './MunicipioContext.jsx'
-import foto from '../../assets/municipio/punto-verde.png'
+import foto from '../../assets/municipio/punto-verde.webp'
 
 /** Formulario para crear o editar un punto verde (no está en el Figma). */
 function Formulario({ punto, onSave, onCancel }) {
