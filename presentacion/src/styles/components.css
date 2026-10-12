@@ -38,16 +38,18 @@
 }
 
 /* Real phones: the prototype is an app, not a framed mockup. On small
- * viewports the phone frame becomes a full-screen app shell (no bezel,
- * no label, no rounded corners, no stage padding). */
+ * viewports the phone frame becomes a full-screen app shell: no bezel, no
+ * label, no rounded corners, no stage padding. The frame grows with its
+ * content (height: auto) so the document scrolls and nothing can ever be
+ * clipped below the visible area, regardless of browser URL-bar quirks. */
 @media (max-width: 480px) {
   body {
     background: var(--surface);
   }
 
   .phone-stage {
-    min-height: 100vh;
-    min-height: 100dvh;
+    justify-content: flex-start;
+    min-height: 100svh;
     padding: 0;
     gap: 0;
     background: var(--surface);
@@ -59,10 +61,25 @@
 
   .phone-frame {
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    height: auto;
+    min-height: 100svh;
     border-radius: 0;
     box-shadow: none;
+    /* clip, not hidden: hidden would make this a scroll container and
+       break position: sticky on the bottom nav below. */
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .phone-frame__screen {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  /* Keep the bottom nav pinned to the visible area (app behavior). */
+  .bottomnav {
+    position: sticky;
+    bottom: 0;
   }
 }
 
