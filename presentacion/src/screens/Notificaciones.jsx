@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ClipboardCheck, Star, Truck, Gift, Gamepad2, CircleCheck } from 'lucide-react'
 import ScreenLayout from '../components/ScreenLayout.jsx'
 import { useNotificaciones } from '../data/notificaciones.js'
-import buho from '../assets/images/buho-rama.webp'
+import buho from '../assets/images/buho-notificaciones.webp'
 import '../styles/Notificaciones.css'
 
 // No está en el Figma: bandeja de notificaciones con el estilo de Recompensas y Nivel.
