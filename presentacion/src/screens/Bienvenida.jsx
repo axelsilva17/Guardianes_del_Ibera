@@ -1,26 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import fondo from '../assets/images/comenzar1.webp'
-import frente from '../assets/images/comenzar2.webp'
+import fondo from '../assets/images/bienvenida-fondo.webp'
+import emblema from '../assets/municipio/emblema.svg'
+import '../styles/Bienvenida.css'
 
 /**
- * Onboarding splash (screen "01 Bienvenida", Figma node 22:34016).
+ * Pantalla de bienvenida (Figma "01 Bienvenida", nodo 22:34016).
  *
- * The screen is a two-layer composition exported from Figma:
- *
- *   - comenzar1.webp (429x720): the wetland photograph. It fills the whole
- *     390x844 frame with `object-fit: cover`.
- *   - comenzar2.webp (390x800): the foreground layer with the logo, the
- *     wordmark and the CTA. It is a transparent PNG whose width already
- *     matches the frame, and its height (800) is exactly the frame height
- *     minus the 44px status bar, so it starts right below it.
- *
- * The CTA is part of the artwork, so the real interactive element is a
- * transparent button laid exactly over the drawn one. Its geometry was
- * measured from the PNG (20px sides, 697px from the top of the layer,
- * 350x52 with rounded corners) so the visual stays faithful while keeping
- * navigation, focus and keyboard access working.
+ * - Fondo: foto de los carpinchos al atardecer, a pantalla completa.
+ * - Logo: emblema vectorial + "GUARDIANES" (Montserrat) + "Iberá" (Bilbo Swash Caps), como en
+ *   el Figma (Page 2, "Marca"). Es texto real, así se ve nítido en cualquier pantalla.
+ * - Lema y botón son elementos reales, centrados en columna.
  */
 export default function Bienvenida() {
   const navigate = useNavigate()
@@ -29,18 +20,19 @@ export default function Bienvenida() {
     <PhoneFrame title="Bienvenida">
       <div className="bienvenida">
         <img className="bienvenida__fondo" src={fondo} alt="" aria-hidden="true" />
-
-        <div className="bienvenida__scene">
-          <img className="bienvenida__arte" src={frente} alt="Guardianes del Iberá" />
-          <button
-            type="button"
-            className="bienvenida__cta"
-            onClick={() => navigate('/login')}
-            aria-label="Comenzar"
-          />
-        </div>
-
         <StatusBar />
+
+        <main className="bienvenida__contenido">
+          <h1 className="bienvenida__marca" aria-label="Guardianes del Iberá">
+            <img className="bienvenida__emblema" src={emblema} alt="" aria-hidden="true" />
+            <span className="bienvenida__nombre" aria-hidden="true">GUARDIANES<span className="bienvenida__ibera">Iberá</span></span>
+          </h1>
+          <p className="bienvenida__lema">Naturaleza que nos une</p>
+
+          <div className="bienvenida__pie">
+            <button type="button" className="bienvenida__boton" onClick={() => navigate('/login')}>Comenzar</button>
+          </div>
+        </main>
       </div>
     </PhoneFrame>
   )

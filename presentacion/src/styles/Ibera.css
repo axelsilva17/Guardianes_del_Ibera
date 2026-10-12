@@ -21,3 +21,8 @@
 .ibera__tips li { display: flex; align-items: center; gap: 5px; min-height: 25px; font-size: 14px; line-height: 1.4; color: var(--color-muted); }
 .ibera__tips li img { flex: none; }
 .ibera__oso { position: absolute; right: -10px; bottom: -24px; width: 115px; height: 86px; object-fit: cover; pointer-events: none; }
+
+/* Prueba con fotos reales (USAR_FOTOS en screens/Ibera/data.js): todas con la misma medida. */
+.ibera__foto { flex: none; max-width: 100%; object-fit: cover; }
+.ibera__foto--thumb { width: 124px; height: 80px; border-radius: var(--radius-sm); }
+.ibera__foto--hero { width: 298px; height: 196px; border-radius: var(--radius-lg); }

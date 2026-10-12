@@ -1,0 +1,21 @@
+/* Tipografías del logo (Figma, Page 2 "Marca"): Montserrat ExtraBold y Bilbo Swash Caps para "Iberá". */
+@import url("https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Montserrat:wght@800&display=swap");
+
+/* Bienvenida: foto a pantalla completa y todo el contenido centrado en una columna.
+   La base de .bienvenida y .bienvenida__fondo está en components.css. */
+.bienvenida .statusbar { position: relative; z-index: 2; }
+
+/* Abajo deja 150 px libres: el botón queda más arriba, lejos del borde de la pantalla. */
+.bienvenida__contenido { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; flex: 1; min-height: 0; padding: 96px 20px 150px; text-align: center; }
+.bienvenida__marca { display: flex; flex-direction: column; align-items: center; gap: 17px; margin: 0; }
+.bienvenida__emblema { width: 90px; height: 90px; }
+.bienvenida__nombre { position: relative; font-family: var(--font-display); font-size: 36px; font-weight: 800; letter-spacing: .72px; line-height: 1.05; color: #f4f9f6; text-shadow: 0 4px 4px rgba(0, 0, 0, .5); }
+/* "Iberá" va apoyado e inclinado sobre el final de "GUARDIANES", como en el logo. */
+.bienvenida__ibera { position: absolute; right: -12px; bottom: -27px; font-family: "Bilbo Swash Caps", cursive; font-size: 40px; font-weight: 400; letter-spacing: .5px; color: #e9813c; -webkit-text-stroke: 2.4px #e9813c; paint-order: stroke fill; text-shadow: 0 2px 4px rgba(0, 0, 0, .45); transform: rotate(-7deg); }
+.bienvenida__lema { margin-top: 26px; font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--white); text-shadow: 0 1px 4px rgba(0, 0, 0, .45); }
+
+.bienvenida__pie { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; margin-top: auto; }
+.bienvenida__boton { width: 100%; max-width: 350px; height: 52px; border: 0; border-radius: var(--radius-md); background: var(--color-primary); color: var(--white); font-size: 15px; font-weight: 700; box-shadow: 0 6px 18px rgba(0, 0, 0, .25); transition: transform .12s ease, background-color .18s ease; }
+.bienvenida__boton:active { transform: scale(.98); }
+.bienvenida__boton:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .bienvenida__boton { transition: none; } .bienvenida__boton:active { transform: none; } }

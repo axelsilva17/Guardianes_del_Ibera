@@ -3,8 +3,9 @@ import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import { GoogleIcon, AppleIcon } from '../components/BrandIcons.jsx'
-import heroLogin from '../assets/images/login.webp'
-import fondoLogin from '../assets/images/comenzar1.webp'
+import emblema from '../assets/municipio/emblema.svg'
+import fondoLogin from '../assets/images/bienvenida-fondo.webp'
+import '../styles/LoginCiudadano.css'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -22,12 +23,11 @@ export default function Login() {
         <div className="login__content">
           <StatusBar />
 
+          {/* Emblema vectorial y texto real (antes una imagen exportada), igual que en Bienvenida. */}
           <div className="login__hero">
-            <img
-              className="login__hero-art"
-              src={heroLogin}
-              alt="Bienvenido, sumate a Guardianes"
-            />
+            <img className="login__emblema" src={emblema} alt="" aria-hidden="true" />
+            <h1 className="login__titulo">BIENVENIDO</h1>
+            <p className="login__subtitulo">Sumate a Guardianes</p>
           </div>
 
           <div className="login__access">

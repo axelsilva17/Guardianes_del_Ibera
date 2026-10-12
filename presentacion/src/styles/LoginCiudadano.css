@@ -1,0 +1,6 @@
+/* Login del ciudadano: mismo tratamiento que Bienvenida (emblema vectorial y texto real, nítidos en cualquier pantalla).
+   La base de .login y .login__hero está en components.css. */
+.login__emblema { width: 72px; height: 72px; }
+.login__titulo { margin: 0; font-family: var(--font-display); font-size: 36px; font-weight: 800; letter-spacing: .72px; line-height: 1.05; color: #f4f9f6; text-shadow: 0 4px 4px rgba(0, 0, 0, .5); }
+/* Verde del diseño, con un halo claro para que se lea sobre el cielo. */
+.login__subtitulo { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-primary-deep); text-shadow: 0 0 2px rgba(255, 255, 255, .95), 0 0 6px rgba(255, 255, 255, .85), 0 0 12px rgba(255, 255, 255, .6); }
