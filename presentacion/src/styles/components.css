@@ -37,6 +37,35 @@
   background: var(--surface);
 }
 
+/* Real phones: the prototype is an app, not a framed mockup. On small
+ * viewports the phone frame becomes a full-screen app shell (no bezel,
+ * no label, no rounded corners, no stage padding). */
+@media (max-width: 480px) {
+  body {
+    background: var(--surface);
+  }
+
+  .phone-stage {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 0;
+    gap: 0;
+    background: var(--surface);
+  }
+
+  .phone-stage__label {
+    display: none;
+  }
+
+  .phone-frame {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 /* ---------- Top bar ---------- */
 .topbar {
   display: flex;
@@ -672,34 +701,13 @@
 }
 
 /* Greeting header: the screen has no top bar, so the greeting sits right
- * under the status bar (per the Figma export). La fila es flex para poder
- * colgar el acceso al juego (/juego) a la derecha de "Hola, Sofía". */
+ * under the status bar (per the Figma export). */
 .inicio__greeting {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2) var(--space-3);
-}
-
-.inicio__juego {
-  order: 2;
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding: 0 var(--space-4);
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-
-.inicio__juego:hover {
-  background: var(--color-primary-dark);
 }
 
 .inicio__hello {
