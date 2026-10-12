@@ -63,3 +63,14 @@ svg {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Como en una app de celular: el contenido de cada pantalla se desplaza con la rueda o el dedo,
+   pero sin mostrar la barra de scroll ni sus flechitas. */
+html,
+body,
+.phone-frame__screen,
+.phone-frame__screen * { scrollbar-width: none; }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.phone-frame__screen::-webkit-scrollbar,
+.phone-frame__screen *::-webkit-scrollbar { display: none; }

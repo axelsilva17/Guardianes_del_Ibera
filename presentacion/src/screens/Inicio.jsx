@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, Percent, Compass, Utensils } from 'lucide-react'
+import { ChevronRight, Percent, Compass, Utensils, Bell } from 'lucide-react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import { USER, getProgress } from '../data/usuario.js'
+import { useNotificaciones } from '../data/notificaciones.js'
+import '../styles/Notificaciones.css'
 import novedadesibera from '../assets/images/novedadesibera.webp'
 import '../styles/Recoleccion.css'
 import guacamayo from '../assets/recoleccion/guacamayo-listo.webp'
@@ -34,6 +36,7 @@ const BENEFITS = [
 
 export default function Inicio() {
   const { level, next, percent } = getProgress()
+  const { sinLeer } = useNotificaciones()
   const goal = next ? next.min : USER.points
   return (
     <PhoneFrame title="Inicio">
@@ -43,6 +46,10 @@ export default function Inicio() {
         <main className="inicio__content">
           <header className="inicio__greeting">
             <h1 className="inicio__hello">Hola, {USER.name}</h1>
+            <Link className="inicio__bell" to="/notificaciones" aria-label={sinLeer ? `Notificaciones: ${sinLeer} sin leer` : 'Notificaciones'}>
+              <Bell size={22} strokeWidth={1.8} aria-hidden="true" />
+              {sinLeer > 0 && <span className="inicio__bell-badge" aria-hidden="true">{sinLeer}</span>}
+            </Link>
             <p className="inicio__hint">¿Qué querés hacer hoy por el Iberá?</p>
           </header>
 

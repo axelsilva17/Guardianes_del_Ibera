@@ -1,0 +1,41 @@
+/* Bandeja de notificaciones y campana de Inicio. Mismo lenguaje que Recompensas y Nivel. */
+.notificaciones .separar__content { gap: 16px; padding: 16px 24px 24px; }
+.notificaciones .separar__content > * { flex: none; }
+.notificaciones .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.notificaciones__filters { display: flex; gap: 6px; }
+.notificaciones__filters button { flex: 1; height: 34px; border: 0; border-radius: var(--radius-full); background: var(--surface-mist); color: var(--color-muted); font-size: 11px; font-weight: 600; transition: background-color .18s ease, color .18s ease; }
+.notificaciones__filters button.is-active { background: var(--color-primary-dark); color: var(--white); }
+.notificaciones__all { align-self: flex-end; margin-top: -6px; padding: 4px 0; border: 0; background: none; color: var(--color-primary); font-size: 12px; font-weight: 700; }
+
+.notificaciones__group { display: flex; flex-direction: column; gap: 8px; }
+.notificaciones__group h2 { font-size: 13px; font-weight: 700; color: var(--color-muted); text-transform: uppercase; letter-spacing: .04em; }
+.notificaciones__group ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+
+.notificacion { display: flex; align-items: flex-start; gap: 12px; width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--surface-raised); color: var(--color-text); text-align: left; font: inherit; transition: background-color .2s ease, border-color .2s ease; }
+.notificacion.is-unread { border-color: transparent; background: #f1f6f2; }
+.notificacion:active { transform: scale(.99); }
+.notificacion__icon { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: var(--radius-sm); }
+.notificacion__icon--blue { background: var(--color-info-soft); color: var(--color-info-alt); }
+.notificacion__icon--amber { background: var(--color-amber-soft); color: var(--color-amber); }
+.notificacion__icon--green { background: var(--color-green-soft); color: var(--color-primary); }
+.notificacion__icon--lilac { background: #eddef6; color: #8a4fa8; }
+.notificacion__body { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; line-height: 1.4; }
+.notificacion__body strong { font-size: 14px; }
+.notificacion:not(.is-unread) .notificacion__body strong { font-weight: 600; }
+.notificacion__body span { font-size: 12px; color: var(--color-muted); }
+.notificacion__body small { font-size: 11px; color: var(--color-muted); }
+.notificacion__dot { width: 10px; height: 10px; flex: none; margin-top: 4px; border-radius: var(--radius-full); background: var(--color-primary); }
+
+.notificaciones__empty { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0 12px; text-align: center; }
+.notificaciones__empty img { width: 180px; height: 180px; object-fit: contain; }
+.notificaciones__empty h2 { font-size: 18px; line-height: 1.4; }
+.notificaciones__empty p { font-size: 13px; color: var(--color-muted); }
+
+
+@media (prefers-reduced-motion: reduce) { .notificaciones__filters button, .notificacion { transition: none; } .notificacion:active { transform: none; } }
+
+/* Campana en el saludo de Inicio, con la cantidad sin leer. */
+.inicio__bell { order: 2; position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--surface-raised); box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-border); color: var(--color-text); }
+.inicio__bell::after { content: ''; position: absolute; inset: -4px; }
+.inicio__bell-badge { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--radius-full); background: var(--color-error); color: var(--white); font-size: 10px; font-weight: 700; line-height: 18px; text-align: center; box-shadow: 0 0 0 2px var(--surface); }

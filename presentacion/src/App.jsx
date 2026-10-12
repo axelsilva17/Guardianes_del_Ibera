@@ -28,6 +28,7 @@ import JuegoIbera from './screens/Ibera/JuegoIbera.jsx'
 import QuizIbera from './screens/Ibera/QuizIbera.jsx'
 import Recompensas from './screens/Recompensas.jsx'
 import Nivel from './screens/Nivel.jsx'
+import NotificacionesBandeja from './screens/Notificaciones.jsx'
 import { MunicipioRoot } from './screens/Municipio/MunicipioContext.jsx'
 import MuniLogin from './screens/Municipio/Login.jsx'
 import MuniPanel from './screens/Municipio/Panel.jsx'
@@ -66,6 +67,7 @@ export default function App() {
         <Route path="/perfil/ayuda" element={<Ayuda />} />
         <Route path="/recompensas" element={<Recompensas />} />
         <Route path="/nivel" element={<Nivel />} />
+        <Route path="/notificaciones" element={<NotificacionesBandeja />} />
         <Route path="/municipio" element={<MunicipioRoot />}>
           <Route index element={<MuniLogin />} />
           <Route path="panel" element={<MuniPanel />} />
