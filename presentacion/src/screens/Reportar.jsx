@@ -1,4 +1,4 @@
-import { Trash2, Milk, Newspaper, Wine, Leaf, Camera, MapPin, Clipboard, ClipboardCheck } from 'lucide-react'
+import { Trash2, Milk, Newspaper, Wine, Leaf, Camera, MapPin, MessageSquareText, Clipboard, ClipboardCheck } from 'lucide-react'
 import { useRef, useState } from 'react'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
@@ -84,7 +84,7 @@ export default function Reportar() {
         {sent ? <ReporteEnviado reporte={sent} /> : <form className="reportar__form" onSubmit={submit} noValidate>
           <header className="reportar__header"><button type="button" aria-label="Volver" onClick={goBack}><Icon name="back" /></button><h1>Reportar un problema</h1></header>
           <>
-            <ol className="reportar__steps" aria-label="Pasos del reporte">{[["Foto", Camera, !!photo], ["Ubicación", MapPin, !!location], ["Tipo", category ? ClipboardCheck : Clipboard, !!category]].map(([label, StepIcon, done]) => <li key={label} className={done ? "is-done" : ""}><StepIcon size={18} strokeWidth={1.8} aria-hidden="true" />{label}<span className="sr-only">{done ? " (completo)" : " (pendiente)"}</span></li>)}</ol>
+            <ol className="reportar__steps" aria-label="Pasos del reporte">{[["Foto", Camera, !!photo], ["Ubicación", MapPin, !!location], ["Descripción", MessageSquareText, !!description.trim()], ["Tipo", category ? ClipboardCheck : Clipboard, !!category]].map(([label, StepIcon, done]) => <li key={label} className={done ? "is-done" : ""}><StepIcon size={18} strokeWidth={1.8} aria-hidden="true" />{label}<span className="sr-only">{done ? " (completo)" : " (pendiente)"}</span></li>)}</ol>
             <input ref={fileInput} className="reportar__file" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} disabled={sending || reading} aria-label="Fotografía del problema" />
             <button className="reportar__photo" type="button" disabled={sending || reading} onClick={() => fileInput.current?.click()} aria-label={photo ? 'Cambiar fotografía' : 'Sacar una foto o subir una imagen'}>
               {photo ? <><img className="reportar__preview" src={photo} alt="Fotografía seleccionada del problema" /><span className="reportar__change">Cambiar foto</span></> : <><Icon name="camera" /><span>Tocá para sacar una foto o subir<br />una imagen de tu galería</span></>}

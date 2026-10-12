@@ -6,8 +6,8 @@
 .reportar__header button { display: grid; place-items: center; border: 0; background: transparent; padding: 0; min-height: 28px; flex: none; }
 .reportar__header h1 { font-size: 20px; line-height: 1.4; }
 /* Cada paso pasa a verde cuando se completa (foto cargada, ubicación obtenida, tipo elegido). */
-.reportar__steps { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 12px; color: var(--color-muted); }
-.reportar__steps li { display: flex; align-items: center; gap: 7px; flex: 1; transition: color .2s ease; }
+.reportar__steps { display: flex; justify-content: space-between; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 12px; color: var(--color-muted); }
+.reportar__steps li { display: flex; align-items: center; gap: 5px; flex: 1 1 auto; white-space: nowrap; transition: color .2s ease; }
 .reportar__steps li.is-done { color: var(--color-primary); font-weight: 600; }
 .reportar__steps .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .reportar__steps li { transition: none; } }
