@@ -1131,23 +1131,34 @@
 /* ---------------------------------------------------------------------------
  * Real phones: the prototype is an app, not a framed mockup. On small
  * viewports the phone frame becomes a full-screen app shell: no bezel, no
- * label, no rounded corners, no stage padding. The frame grows with its
- * content (height: auto) so the document scrolls and nothing can ever be
- * clipped below the visible area, regardless of browser URL-bar quirks.
+ * label, no rounded corners, no stage padding.
+ *
+ * The DOCUMENT stays still (overflow: hidden) so the URL bar never hides,
+ * nothing jumps between routes, and every screen scrolls internally at a
+ * fixed 100svh height. Content can never be clipped or lost below the
+ * visible area.
  *
  * Placed last so these overrides always win over the base rules above.
  * ------------------------------------------------------------------------ */
 @media (max-width: 480px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   body {
     background: var(--surface);
   }
 
   .phone-stage {
     justify-content: flex-start;
+    height: 100svh;
     min-height: 100svh;
     padding: 0;
     gap: 0;
     background: var(--surface);
+    overflow: hidden;
   }
 
   .phone-stage__label {
@@ -1156,26 +1167,33 @@
 
   .phone-frame {
     width: 100%;
-    height: auto;
+    height: 100svh;
     min-height: 100svh;
     border-radius: 0;
     box-shadow: none;
-    /* clip, not hidden: hidden would make this a scroll container and
-       break position: sticky on the bottom nav below. */
-    overflow-x: clip;
-    overflow-y: visible;
+    overflow: hidden;
   }
 
   .phone-frame__screen {
-    height: auto;
-    min-height: 100svh;
+    height: 100svh;
+    overflow-y: auto;
+    /* contain: the inner scroll never chains to the document or to a
+       pull-to-refresh on the page itself. */
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* The screen is a flex column; without this the flex-shrink: 1 default
+     squashes any screen taller than the viewport to 100svh, clipping it
+     instead of letting it overflow and scroll (the "cut off" effect). */
+  .phone-frame__screen > * {
+    flex: none;
   }
 
   /* Bienvenida is a fixed 390x844 artwork composition (layer + scene in
    * absolute positioning) with no in-flow content, so height:100% against
-   * a height:auto frame collapses to the status bar. Give it its design
-   * height and let the document scroll the same way the rest of the app
-   * does — the CTA at 697px is always reachable. */
+   * the fixed-height screen is exactly its design height. The inner scroll
+   * of the screen exposes the CTA at 697px. */
   .bienvenida {
     height: 844px;
   }
