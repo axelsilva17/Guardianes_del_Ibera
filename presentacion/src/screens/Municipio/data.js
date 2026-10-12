@@ -28,11 +28,11 @@ export const PASOS = ['Asignado', 'En camino', 'Intervención']
 
 // `x`/`y`: posición del pin sobre la imagen del mapa (en px del diseño, área de 354×634).
 export const REPORTES = [
-  { numero: 42, titulo: 'Microbasural', tipo: 'plasticos', ubicacion: 'Calle San Martín · Colonia C. Pellegrini', fecha: 'Hoy', hora: '10:32', estado: 'pendiente', prioridad: 'media', x: 221, y: 125 },
+  { numero: 42, titulo: 'Microbasural', tipo: 'plasticos', ubicacion: 'Calle San Martín · Colonia C. Pellegrini', fecha: 'Hoy', hora: '10:32', estado: 'en_curso', prioridad: 'media', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 10:40' }, x: 221, y: 125 },
   { numero: 41, titulo: 'Residuos', tipo: 'organicos', ubicacion: 'Costanera · Laguna Iberá', fecha: 'Hoy', hora: '09:15', estado: 'en_curso', prioridad: 'alta', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 09:40' }, x: 120, y: 300 },
   { numero: 40, titulo: 'Quema de residuos', tipo: 'otros', ubicacion: 'Ruta 40 · km 12', fecha: 'Ayer', hora: '19:05', estado: 'pendiente', prioridad: 'alta', x: 60, y: 520 },
   { numero: 39, titulo: 'Vidrios en el sendero', tipo: 'vidrio', ubicacion: 'Sendero Carayá', fecha: 'Ayer', hora: '18:20', estado: 'en_curso', prioridad: 'media', area: 'Guardaparques', pasos: { Asignado: 'Ayer 18:50', 'En camino': 'Hoy 08:10' }, x: 300, y: 400 },
-  { numero: 38, titulo: 'Basura', tipo: 'plasticos', ubicacion: 'Plaza principal', fecha: 'Ayer', hora: '16:40', estado: 'resuelto', prioridad: 'baja', area: 'Higiene Urbana', resuelto: 'Ayer 19:30', x: 180, y: 220 },
+  { numero: 38, titulo: 'Basura en la costa', tipo: 'plasticos', ubicacion: 'Costa del humedal · Laguna Iberá', fecha: '09/10', hora: '12:50', estado: 'resuelto', prioridad: 'baja', area: 'Higiene Urbana', pasos: { Asignado: '09/10 13:10', 'En camino': '09/10 15:00', 'Intervención': '09/10 17:45' }, resuelto: '09/10 19:30', x: 180, y: 220 },
   { numero: 37, titulo: 'Cartones acumulados', tipo: 'papel', ubicacion: 'Av. San Martín 450', fecha: '12/10', hora: '11:00', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '13/10 10:15', x: 250, y: 560 },
   { numero: 36, titulo: 'Bolsas en la laguna', tipo: 'plasticos', ubicacion: 'Laguna Iberá · muelle', fecha: '11/10', hora: '15:30', estado: 'resuelto', prioridad: 'alta', area: 'Medio Ambiente', resuelto: '12/10 09:00', x: 150, y: 450 },
   { numero: 35, titulo: 'Restos de poda', tipo: 'organicos', ubicacion: 'Calle Yacaré', fecha: '10/10', hora: '08:45', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '10/10 17:20', x: 90, y: 160 },

@@ -8,7 +8,7 @@ export const NOTIFICACIONES = [
   { id: 'recoleccion-manana', tipo: 'recoleccion', titulo: 'Mañana pasa el recolector de residuos', texto: 'Sacá la basura de tu casa antes de las 20 h.', cuando: 'Hoy · 08:00', hoy: true, to: '/recoleccion' },
   { id: 'recompensa-visita', tipo: 'recompensa', titulo: 'Nueva recompensa disponible', texto: 'Visita guiada por los esteros: canjeala por 300 puntos.', cuando: 'Ayer · 18:30', to: '/recompensas' },
   { id: 'desafio-guardian', tipo: 'desafio', titulo: 'Nuevo desafío: Desafío Guardián', texto: 'Poné a prueba lo que sabés sobre cuidar el Iberá y ganá puntos.', cuando: 'Ayer · 12:00', to: '/aprender/ibera/juego', leidaInicial: true },
-  { id: 'rep-038-resuelto', tipo: 'resuelto', titulo: 'Tu reporte #038 fue resuelto', texto: '¡Gracias por cuidar el Iberá! Higiene Urbana retiró la basura de la plaza.', cuando: 'Hace 3 días', to: '/mis-reportes', leidaInicial: true },
+  { id: 'rep-038-resuelto', tipo: 'resuelto', titulo: 'Tu reporte #038 fue resuelto', texto: '¡Gracias por cuidar el Iberá! Higiene Urbana retiró la basura de la costa del humedal.', cuando: 'Hace 3 días', to: '/mis-reportes', leidaInicial: true },
 ]
 
 const KEY = 'guardianes-notificaciones-leidas'

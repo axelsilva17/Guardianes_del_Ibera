@@ -7,6 +7,10 @@ import '../styles/MisReportes.css'
 const FILTERS = [['todos', 'Todos'], ['proceso', 'En proceso'], ['resuelto', 'Resueltos']]
 const STATES = { pendiente: 'Pendiente', en_revision: 'En proceso', resuelto: 'Resuelto' }
 const base = API_URL
+// Etapas que carga el municipio (mismos nombres que el panel municipal). Las fechas vienen como "2026-10-09T13:10".
+const PASOS = ['Asignado', 'En camino', 'Intervención']
+const cuando = valor => valor ? new Date(valor.length > 10 ? valor : `${valor}T12:00:00`).toLocaleString('es-AR', valor.length > 10 ? { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false } : { day: '2-digit', month: '2-digit' }) : null
+const etapas = r => [['Recibido', r.fecha], ...PASOS.map(paso => [paso, r.pasos?.[paso]]), ['Resuelto', r.estado === 'resuelto' ? r.resuelto || 'sí' : null]]
 export default function MisReportes() {
   const [reports, setReports] = useState([])
   const [filter, setFilter] = useState('todos')
@@ -36,7 +40,11 @@ export default function MisReportes() {
       <h3>{selected.titulo}</h3>
       {selected.foto && <img className="mis-reportes__photo" src={selected.foto} alt="Fotografía del problema reportado" />}
       <p>{selected.descripcion || 'Sin descripción adicional.'}</p>
-      <dl><div><dt>Fecha de envío</dt><dd>{new Date(`${selected.fecha}T12:00:00`).toLocaleDateString('es-AR')}</dd></div><div><dt>Ubicación</dt><dd>{Number(selected.lat).toFixed(5)}, {Number(selected.lng).toFixed(5)}</dd></div><div><dt>Reportado por</dt><dd>{selected.autor}</dd></div></dl>
+      <section className="mis-reportes__seguimiento" aria-label="Seguimiento del reporte">
+        <h4>Seguimiento</h4>
+        <ol>{etapas(selected).map(([paso, fecha]) => <li key={paso} className={fecha ? 'is-hecho' : ''}><span>{paso}</span><small>{fecha ? (fecha === 'sí' ? '' : cuando(fecha)) : 'Pendiente'}</small></li>)}</ol>
+      </section>
+      <dl>{selected.area && <div><dt>Área asignada</dt><dd>{selected.area}</dd></div>}<div><dt>Fecha de envío</dt><dd>{new Date(`${selected.fecha}T12:00:00`).toLocaleDateString('es-AR')}</dd></div><div><dt>Ubicación</dt><dd>{Number(selected.lat).toFixed(5)}, {Number(selected.lng).toFixed(5)}</dd></div><div><dt>Reportado por</dt><dd>{selected.autor}</dd></div></dl>
       <button className="mis-reportes__action" onClick={() => setSelected(null)}>Volver a mis reportes</button>
     </article> : <>
       <div className="mis-reportes__filters" role="group" aria-label="Filtrar reportes">{FILTERS.map(([id, label]) => <button key={id} type="button" aria-pressed={filter === id} onClick={() => setFilter(id)}>{label}</button>)}</div>
