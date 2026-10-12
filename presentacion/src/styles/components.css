@@ -37,52 +37,6 @@
   background: var(--surface);
 }
 
-/* Real phones: the prototype is an app, not a framed mockup. On small
- * viewports the phone frame becomes a full-screen app shell: no bezel, no
- * label, no rounded corners, no stage padding. The frame grows with its
- * content (height: auto) so the document scrolls and nothing can ever be
- * clipped below the visible area, regardless of browser URL-bar quirks. */
-@media (max-width: 480px) {
-  body {
-    background: var(--surface);
-  }
-
-  .phone-stage {
-    justify-content: flex-start;
-    min-height: 100svh;
-    padding: 0;
-    gap: 0;
-    background: var(--surface);
-  }
-
-  .phone-stage__label {
-    display: none;
-  }
-
-  .phone-frame {
-    width: 100%;
-    height: auto;
-    min-height: 100svh;
-    border-radius: 0;
-    box-shadow: none;
-    /* clip, not hidden: hidden would make this a scroll container and
-       break position: sticky on the bottom nav below. */
-    overflow-x: clip;
-    overflow-y: visible;
-  }
-
-  .phone-frame__screen {
-    height: auto;
-    min-height: 100svh;
-  }
-
-  /* Keep the bottom nav pinned to the visible area (app behavior). */
-  .bottomnav {
-    position: sticky;
-    bottom: 0;
-  }
-}
-
 /* ---------- Top bar ---------- */
 .topbar {
   display: flex;
@@ -1172,4 +1126,63 @@
   font-family: var(--font-display);
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
+}
+
+/* ---------------------------------------------------------------------------
+ * Real phones: the prototype is an app, not a framed mockup. On small
+ * viewports the phone frame becomes a full-screen app shell: no bezel, no
+ * label, no rounded corners, no stage padding. The frame grows with its
+ * content (height: auto) so the document scrolls and nothing can ever be
+ * clipped below the visible area, regardless of browser URL-bar quirks.
+ *
+ * Placed last so these overrides always win over the base rules above.
+ * ------------------------------------------------------------------------ */
+@media (max-width: 480px) {
+  body {
+    background: var(--surface);
+  }
+
+  .phone-stage {
+    justify-content: flex-start;
+    min-height: 100svh;
+    padding: 0;
+    gap: 0;
+    background: var(--surface);
+  }
+
+  .phone-stage__label {
+    display: none;
+  }
+
+  .phone-frame {
+    width: 100%;
+    height: auto;
+    min-height: 100svh;
+    border-radius: 0;
+    box-shadow: none;
+    /* clip, not hidden: hidden would make this a scroll container and
+       break position: sticky on the bottom nav below. */
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .phone-frame__screen {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  /* Bienvenida is a fixed 390x844 artwork composition (layer + scene in
+   * absolute positioning) with no in-flow content, so height:100% against
+   * a height:auto frame collapses to the status bar. Give it its design
+   * height and let the document scroll the same way the rest of the app
+   * does — the CTA at 697px is always reachable. */
+  .bienvenida {
+    height: 844px;
+  }
+
+  /* Keep the bottom nav pinned to the visible area (app behavior). */
+  .bottomnav {
+    position: sticky;
+    bottom: 0;
+  }
 }
