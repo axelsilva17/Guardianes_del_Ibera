@@ -17,13 +17,16 @@ export default function Reportar() {
   const [photo, setPhoto] = useState('')
   const [reading, setReading] = useState(false)
   const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('general')
-  const [typeChosen, setTypeChosen] = useState(false)
+  const [category, setCategory] = useState(null) // ninguno marcado hasta que el usuario elige
   const [location, setLocation] = useState(null)
   const [locating, setLocating] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
+  const [tried, setTried] = useState(false) // el aviso de qué falta aparece recién al tocar Enviar
   const [sent, setSent] = useState(null)
+  // Lo que falta para poder enviar: el botón se ve gris y, si se toca igual, se avisa debajo qué falta.
+  const missing = [!photo && 'foto', !location && 'ubicación', !description.trim() && 'descripción', !category && 'tipo de residuo'].filter(Boolean)
+  const missingText = missing.length > 1 ? `${missing.slice(0, -1).join(', ')} y ${missing.at(-1)}` : missing[0]
 
   function selectPhoto(event) {
     const file = event.target.files?.[0]
@@ -56,6 +59,7 @@ export default function Reportar() {
     event.preventDefault()
     if (sending || reading) return
     setError('')
+    if (missing.length) { setTried(true); return }
     if (!description.trim()) { setError('Contanos qué está pasando.'); return }
     if (!location) { setError('Tocá “Mi ubicación actual” para indicar dónde está el problema.'); return }
     setSending(true)
@@ -77,19 +81,19 @@ export default function Reportar() {
     <PhoneFrame title={sent ? 'Reporte enviado' : 'Reportar'}>
       <div className="reportar">
         <div className="reportar__status" aria-hidden="true"><span>9:41</span><div><Icon name="signal" /><Icon name="wifi" /><Icon name="battery" /></div></div>
-        {sent ? <ReporteEnviado reporte={sent} /> : <form className="reportar__form" onSubmit={submit}>
+        {sent ? <ReporteEnviado reporte={sent} /> : <form className="reportar__form" onSubmit={submit} noValidate>
           <header className="reportar__header"><button type="button" aria-label="Volver" onClick={goBack}><Icon name="back" /></button><h1>Reportar un problema</h1></header>
           <>
-            <ol className="reportar__steps" aria-label="Pasos del reporte">{[["Foto", Camera, !!photo], ["Ubicación", MapPin, !!location], ["Tipo", typeChosen ? ClipboardCheck : Clipboard, typeChosen]].map(([label, StepIcon, done]) => <li key={label} className={done ? "is-done" : ""}><StepIcon size={18} strokeWidth={1.8} aria-hidden="true" />{label}<span className="sr-only">{done ? " (completo)" : " (pendiente)"}</span></li>)}</ol>
+            <ol className="reportar__steps" aria-label="Pasos del reporte">{[["Foto", Camera, !!photo], ["Ubicación", MapPin, !!location], ["Tipo", category ? ClipboardCheck : Clipboard, !!category]].map(([label, StepIcon, done]) => <li key={label} className={done ? "is-done" : ""}><StepIcon size={18} strokeWidth={1.8} aria-hidden="true" />{label}<span className="sr-only">{done ? " (completo)" : " (pendiente)"}</span></li>)}</ol>
             <input ref={fileInput} className="reportar__file" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} disabled={sending || reading} aria-label="Fotografía del problema" />
             <button className="reportar__photo" type="button" disabled={sending || reading} onClick={() => fileInput.current?.click()} aria-label={photo ? 'Cambiar fotografía' : 'Sacar una foto o subir una imagen'}>
               {photo ? <><img className="reportar__preview" src={photo} alt="Fotografía seleccionada del problema" /><span className="reportar__change">Cambiar foto</span></> : <><Icon name="camera" /><span>Tocá para sacar una foto o subir<br />una imagen de tu galería</span></>}
             </button>
             <button className="reportar__location" type="button" onClick={locate} disabled={locating || sending}><Icon name="pin" /><span><strong>Mi ubicación actual</strong><small>{locating ? 'Obteniendo ubicación…' : location ? `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}` : 'Tocá para obtener tu ubicación'}</small></span></button>
             <label className="reportar__description">Descripción<textarea required maxLength={2000} rows={1} value={description} disabled={sending} onChange={(e) => { setDescription(e.target.value); e.target.style.height = "auto"; e.target.style.height = `${e.target.scrollHeight}px` }} placeholder="Contanos qué está pasando…" /></label>
-            <fieldset className="reportar__categories" disabled={sending}><legend>Tipo de residuo</legend><div>{CATEGORIES.map(([value, label, CategoryIcon]) => <button key={value} type="button" aria-label={label} title={label} aria-pressed={category === value} className={category === value ? 'is-selected' : ''} onClick={() => { setCategory(value); setTypeChosen(true) }}><CategoryIcon size={22} strokeWidth={1.8} aria-hidden="true" /></button>)}</div></fieldset>
+            <fieldset className="reportar__categories" disabled={sending}><legend>Tipo de residuo</legend><div>{CATEGORIES.map(([value, label, CategoryIcon]) => <button key={value} type="button" aria-label={label} title={label} aria-pressed={category === value} className={category === value ? 'is-selected' : ''} onClick={() => setCategory(value)}><CategoryIcon size={22} strokeWidth={1.8} aria-hidden="true" /></button>)}</div></fieldset>
             {error && <p className="reportar__error" role="alert">{error}</p>}
-            <Button type="submit" className="reportar__submit" disabled={sending || locating || reading}>{sending ? 'Enviando…' : reading ? 'Leyendo imagen…' : 'Enviar reporte'}</Button>
+            {tried && missing.length > 0 && <p id="reportar-falta" className="reportar__hint" role="alert">Para enviar falta: {missingText}.</p>}<Button type="submit" className={`reportar__submit${missing.length ? " is-incomplete" : ""}`} disabled={sending || locating || reading} aria-disabled={missing.length > 0} aria-describedby={tried && missing.length ? "reportar-falta" : undefined}>{sending ? 'Enviando…' : reading ? 'Leyendo imagen…' : 'Enviar reporte'}</Button>
           </>
         </form>}
       </div>
