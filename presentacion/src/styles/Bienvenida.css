@@ -20,4 +20,12 @@ div.bienvenida .statusbar { color: var(--color-text); }
 .bienvenida__boton { width: 100%; max-width: 350px; height: 52px; border: 0; border-radius: 10px; background: #336c2c; color: var(--white); font-size: 15px; font-weight: 700; box-shadow: 0 6px 18px rgba(0, 0, 0, .25); transition: transform .12s ease, background-color .18s ease; }
 .bienvenida__boton:active { transform: scale(.98); }
 .bienvenida__boton:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { .bienvenida__boton { transition: none; } .bienvenida__boton:active { transform: none; } }
+
+/* Accesos a los portales institucionales, debajo del botón principal.
+   Misma tipografía que el lema (Montserrat 13px, blanco) y subrayados. */
+.bienvenida__accesos { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.bienvenida__acceso { padding: 8px 4px; font-family: var(--font-display); font-size: 13px; font-weight: 400; letter-spacing: .3px; color: var(--white); text-decoration: underline; text-underline-offset: 3px; text-shadow: 0 1px 4px rgba(0, 0, 0, .45); transition: opacity .18s ease; }
+.bienvenida__acceso:hover { opacity: .82; }
+.bienvenida__acceso:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) { .bienvenida__boton { transition: none; } .bienvenida__boton:active { transform: none; } .bienvenida__acceso { transition: none; } }

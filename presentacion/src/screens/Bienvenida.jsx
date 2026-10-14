@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import fondo from '../assets/images/portada-estero.webp'
@@ -12,6 +12,7 @@ import '../styles/Bienvenida.css'
  * - Marca "GUARDIANES x Iberá": logo en SVG + "GUARDIANES" (Montserrat) + "x Iberá" (Bilbo Swash Caps).
  *   Es texto real, así se ve nítido en cualquier pantalla.
  * - Lema y botón son elementos reales, centrados en columna.
+ * - Debajo del botón, los accesos a los portales institucionales (comercio y municipio).
  */
 export default function Bienvenida() {
   const navigate = useNavigate()
@@ -31,6 +32,11 @@ export default function Bienvenida() {
 
           <div className="bienvenida__pie">
             <button type="button" className="bienvenida__boton" onClick={() => navigate('/login')}>Comenzar</button>
+
+            <nav className="bienvenida__accesos" aria-label="Acceso a los portales institucionales">
+              <Link className="bienvenida__acceso" to="/comercio">Soy comercio</Link>
+              <Link className="bienvenida__acceso" to="/municipio">Soy municipio</Link>
+            </nav>
           </div>
         </main>
       </div>
