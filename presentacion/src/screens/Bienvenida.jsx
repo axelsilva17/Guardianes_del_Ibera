@@ -33,10 +33,13 @@ export default function Bienvenida() {
           <div className="bienvenida__pie">
             <button type="button" className="bienvenida__boton" onClick={() => navigate('/login')}>Comenzar</button>
 
-            <nav className="bienvenida__accesos" aria-label="Acceso a los portales institucionales">
-              <Link className="bienvenida__acceso" to="/comercio">Soy comercio</Link>
-              <Link className="bienvenida__acceso" to="/municipio">Soy municipio</Link>
-            </nav>
+            <div className="bienvenida__accesos">
+              <p className="bienvenida__accesos-titulo" id="bienvenida-accesos-titulo">¿Tenés un usuario institucional?</p>
+              <nav className="bienvenida__accesos-enlaces" aria-labelledby="bienvenida-accesos-titulo">
+                <Link className="bienvenida__acceso" to="/comercio">Soy comercio</Link>
+                <Link className="bienvenida__acceso" to="/municipio">Soy municipio</Link>
+              </nav>
+            </div>
           </div>
         </main>
       </div>
