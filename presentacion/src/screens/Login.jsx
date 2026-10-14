@@ -3,8 +3,8 @@ import PhoneFrame from '../components/PhoneFrame.jsx'
 import Button from '../components/Button.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import { GoogleIcon, AppleIcon } from '../components/BrandIcons.jsx'
-import emblema from '../assets/municipio/emblema.svg'
-import fondoLogin from '../assets/images/bienvenida-fondo.webp'
+import emblema from '../assets/images/logo-guardianes.svg'
+import fondoLogin from '../assets/images/portada-estero.webp'
 import '../styles/LoginCiudadano.css'
 
 export default function Login() {

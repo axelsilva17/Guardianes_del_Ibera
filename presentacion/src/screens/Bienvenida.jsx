@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import fondo from '../assets/images/bienvenida-fondo.webp'
-import emblema from '../assets/municipio/emblema.svg'
+import fondo from '../assets/images/portada-estero.webp'
+import emblema from '../assets/images/logo-guardianes.svg'
 import '../styles/Bienvenida.css'
 
 /**
  * Pantalla de bienvenida (Figma "01 Bienvenida", nodo 22:34016).
  *
- * - Fondo: foto de los carpinchos al atardecer, a pantalla completa.
- * - Logo: emblema vectorial + "GUARDIANES" (Montserrat) + "Iberá" (Bilbo Swash Caps), como en
+ * - Fondo: muelle sobre los esteros al atardecer (la misma foto que los portales de Municipio y Comercio).
+ * - Logo: logo nuevo en SVG + "GUARDIANES" (Montserrat) + "Iberá" (Bilbo Swash Caps), como en
  *   el Figma (Page 2, "Marca"). Es texto real, así se ve nítido en cualquier pantalla.
  * - Lema y botón son elementos reales, centrados en columna.
  */
