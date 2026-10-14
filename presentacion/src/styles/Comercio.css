@@ -230,3 +230,8 @@
   .com-login-photo .com-marca>span{font-size:21px}
   .com-login-photo .com-marca i{font-size:29px;top:14px}
 }
+
+/* Marca del mismo tamaño que en el portal municipal: 14px en el menú lateral (así no desborda)
+   y 36px en el acceso desde el celular, como en la Bienvenida. */
+.com-sidebar .com-marca>span{font-size:14px}
+@media(max-width:760px){.com-login-photo .com-marca>span{font-size:36px}}

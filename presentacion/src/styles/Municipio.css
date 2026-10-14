@@ -55,7 +55,7 @@
 .muni-login__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .8; }
 .muni-login .muni__status { color: var(--color-text); }
 .muni-login__content { position: relative; display: flex; flex-direction: column; gap: 40px; flex: 1; padding: 16px 20px 24px; }
-.muni-login__brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 320px; padding-top: 120px; text-align: center; }
+.muni-login__brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 320px; padding-top: 120px; text-align: center; font-size: 36px; }
 .muni-login__brand img { width: 90px; height: auto; margin-bottom: 11px; }
 
 /* En celular manda el alto disponible. En la maqueta de 390x844 la marca ocupaba 320px
@@ -69,8 +69,6 @@
   .muni-login__brand { height: auto; padding-top: 0; margin-top: auto; }
   .muni-login__form { margin-bottom: auto; }
 }
-.muni-login__name { position: relative; font-family: var(--font-display); font-size: 36px; font-weight: 800; letter-spacing: .72px; line-height: 1.05; color: var(--surface-2); text-shadow: 0 4px 4px rgba(0, 0, 0, .5); }
-.muni-login__name span { position: absolute; right: -6px; bottom: -22px; font-family: 'Segoe Script', 'Brush Script MT', cursive; font-size: 26px; font-weight: 400; letter-spacing: 0; color: var(--color-accent-warm); text-shadow: none; transform: rotate(-8deg); }
 .muni-login__tagline { margin-top: 16px; font-family: var(--font-display); font-size: 12px; color: var(--white); }
 .muni-login__form { display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: var(--radius-md); background: var(--white); }
 .muni-login__form h1 { font-size: 15px; line-height: 1.4; }
@@ -152,3 +150,10 @@
 .muni-mapa__bg { z-index: 0; }
 .muni-mapa .muni__header, .muni-mapa .muni-filters, .muni-mapa__legend { position: relative; z-index: 1; }
 .muni-mapa__pins { z-index: 1; }
+
+/* Tarjeta de acceso igual a la del portal de comercios en celular: etiqueta, título, frase y campos con nombre e ícono. */
+.muni-login__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .4px; color: #1d4a28; }
+.muni-login__form h1 { font-size: 18px; color: #1d4a28; }
+.muni-login__intro { margin-top: -6px; font-size: 13px; line-height: 1.4; color: var(--color-muted); }
+.muni-login__form label { display: grid; gap: 7px; font-size: 13px; font-weight: 400; color: var(--color-text); }
+.muni-login__form label > span { display: flex; align-items: center; gap: 6px; }

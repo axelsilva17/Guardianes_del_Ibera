@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
+import { UserRound, LockKeyhole } from 'lucide-react'
 import PhoneFrame from '../../components/PhoneFrame.jsx'
 import { StatusBar } from './MuniScreen.jsx'
 import fondo from '../../assets/images/portada-estero.jpg'
-// Misma marca que usan la Bienvenida y el login del ciudadano, para que el municipio no
-// quede con el emblema viejo. Es el vector: nítido a cualquier tamaño y pesa 4 KB.
-import emblema from '../../assets/images/logo-guardianes.svg'
+// Misma marca que la Bienvenida y los portales (componente compartido).
+import MarcaGuardianes from '../../components/MarcaGuardianes.jsx'
 
 // Figma, Page 3: "Login municipal". Prototipo: cualquier usuario entra al panel.
 export default function Login() {
@@ -16,14 +16,14 @@ export default function Login() {
       <StatusBar />
       <main className="muni-login__content">
         <div className="muni-login__brand">
-          <img src={emblema} alt="" aria-hidden="true" />
-          <p className="muni-login__name">MUNICIPIO <span>Iberá</span></p>
-          <p className="muni-login__tagline">Gestión Ambiental</p>
+          <MarcaGuardianes />
         </div>
         <form className="muni-login__form" onSubmit={entrar}>
-          <h1>Ingresar al sistema</h1>
-          <label><span className="sr-only">Usuario</span><input id="muni-usuario" name="usuario" placeholder="Usuario" autoComplete="username" /></label>
-          <label><span className="sr-only">Contraseña</span><input id="muni-clave" name="clave" type="password" placeholder="Contraseña" autoComplete="current-password" /></label>
+          <p className="muni-login__eyebrow">PLATAFORMA MUNICIPAL</p>
+          <h1>Iniciar Sesión</h1>
+          <p className="muni-login__intro">Gestioná, coordiná y hacé crecer el impacto ambiental en el Iberá</p>
+          <label><span><UserRound size={14} aria-hidden="true" /> Email o usuario</span><input id="muni-usuario" name="usuario" placeholder="Usuario" autoComplete="username" /></label>
+          <label><span><LockKeyhole size={14} aria-hidden="true" /> Contraseña</span><input id="muni-clave" name="clave" type="password" placeholder="Contraseña" autoComplete="current-password" /></label>
           <button type="submit" className="muni-btn">Entrar</button>
           <p className="muni-login__forgot">¿Olvidaste tu contraseña?</p>
         </form>

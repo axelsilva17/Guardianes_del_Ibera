@@ -1,0 +1,12 @@
+/* Marca "GUARDIANES x Iberá" (components/MarcaGuardianes.jsx). Única fuente del estilo de la marca.
+   Tipografías: Montserrat ExtraBold para GUARDIANES y Bilbo Swash Caps para "x Iberá".
+   Medidas en em: el tamaño lo da el font-size del contenedor (GUARDIANES = 1em).
+   Las clases van duplicadas (.a.a) para ganarles a los estilos de cada pantalla. */
+@import url("https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Montserrat:wght@400;800&display=swap");
+
+.marca__texto.marca__texto { position: relative; display: inline-flex; flex-direction: column; align-items: center; font-family: var(--font-display); font-weight: 800; font-style: normal; letter-spacing: .02em; line-height: 1.05; white-space: nowrap; }
+.marca__texto--claro.marca__texto--claro { color: #f4f9f6; text-shadow: 0 .11em .11em rgba(0, 0, 0, .5); }
+.marca__texto--oscuro.marca__texto--oscuro { color: #356e2f; text-shadow: 0 .04em .08em rgba(0, 0, 0, .2); }
+
+/* "x Iberá": derecho y centrado en su propio renglón, debajo de GUARDIANES (sin encimarse). */
+.marca__ibera.marca__ibera { position: static; margin-top: .02em; font-family: "Bilbo Swash Caps", cursive; font-size: 1.333em; font-weight: 400; font-style: normal; letter-spacing: .01em; line-height: .85; color: #f4a10d; -webkit-text-stroke: .033em #f4a10d; paint-order: stroke fill; text-shadow: 0 .04em .08em rgba(0, 0, 0, .35); white-space: nowrap; transform: none; }

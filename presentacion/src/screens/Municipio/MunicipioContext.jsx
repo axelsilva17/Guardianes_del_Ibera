@@ -9,7 +9,7 @@ const Ctx = createContext(null)
 
 const ahora = () => `Hoy ${new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`
 
-const CONSULTA_ESCRITORIO = '(min-width: 900px)'
+const CONSULTA_ESCRITORIO = '(min-width: 768px)'
 const suscribirAlAncho = onCambio => { const mq = window.matchMedia(CONSULTA_ESCRITORIO); mq.addEventListener('change', onCambio); return () => mq.removeEventListener('change', onCambio) }
 const esEscritorio = () => window.matchMedia(CONSULTA_ESCRITORIO).matches
 
@@ -20,7 +20,7 @@ export function MunicipioRoot() {
   const vista = useSyncExternalStore(suscribirAlAncho, esEscritorio) ? 'desktop' : 'celular'
   const [reportes, setReportes] = useState(REPORTES)
   const [puntos, setPuntos] = useState(PUNTOS_VERDES)
-  const [perfilMunicipal, guardarPerfil] = useState({ nombre: 'Sofía Martínez', municipio: 'Colonia Carlos Pellegrini' })
+  const [perfilMunicipal, guardarPerfil] = useState({ nombre: 'Laura Gómez', municipio: 'Colonia Carlos Pellegrini' })
   const update = (n, change) => setReportes(list => list.map(r => r.numero === n ? { ...r, ...change(r) } : r))
   const value = {
     vista,

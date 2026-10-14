@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate, Navigate } from 'react-router-dom'
-import { House, MapPin, ClipboardList, Gift, Truck, ChartColumn, UserRound, Bell, Building2, ArrowLeft, Plus, Leaf, KeyRound, LogOut, CircleHelp } from 'lucide-react'
+import { House, MapPin, ClipboardList, Gift, Truck, ChartColumn, UserRound, Bell, Building2, ArrowLeft, Plus, Leaf, KeyRound, LogOut, CircleHelp, LockKeyhole } from 'lucide-react'
 import { useMunicipio } from './MunicipioContext.jsx'
 import { AREAS, ESTADOS, PRIORIDADES, TIPOS, PASOS, numero, RESOLUCION_MENSUAL } from './data.js'
-import logo from '../../assets/comercio/logo.svg'
+import MarcaGuardianes from '../../components/MarcaGuardianes.jsx'
 import fondo from '../../assets/images/portada-estero.jpg'
 import mapa from '../../assets/mapa/mapa.webp'
 import foto from '../../assets/municipio/reporte-foto.webp'
@@ -11,7 +11,7 @@ import foto from '../../assets/municipio/reporte-foto.webp'
 
 const navigation = [['panel','Inicio',House],['mapa','Mapa',MapPin],['reportes','Reportes',ClipboardList],['beneficios','Beneficios',Gift],['puntos-verdes','Puntos Verdes',MapPin],['recoleccion','Recolección',Truck],['estadisticas','Estadísticas',ChartColumn],['perfil','Perfil',UserRound]]
 const titles = { panel:'Hola, equipo municipal', mapa:'Mapa de reportes', reportes:'Reportes', beneficios:'Beneficios de comercios', 'puntos-verdes':'Puntos Verdes y recolección', recoleccion:'Seguimiento de recolección', estadisticas:'Estadísticas', perfil:'Mi Perfil' }
-function Brand() { return <Link to="/municipio" className="md-brand"><img src={logo} alt="" /><span>GUARDIANES<i>Iberá</i></span></Link> }
+function Brand({ tono = 'oscuro' }) { return <Link to="/municipio" className="md-brand" aria-label="Guardianes x Iberá"><MarcaGuardianes tono={tono} /></Link> }
 function Badge({ type, children }) { return <span className={`md-badge md-badge--${type}`}>{children}</span> }
 function Box({ title, children, className='' }) { return <section className={`md-box ${className}`}>{title && <h2>{title}</h2>}{children}</section> }
 function Tabs({ value, onChange, options }) { return <div className="md-tabs">{options.map(([id,label]) => <button key={id} aria-pressed={value===id} onClick={()=>onChange(id)}>{label}</button>)}</div> }
@@ -27,7 +27,7 @@ export default function MunicipioDesktop() {
 }
 function DesktopLogin() {
   const navigate=useNavigate(), [help,setHelp]=useState(false)
-  return <main className="md-login"><div className="md-login-card"><div className="md-login-photo"><img src={fondo} alt="Muelle y bote en los Esteros del Iberá"/><Brand/></div><form onSubmit={e=>{e.preventDefault();navigate('/municipio/panel')}}><p className="md-eyebrow">PLATAFORMA MUNICIPAL</p><h1>Iniciar Sesión</h1><p className="md-muted">Gestioná, coordiná y hacé crecer el impacto ambiental en el Iberá</p><label>Email o usuario<input placeholder="Usuario" autoComplete="username"/></label><label>Contraseña<input type="password" placeholder="Contraseña" autoComplete="current-password"/></label><button className="md-btn">Entrar</button><button type="button" className="md-link" onClick={()=>setHelp(!help)}>¿Olvidaste tu contraseña?</button>{help && <p role="status">Contactá al administrador municipal para recuperar tu acceso.</p>}</form></div></main>
+  return <main className="md-login"><div className="md-login-card"><div className="md-login-photo"><img src={fondo} alt="Muelle y bote en los Esteros del Iberá"/><Brand tono="claro"/></div><form onSubmit={e=>{e.preventDefault();navigate('/municipio/panel')}}><p className="md-eyebrow">PLATAFORMA MUNICIPAL</p><h1>Iniciar Sesión</h1><p className="md-muted">Gestioná, coordiná y hacé crecer el impacto ambiental en el Iberá</p><label><span><UserRound size={14} aria-hidden="true"/> Email o usuario</span><input placeholder="Usuario" autoComplete="username"/></label><label><span><LockKeyhole size={14} aria-hidden="true"/> Contraseña</span><input type="password" placeholder="Contraseña" autoComplete="current-password"/></label><button className="md-btn">Entrar</button><button type="button" className="md-link" onClick={()=>setHelp(!help)}>¿Olvidaste tu contraseña?</button>{help && <p role="status">Contactá al administrador municipal para recuperar tu acceso.</p>}</form></div></main>
 }
 function Indicators({ reports }) {
   const kpis=[['Total reportes',reports.length,'blue',ClipboardList,'todos'],['Pendientes',reports.filter(r=>r.estado==='pendiente').length,'orange',Truck,'pendiente'],['En curso',reports.filter(r=>r.estado==='en_curso').length,'blue',Truck,'en_curso'],['Resueltos',reports.filter(r=>r.estado==='resuelto').length,'green',Leaf,'resuelto']]

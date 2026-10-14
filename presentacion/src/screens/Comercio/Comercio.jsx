@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { House, Gift, ScanLine, Truck, ChartColumn, UserRound, Building2, Bell, Leaf, CupSoda, Utensils, Recycle, Sprout, Plus, MoreVertical, X, LockKeyhole, ArrowLeft } from 'lucide-react'
 import QRCode from 'qrcode'
-import emblema from '../../assets/comercio/logo.svg'
+import MarcaGuardianes from '../../components/MarcaGuardianes.jsx'
 import fondo from '../../assets/images/portada-estero.jpg'
 import '../../styles/Comercio.css'
 
@@ -29,8 +29,8 @@ export function ComercioRoot() {
   useEffect(() => { try { localStorage.setItem('guardianes-comercio-v1', JSON.stringify(data)) } catch { /* El estado sigue disponible durante la sesión. */ } }, [data])
   return <Context.Provider value={{ ...data, setData }}><Outlet /></Context.Provider>
 }
-function Marca() { return <Link to="/comercio" className="com-marca" aria-label="Guardianes del Iberá"><img src={emblema} alt="" /><span>GUARDIANES<i>Iberá</i></span></Link> }
-const nav = [['panel', 'Inicio', House], ['beneficios', 'Mis Beneficios', Gift], ['canjes', 'Canjes', ScanLine], ['retiros', 'Retiros', Truck], ['aporte', 'Mi Aporte', ChartColumn], ['perfil', 'Perfil', UserRound]]
+function Marca({ tono = 'oscuro' }) { return <Link to="/comercio" className="com-marca" aria-label="Guardianes x Iberá"><MarcaGuardianes tono={tono} /></Link> }
+const nav = [['panel', 'Inicio', House], ['beneficios', 'Beneficios', Gift], ['canjes', 'Canjes', ScanLine], ['retiros', 'Retiros', Truck], ['aporte', 'Mi Aporte', ChartColumn], ['perfil', 'Perfil', UserRound]]
 function Layout({ title, breadcrumb = title, children, action }) {
   const { perfil, retiros } = useComercio()
   const [notifications, setNotifications] = useState(false)
@@ -39,7 +39,7 @@ function Layout({ title, breadcrumb = title, children, action }) {
 export function ComercioLogin() {
   const navigate = useNavigate()
   const [help, setHelp] = useState(false)
-  return <main className="com-login"><div className="com-login-card"><div className="com-login-photo"><img src={fondo} alt="Muelle y bote en los Esteros del Iberá al atardecer" /><Marca /></div><form onSubmit={event => { event.preventDefault(); navigate('/comercio/panel') }}><p className="com-eyebrow">PLATAFORMA COMERCIAL+</p><h1>Iniciar Sesión</h1><p className="com-muted">Gestioná, coordiná y hacé crecer el impacto ambiental en el Iberá</p><label><span><UserRound size={14} /> Email o usuario</span><input name="usuario" placeholder="Usuario" autoComplete="username" /></label><label><span><LockKeyhole size={14} /> Contraseña</span><input name="clave" type="password" placeholder="Contraseña" autoComplete="current-password" /></label><button className="com-btn com-login-submit">Entrar</button><button type="button" className="com-forgot" onClick={() => setHelp(!help)}>¿Olvidaste tu contraseña?</button>{help && <p role="status" className="com-muted">Contactá al administrador del Municipio Iberá para recuperar tu acceso.</p>}</form></div></main>
+  return <main className="com-login"><div className="com-login-card"><div className="com-login-photo"><img src={fondo} alt="Muelle y bote en los Esteros del Iberá al atardecer" /><Marca tono="claro" /></div><form onSubmit={event => { event.preventDefault(); navigate('/comercio/panel') }}><p className="com-eyebrow">PLATAFORMA COMERCIAL+</p><h1>Iniciar Sesión</h1><p className="com-muted">Gestioná, coordiná y hacé crecer el impacto ambiental en el Iberá</p><label><span><UserRound size={14} /> Email o usuario</span><input name="usuario" placeholder="Usuario" autoComplete="username" /></label><label><span><LockKeyhole size={14} /> Contraseña</span><input name="clave" type="password" placeholder="Contraseña" autoComplete="current-password" /></label><button className="com-btn com-login-submit">Entrar</button><button type="button" className="com-forgot" onClick={() => setHelp(!help)}>¿Olvidaste tu contraseña?</button>{help && <p role="status" className="com-muted">Contactá al administrador del Municipio Iberá para recuperar tu acceso.</p>}</form></div></main>
 }
 const benefitIcons = { productos: Leaf, bebidas: CupSoda, comida: Utensils }
 function Detalle({ beneficio, onClose }) { return <Modal title="Detalle del beneficio" onClose={onClose}><h3>{beneficio.titulo}</h3><p>Vigencia: {fecha(beneficio.vigencia)}</p><p>Stock disponible: {beneficio.stock}</p><p>Estado: {beneficio.estado}</p></Modal> }

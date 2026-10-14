@@ -2,15 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import StatusBar from '../components/StatusBar.jsx'
 import fondo from '../assets/images/portada-estero.webp'
-import emblema from '../assets/images/logo-guardianes.svg'
+import MarcaGuardianes from '../components/MarcaGuardianes.jsx'
 import '../styles/Bienvenida.css'
 
 /**
  * Pantalla de bienvenida (Figma "01 Bienvenida", nodo 22:34016).
  *
  * - Fondo: muelle sobre los esteros al atardecer (la misma foto que los portales de Municipio y Comercio).
- * - Marca "GUARDIANES x Iberá": logo en SVG + "GUARDIANES" (Montserrat) + "x Iberá" (Bilbo Swash Caps).
- *   Es texto real, así se ve nítido en cualquier pantalla.
+ * - Marca "GUARDIANES x Iberá": componente MarcaGuardianes (el mismo de los portales).
  * - Lema y botón son elementos reales, centrados en columna.
  * - Debajo del botón, los accesos a los portales institucionales (comercio y municipio).
  */
@@ -25,8 +24,7 @@ export default function Bienvenida() {
 
         <main className="bienvenida__contenido">
           <h1 className="bienvenida__marca" aria-label="Guardianes x Iberá">
-            <img className="bienvenida__emblema" src={emblema} alt="" aria-hidden="true" />
-            <span className="bienvenida__nombre" aria-hidden="true">GUARDIANES<span className="bienvenida__ibera">x Iberá</span></span>
+            <MarcaGuardianes logoClassName="bienvenida__emblema" />
           </h1>
           <p className="bienvenida__lema">Naturaleza que nos une</p>
 
