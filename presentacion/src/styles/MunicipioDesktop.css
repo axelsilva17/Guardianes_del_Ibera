@@ -52,3 +52,7 @@
 @media(max-width:450px){.md-stats-filters select{width:100%;font-size:16px}.md-stats-legend{font-size:12px;justify-content:flex-start;gap:10px 16px}.md-month-group small{font-size:12px}.md-zone-chart ul{font-size:14px}}
 /* Campos del acceso como en el portal de comercios: nombre con ícono y sin negrita. */
 .md-login label{font-weight:400}.md-login label>span{display:flex;align-items:center;gap:6px}
+/* Mapa real: su propia capa (Leaflet usa z-index altos) y el camión del mismo tamaño que los pines. */
+.md-map{z-index:0;isolation:isolate}.mapa-real-punto .md-truck{display:grid;place-items:center;width:28px;height:28px;padding:0}
+/* Ficha del punto verde tocado en el mapa. */
+.md-punto>div:first-child{display:grid;gap:6px;justify-items:start}.md-punto__acciones{display:flex;gap:10px;flex-wrap:wrap}

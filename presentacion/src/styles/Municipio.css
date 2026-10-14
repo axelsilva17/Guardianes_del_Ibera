@@ -78,13 +78,9 @@
 
 /* Mapa de gestión */
 .muni-mapa .muni__content { padding: 16px 18px 24px; overflow: hidden; }
-.muni-mapa__bg { position: absolute; left: -1.75%; top: 4.36%; width: 103.5%; height: 95.64%; object-fit: cover; pointer-events: none; }
+/* Mapa real (OpenStreetMap) debajo del título; filtros y leyenda flotan encima. */
+.muni-mapa__mapa { position: absolute; left: 0; right: 0; top: 52px; bottom: 0; }
 .muni-mapa__legend { display: flex; justify-content: space-between; }
-.muni-mapa__pins { position: absolute; inset: 0; pointer-events: none; }
-.muni-pin { position: absolute; width: 23px; height: 30px; pointer-events: auto; }
-.muni-pin::after { content: ''; position: absolute; inset: -8px -10px; }
-.muni-pin img { display: block; width: 23px; height: 30px; }
-.muni-pin .muni-pin__icon { position: absolute; left: 5px; top: 2px; width: 14px; height: 14px; }
 
 /* Detalle */
 .muni-detalle__foto { width: 100%; height: 257px; object-fit: cover; border-radius: var(--radius-lg); }
@@ -147,9 +143,8 @@
 .muni-perfil { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: var(--radius-md); background: var(--color-green-soft); line-height: 1.4; }
 .muni-perfil strong { font-size: 16px; }
 .muni-perfil span { font-size: 12px; color: var(--color-muted); }
-.muni-mapa__bg { z-index: 0; }
+.muni-mapa__mapa { z-index: 0; }
 .muni-mapa .muni__header, .muni-mapa .muni-filters, .muni-mapa__legend { position: relative; z-index: 1; }
-.muni-mapa__pins { z-index: 1; }
 
 /* Tarjeta de acceso igual a la del portal de comercios en celular: etiqueta, título, frase y campos con nombre e ícono. */
 .muni-login__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .4px; color: #1d4a28; }
@@ -161,3 +156,16 @@
 /* En el celular la pantalla ocupa todo, como la app del ciudadano y el portal de comercios:
    sin el borde ni las esquinas redondeadas del marco (mismo corte que .phone-frame en components.css). */
 @media (max-width: 480px) { .muni { border: 0; border-radius: 0; } }
+
+/* Ficha del punto verde tocado en el mapa: sube desde abajo, como en el mapa del ciudadano. */
+.muni-punto-ficha { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; flex-direction: column; gap: 14px; padding: 16px 20px 18px; border-radius: 20px 20px 0 0; background: var(--white); box-shadow: 0 -6px 20px rgba(5, 77, 64, .18); animation: muni-ficha-in .2s ease-out; }
+@keyframes muni-ficha-in { from { transform: translateY(24px); opacity: 0; } }
+.muni-punto-ficha__head { display: flex; align-items: center; gap: 12px; }
+.muni-punto-ficha__head > div { flex: 1; min-width: 0; }
+.muni-punto-ficha__head h2 { font-size: 15px; line-height: 1.3; }
+.muni-punto-ficha__head p { display: flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 12px; color: var(--color-muted); }
+.muni-punto-ficha__icono { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--color-green-soft); color: var(--color-primary); }
+.muni-punto-ficha__acciones { display: flex; gap: 10px; }
+.muni-punto-ficha__acciones > * { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+@media (prefers-reduced-motion: reduce) { .muni-punto-ficha { animation: none; } }
+.muni-punto-ficha .muni-btn--ghost { border: 1.5px solid var(--color-primary); }

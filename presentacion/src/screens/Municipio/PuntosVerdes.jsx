@@ -23,7 +23,7 @@ export default function PuntosVerdes() {
   const [editando, setEditando] = useState(null)
   const save = p => { guardarPunto(p); setEditando(null) }
   return <MuniScreen title="Puntos verdes" back tab="/municipio/estadisticas">
-    <div className="muni-puntos__new"><button type="button" className="muni-btn" onClick={() => setEditando({ id: `punto-${Date.now()}`, nombre: '', direccion: '', activo: true, x: 180, y: 300 })}><Plus size={20} strokeWidth={1.8} aria-hidden="true" />Nuevo punto</button></div>
+    <div className="muni-puntos__new"><button type="button" className="muni-btn" onClick={() => setEditando({ id: `punto-${Date.now()}`, nombre: '', direccion: '', activo: true, x: 180, y: 300, lat: -28.536, lng: -57.17 })}><Plus size={20} strokeWidth={1.8} aria-hidden="true" />Nuevo punto</button></div>
     {editando && !puntos.some(p => p.id === editando.id) && <Formulario punto={editando} onSave={save} onCancel={() => setEditando(null)} />}
     {puntos.map(p => editando?.id === p.id
       ? <Formulario key={p.id} punto={p} onSave={save} onCancel={() => setEditando(null)} />

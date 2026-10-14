@@ -5,7 +5,7 @@ import useBack from '../hooks/useBack.js'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import MapaReal from '../components/MapaReal.jsx'
+import MapaReal, { CENTRO_PUEBLO } from '../components/MapaReal.jsx'
 import { API_URL } from '../data/api.js'
 import { USER } from '../data/usuario.js'
 import pinReporte from '../assets/mapa/pin-reporte.svg'
@@ -118,7 +118,7 @@ export default function Mapa() {
       <div className="mapa-c">
         <StatusBar />
         <main className="mapa-c__content">
-          <MapaReal className="mapa-c__mapa" pines={pines} onSelect={id => setSelected(selected === id ? null : id)} onFondo={() => setSelected(null)} />
+          <MapaReal className="mapa-c__mapa" pines={pines} onSelect={id => setSelected(selected === id ? null : id)} onFondo={() => setSelected(null)} centro={CENTRO_PUEBLO} />
           <header className="mapa-c__header">
             <button type="button" className="mapa-c__back" aria-label="Volver" onClick={goBack}><ArrowLeft size={22} strokeWidth={1.8} aria-hidden="true" /></button>
             <h1>Mapa</h1>

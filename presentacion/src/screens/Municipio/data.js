@@ -27,17 +27,18 @@ export const AREAS = ['Servicios Públicos', 'Medio Ambiente', 'Higiene Urbana',
 export const PASOS = ['Asignado', 'En camino', 'Intervención']
 
 // `x`/`y`: posición del pin sobre la imagen del mapa (en px del diseño, área de 354×634).
+// `lat`/`lng`: posición real (alrededor de Colonia Carlos Pellegrini) para el mapa de OpenStreetMap.
 export const REPORTES = [
-  { numero: 42, titulo: 'Microbasural', tipo: 'plasticos', ubicacion: 'Calle Panambí · Colonia C. Pellegrini', fecha: 'Hoy', hora: '10:32', estado: 'en_curso', prioridad: 'media', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 10:40' }, x: 221, y: 125 },
-  { numero: 41, titulo: 'Residuos', tipo: 'organicos', ubicacion: 'Costanera · Laguna Iberá', fecha: 'Hoy', hora: '09:15', estado: 'en_curso', prioridad: 'alta', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 09:40' }, x: 120, y: 300 },
-  { numero: 40, titulo: 'Quema de residuos', tipo: 'otros', ubicacion: 'Ruta 40 · km 12', fecha: 'Ayer', hora: '19:05', estado: 'pendiente', prioridad: 'alta', x: 60, y: 520 },
-  { numero: 39, titulo: 'Vidrios en el sendero', tipo: 'vidrio', ubicacion: 'Sendero Carayá', fecha: 'Ayer', hora: '18:20', estado: 'en_curso', prioridad: 'media', area: 'Guardaparques', pasos: { Asignado: 'Ayer 18:50', 'En camino': 'Hoy 08:10' }, x: 300, y: 400 },
-  { numero: 38, titulo: 'Basural en espacio público', tipo: 'plasticos', ubicacion: 'Reserva Natural Iberá', fecha: '09/10', hora: '12:50', estado: 'resuelto', prioridad: 'baja', area: 'Guardaparques', pasos: { Asignado: '09/10 13:10', 'En camino': '10/10 09:00', 'Intervención': '11/10 11:30' }, resuelto: '11/10 16:40', x: 180, y: 220 },
-  { numero: 37, titulo: 'Cartones acumulados', tipo: 'papel', ubicacion: 'Av. San Martín 450', fecha: '12/10', hora: '11:00', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '13/10 10:15', x: 250, y: 560 },
-  { numero: 36, titulo: 'Bolsas en la laguna', tipo: 'plasticos', ubicacion: 'Laguna Iberá · muelle', fecha: '11/10', hora: '15:30', estado: 'resuelto', prioridad: 'alta', area: 'Medio Ambiente', resuelto: '12/10 09:00', x: 150, y: 450 },
-  { numero: 35, titulo: 'Restos de poda', tipo: 'organicos', ubicacion: 'Calle Yacaré', fecha: '10/10', hora: '08:45', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '10/10 17:20', x: 90, y: 160 },
-  { numero: 34, titulo: 'Papeles en el mirador', tipo: 'papel', ubicacion: 'Mirador Iberá', fecha: '09/10', hora: '17:10', estado: 'resuelto', prioridad: 'media', area: 'Guardaparques', resuelto: '10/10 11:40', x: 320, y: 230 },
-  { numero: 33, titulo: 'Electrodoméstico abandonado', tipo: 'otros', ubicacion: 'Acceso al pueblo', fecha: '08/10', hora: '12:00', estado: 'resuelto', prioridad: 'media', area: 'Higiene Urbana', resuelto: '09/10 16:00', x: 40, y: 380 },
+  { numero: 42, titulo: 'Microbasural', tipo: 'plasticos', ubicacion: 'Calle Panambí · Colonia C. Pellegrini', fecha: 'Hoy', hora: '10:32', estado: 'en_curso', prioridad: 'media', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 10:40' }, lat: -28.533, lng: -57.17, x: 221, y: 125 },
+  { numero: 41, titulo: 'Residuos', tipo: 'organicos', ubicacion: 'Costanera · Laguna Iberá', fecha: 'Hoy', hora: '09:15', estado: 'en_curso', prioridad: 'alta', area: 'Servicios Públicos', pasos: { Asignado: 'Hoy 09:40' }, lat: -28.544, lng: -57.164, x: 120, y: 300 },
+  { numero: 40, titulo: 'Quema de residuos', tipo: 'otros', ubicacion: 'Ruta 40 · km 12', fecha: 'Ayer', hora: '19:05', estado: 'pendiente', prioridad: 'alta', lat: -28.5435, lng: -57.1885, x: 60, y: 520 },
+  { numero: 39, titulo: 'Vidrios en el sendero', tipo: 'vidrio', ubicacion: 'Sendero Carayá', fecha: 'Ayer', hora: '18:20', estado: 'en_curso', prioridad: 'media', area: 'Guardaparques', pasos: { Asignado: 'Ayer 18:50', 'En camino': 'Hoy 08:10' }, lat: -28.547, lng: -57.1955, x: 300, y: 400 },
+  { numero: 38, titulo: 'Basural en espacio público', tipo: 'plasticos', ubicacion: 'Reserva Natural Iberá', fecha: '09/10', hora: '12:50', estado: 'resuelto', prioridad: 'baja', area: 'Guardaparques', pasos: { Asignado: '09/10 13:10', 'En camino': '10/10 09:00', 'Intervención': '11/10 11:30' }, resuelto: '11/10 16:40', lat: -28.533, lng: -57.156, x: 180, y: 220 },
+  { numero: 37, titulo: 'Cartones acumulados', tipo: 'papel', ubicacion: 'Av. San Martín 450', fecha: '12/10', hora: '11:00', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '13/10 10:15', lat: -28.5362, lng: -57.1622, x: 250, y: 560 },
+  { numero: 36, titulo: 'Bolsas en la laguna', tipo: 'plasticos', ubicacion: 'Laguna Iberá · muelle', fecha: '11/10', hora: '15:30', estado: 'resuelto', prioridad: 'alta', area: 'Medio Ambiente', resuelto: '12/10 09:00', lat: -28.545, lng: -57.1675, x: 150, y: 450 },
+  { numero: 35, titulo: 'Restos de poda', tipo: 'organicos', ubicacion: 'Calle Yacaré', fecha: '10/10', hora: '08:45', estado: 'resuelto', prioridad: 'baja', area: 'Servicios Públicos', resuelto: '10/10 17:20', lat: -28.532, lng: -57.1745, x: 90, y: 160 },
+  { numero: 34, titulo: 'Papeles en el mirador', tipo: 'papel', ubicacion: 'Mirador Iberá', fecha: '09/10', hora: '17:10', estado: 'resuelto', prioridad: 'media', area: 'Guardaparques', resuelto: '10/10 11:40', lat: -28.5395, lng: -57.158, x: 320, y: 230 },
+  { numero: 33, titulo: 'Electrodoméstico abandonado', tipo: 'otros', ubicacion: 'Acceso al pueblo', fecha: '08/10', hora: '12:00', estado: 'resuelto', prioridad: 'media', area: 'Higiene Urbana', resuelto: '09/10 16:00', lat: -28.542, lng: -57.179, x: 40, y: 380 },
 ]
 
 // Historial adicional de ejemplo para explorar estadísticas y filtros.
@@ -82,10 +83,10 @@ REPORTES.push(...idsDemo.map((n, i) => {
 }))
 
 export const PUNTOS_VERDES = [
-  { id: 'pellegrini', nombre: 'Punto verde Carlos Pellegrini', direccion: 'Colonia Carlos Pellegrini', activo: true, x: 42, y: 160 },
-  { id: 'centro', nombre: 'Centro de reciclaje municipal', direccion: 'Av. San Martín 450', activo: true, x: 286, y: 216 },
-  { id: 'ibera', nombre: 'Punto verde Iberá', direccion: 'Acceso al pueblo', activo: false, x: 97, y: 390 },
-  { id: 'costanera', nombre: 'Punto verde Costanera', direccion: 'Costanera sur', activo: true, x: 281, y: 457 },
+  { id: 'pellegrini', nombre: 'Punto verde Carlos Pellegrini', direccion: 'Colonia Carlos Pellegrini', activo: true, lat: -28.537, lng: -57.172, x: 42, y: 160 },
+  { id: 'centro', nombre: 'Centro de reciclaje municipal', direccion: 'Av. San Martín 450', activo: true, lat: -28.534, lng: -57.165, x: 286, y: 216 },
+  { id: 'ibera', nombre: 'Punto verde Iberá', direccion: 'Acceso al pueblo', activo: false, lat: -28.541, lng: -57.179, x: 97, y: 390 },
+  { id: 'costanera', nombre: 'Punto verde Costanera', direccion: 'Costanera sur', activo: true, lat: -28.545, lng: -57.166, x: 281, y: 457 },
 ]
 
 // Promedio mensual de días hasta resolver un reporte (últimos 12 meses, el último es el actual).
@@ -96,3 +97,9 @@ export const RESOLUCION_MENSUAL = [
 ]
 
 export const numero = n => `#${String(n).padStart(3, '0')}`
+
+// Posición real para el mapa. Los reportes de ejemplo que solo tienen x/y (posición en la ilustración
+// de 354×634) se ubican dentro del casco urbano de Colonia Carlos Pellegrini, respetando su posición relativa.
+export const posicion = item => item.lat != null ? { lat: item.lat, lng: item.lng }
+  : item.x == null ? { lat: -28.536, lng: -57.17 } // sin ubicación: centro del pueblo
+  : { lat: -28.5300 - (item.y / 634) * 0.0110, lng: -57.1780 + (item.x / 354) * 0.0170 }

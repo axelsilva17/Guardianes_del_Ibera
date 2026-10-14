@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate, Navigate } from 'react-router-dom'
 import { House, MapPin, ClipboardList, Gift, Truck, ChartColumn, UserRound, Bell, Building2, ArrowLeft, Plus, Leaf, KeyRound, LogOut, CircleHelp, LockKeyhole } from 'lucide-react'
 import { useMunicipio } from './MunicipioContext.jsx'
-import { AREAS, ESTADOS, PRIORIDADES, TIPOS, PASOS, numero, RESOLUCION_MENSUAL } from './data.js'
+import { AREAS, ESTADOS, PRIORIDADES, TIPOS, PASOS, numero, posicion, RESOLUCION_MENSUAL } from './data.js'
 import MarcaGuardianes from '../../components/MarcaGuardianes.jsx'
 import fondo from '../../assets/images/portada-estero.jpg'
-import mapa from '../../assets/mapa/mapa.webp'
+import MapaReal, { CENTRO_PUEBLO } from '../../components/MapaReal.jsx'
 import foto from '../../assets/municipio/reporte-foto.webp'
 
 
@@ -48,9 +48,21 @@ function Detail({id}) {
   if(!r)return <Navigate to="/municipio/reportes" replace/>
   return <><div className="md-section-heading"><h1><Link aria-label="Volver a reportes" to="/municipio/reportes"><ArrowLeft size={20}/></Link>{numero(r.numero)}</h1><div><Badge type={r.prioridad}>{PRIORIDADES[r.prioridad].label}</Badge> <Badge type={r.estado}>{ESTADOS[r.estado].label}</Badge></div></div><p className="md-muted md-intro">{r.ubicacion}</p><div className="md-columns"><div><Box><div className="md-report-info"><img src={foto} alt={`Foto de ejemplo: ${r.titulo}`}/><dl><dt>Tipo de residuo</dt><dd>{TIPOS[r.tipo].label}</dd><dt>Fecha de reporte</dt><dd>{r.fecha} · {r.hora}</dd><dt>Reportado por</dt><dd>Vecino ciudadano</dd><dt>Prioridad</dt><dd>{PRIORIDADES[r.prioridad].label}</dd></dl></div><h2>Descripción</h2><p>{r.titulo} · Se requiere intervención del equipo municipal.</p></Box><Box title="Historial de acciones"><dl><dt>Reporte creado</dt><dd>{r.fecha} · {r.hora}</dd>{Object.entries(r.pasos||{}).map(([step,date])=><div key={step}><dt>{step}</dt><dd>{date}</dd></div>)}{r.resuelto && <><dt>Resuelto</dt><dd>{r.resuelto}</dd></>}</dl><p className="md-muted">El historial se actualiza con cada acción del equipo municipal.</p></Box></div><div><Box title="Asignación"><label>Área responsable<select value={area} disabled={r.estado==='resuelto'} onChange={e=>{setArea(e.target.value);if(r.estado==='en_curso')cambiarArea(r.numero,e.target.value)}}>{AREAS.map(a=><option key={a}>{a}</option>)}</select></label>{r.estado==='pendiente' && <button className="md-btn" onClick={()=>{asignar(r.numero);cambiarArea(r.numero,area)}}>Asignar</button>}</Box><Box title="Estado"><p><Badge type={r.estado}>{ESTADOS[r.estado].label}</Badge></p>{PASOS.map(step=><button className="md-step" key={step} aria-pressed={!!r.pasos?.[step]} disabled={r.estado!=='en_curso'||!!r.pasos?.[step]} onClick={()=>marcarPaso(r.numero,step)}><span>{r.pasos?.[step]?'●':'○'} {step}</span><small>{r.pasos?.[step]||'Pendiente'}</small></button>)}{r.estado!=='resuelto' && <button className="md-btn md-btn-outline" onClick={()=>resolver(r.numero)}>Marcar como resuelto</button>}</Box></div></div></>
 }
+// Mapa real (OpenStreetMap) con ubicaciones reales. Pines redondos con el color de la prioridad; los cercanos se agrupan.
+const ICONO_PIN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>'
+const ICONO_CAMION = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>'
+// Tocar un punto verde muestra su ficha debajo del mapa; tocar un reporte abre su detalle.
 function MapCanvas({reports=[],points=[],truck=false}) {
-  const [zoom,setZoom]=useState(1)
-  return <div className="md-map"><div className="md-map-layer" style={{transform:`scale(${zoom})`}}><img className="md-map-image" src={mapa} alt="Mapa ilustrativo de Colonia Carlos Pellegrini"/>{reports.map(r=><Link className={`md-pin md-pin--${r.prioridad}`} key={r.numero} to={`/municipio/reportes/${r.numero}`} style={{left:`${r.x/354*100}%`,top:`${r.y/634*100}%`}} aria-label={`${numero(r.numero)} ${r.titulo}`}><MapPin size={19}/></Link>)}{points.filter(p=>p.activo).map(p=><Link key={p.id} className="md-pin md-pin--green" to="/municipio/puntos-verdes" style={{left:`${p.x/354*100}%`,top:`${p.y/634*100}%`}} aria-label={p.nombre}><MapPin size={19}/></Link>)}{truck && <span className="md-truck" style={{left:'42%',top:'65%'}}><Truck size={26}/></span>}</div><div className="md-zoom"><button aria-label="Acercar mapa" onClick={()=>setZoom(z=>Math.min(2,z+.2))}>+</button><button aria-label="Alejar mapa" onClick={()=>setZoom(z=>Math.max(1,z-.2))}>−</button></div></div>
+  const navigate=useNavigate()
+  const [punto,setPunto]=useState(null)
+  const pines=useMemo(()=>[
+    ...points.filter(p=>p.activo).map(p=>({id:`punto:${p.id}`,...posicion(p),label:p.nombre,tono:'verde',suelto:true,seleccionado:punto?.id===p.id,html:`<span class="md-pin md-pin--green">${ICONO_PIN}</span>`})),
+    ...reports.map(r=>({id:`reporte:${r.numero}`,...posicion(r),label:`${numero(r.numero)} ${r.titulo}`,html:`<span class="md-pin md-pin--${r.prioridad}">${ICONO_PIN}</span>`})),
+    ...(truck?[{id:'camion',lat:-28.5365,lng:-57.1705,label:'Camión recolector',tono:'verde',suelto:true,html:`<span class="md-truck">${ICONO_CAMION}</span>`}]:[]),
+  ],[reports,points,truck,punto])
+  const abrir=id=>{const [tipo,valor]=id.split(':');if(tipo==='punto')setPunto(p=>p?.id===valor?null:points.find(x=>x.id===valor));else if(tipo==='reporte')navigate(`/municipio/reportes/${valor}`)}
+  const pos=punto&&posicion(punto)
+  return <><MapaReal className="md-map" pines={pines} onSelect={abrir} onFondo={()=>setPunto(null)} centro={CENTRO_PUEBLO} agrupar={pines.length>20}/>{punto && <Box className="md-map-selected md-punto"><div><span className="md-badge md-badge--activo">Punto verde · Activo</span><strong>{punto.nombre}</strong><p className="md-muted">{punto.direccion}</p></div><div className="md-punto__acciones"><a className="md-btn md-btn-outline" href={`https://www.google.com/maps/dir/?api=1&destination=${pos.lat},${pos.lng}`} target="_blank" rel="noreferrer">Cómo llegar</a><Link className="md-btn" to="/municipio/puntos-verdes">Editar</Link></div></Box>}</>
 }
 function MapScreen() {
   const {reportes,puntos}=useMunicipio(),[state,setState]=useState('todos'),[type,setType]=useState('todos'),[priority,setPriority]=useState('todos'),[zone,setZone]=useState('todos')
