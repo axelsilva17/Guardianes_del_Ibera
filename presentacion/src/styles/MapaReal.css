@@ -1,0 +1,10 @@
+/* Mapa real (Leaflet + OpenStreetMap): mismos pines SVG que en la ilustración. */
+.mapa-real-pin { background: none; border: 0; }
+.mapa-real-pin__cuerpo { position: relative; display: block; width: 23px; height: 30px; transition: transform .15s; transform-origin: bottom center; }
+.mapa-real-pin img { display: block; width: 23px; height: 30px; }
+.mapa-real-pin .mapa-real-pin__icono { position: absolute; left: 5px; top: 2px; width: 14px; height: 14px; }
+.mapa-real-pin.is-selected { z-index: 1000 !important; }
+.mapa-real-pin.is-selected .mapa-real-pin__cuerpo { transform: scale(1.3); }
+.leaflet-container { font: inherit; background: var(--surface-mist); }
+.leaflet-control-attribution { font-size: 9px; }
+@media (prefers-reduced-motion: reduce) { .mapa-real-pin__cuerpo { transition: none; } }

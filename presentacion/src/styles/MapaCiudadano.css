@@ -2,8 +2,8 @@
 .mapa-c { display: flex; flex-direction: column; height: 100%; background: var(--surface); }
 .mapa-c__content { position: relative; display: flex; flex-direction: column; gap: 20px; flex: 1; min-height: 0; overflow: hidden; padding: 16px 18px 24px; }
 .mapa-c__content > * { flex: none; }
-/* El mapa ocupa todo el contenido; encabezado, filtros y leyenda flotan encima. */
-.mapa-c__bg { position: absolute; top: -26px; left: -26px; width: calc(100% + 52px); height: calc(100% + 52px); max-width: none; object-fit: cover; pointer-events: none; }
+/* El mapa real (OpenStreetMap) ocupa todo el contenido; encabezado, filtros y leyenda flotan encima. */
+.mapa-c__mapa { position: absolute; inset: 0; z-index: 0; }
 .mapa-c__header { position: relative; display: flex; align-items: center; gap: 12px; }
 .mapa-c__header h1 { flex: 1; font-size: 20px; line-height: 1.4; color: var(--color-text); text-shadow: 0 0 6px var(--surface), 0 0 2px var(--surface); }
 .mapa-c__back { position: relative; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--radius-full); background: var(--surface-raised); box-shadow: var(--shadow-md); color: var(--color-text); }
@@ -15,17 +15,12 @@
 .mapa-c__chip { padding: 5px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; }
 .mapa-c__chip--green { background: var(--color-green-soft); color: var(--color-primary); }
 .mapa-c__chip--red { background: var(--color-error-soft); color: var(--color-error-mid); }
-.mapa-c__pin { position: absolute; width: 23px; height: 30px; padding: 0; border: 0; background: none; transition: transform .15s; transform-origin: bottom center; }
-.mapa-c__pin::after { content: ''; position: absolute; inset: -8px -10px; }
-.mapa-c__pin.is-selected { transform: scale(1.3); }
-.mapa-c__pin img { display: block; width: 23px; height: 30px; }
-.mapa-c__pin .mapa-c__pin-icon { position: absolute; left: 5px; top: 2px; width: 14px; height: 14px; }
-.mapa-c__header, .mapa-c__filters, .mapa-c__legend, .mapa-c__pin { z-index: 1; }
+.mapa-c__header, .mapa-c__filters, .mapa-c__legend { z-index: 1; }
 
 /* Tarjetas "Info punto" e "Info reporte" (Figma, Page 3): suben desde abajo al tocar un pin. */
 .mapa-info { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; flex-direction: column; gap: 16px; padding: 10px 20px 16px; border-radius: 20px 20px 0 0; background: var(--white); box-shadow: 0 -6px 20px rgba(5, 77, 64, .18); animation: mapa-info-in .2s ease-out; }
 @keyframes mapa-info-in { from { transform: translateY(24px); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .mapa-info { animation: none; } .mapa-c__pin { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .mapa-info { animation: none; } }
 .mapa-info__head { display: flex; align-items: center; gap: 15px; padding: 10px 0 0; }
 .mapa-info__head > img { width: 40px; height: 40px; flex: none; }
 .mapa-info__alert { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 20px; background: var(--color-error); }

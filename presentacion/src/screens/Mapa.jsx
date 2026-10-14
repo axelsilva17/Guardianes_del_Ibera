@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import useBack from '../hooks/useBack.js'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import mapa from '../assets/mapa/mapa.webp'
+import MapaReal from '../components/MapaReal.jsx'
+import { API_URL } from '../data/api.js'
+import { USER } from '../data/usuario.js'
 import pinReporte from '../assets/mapa/pin-reporte.svg'
 import pinReporteIcono from '../assets/mapa/pin-reporte-icono.svg'
 import pinVerde from '../assets/mapa/pin-verde.svg'
@@ -31,15 +33,19 @@ const RESIDUOS = {
   metales: { label: 'Metales', icon: lata },
 }
 
-// Figma, Page 3: "04 · Mapa ciudadano", "Info punto" e "Info reporte". Datos de ejemplo.
-// x/y: posición del pin en px dentro del área del mapa; lat/lng: para "Cómo llegar".
+// Figma, Page 3: "04 · Mapa ciudadano", "Info punto" e "Info reporte". Puntos verdes de ejemplo;
+// los reportes son los de la usuaria, que vienen de la API.
+// lat/lng: posición en el mapa real (OpenStreetMap) y destino de "Cómo llegar". x/y: posición en la ilustración del Figma.
 const MARKERS = [
-  { id: 'report-1', variant: 'report', nombre: 'Basural en espacio público', direccion: 'Ruta 40, acceso a Colonia Pellegrini', estado: 'En revisión', descripcion: 'Residuos acumulados junto a la ruta', x: 239, y: 169, lat: -28.531, lng: -57.168 },
   { id: 'green-1', variant: 'green', nombre: 'Punto verde Carlos Pellegrini', direccion: 'Colonia Carlos Pellegrini', distancia: '0,8 km', recibe: ['plasticos', 'papel', 'vidrios', 'metales'], horario: '08:00 - 21:00', x: 42, y: 204, lat: -28.537, lng: -57.172 },
   { id: 'green-2', variant: 'green', nombre: 'Centro de reciclaje municipal', direccion: 'Av. San Martín 450', distancia: '1,2 km', recibe: ['plasticos', 'papel', 'vidrios', 'metales'], horario: '07:00 - 19:00', x: 286, y: 260, lat: -28.534, lng: -57.165 },
   { id: 'green-3', variant: 'green', nombre: 'Punto verde Iberá', direccion: 'Acceso al pueblo', distancia: '2,1 km', recibe: ['plasticos', 'vidrios'], horario: '09:00 - 18:00', x: 97, y: 434, lat: -28.541, lng: -57.179 },
   { id: 'green-4', variant: 'green', nombre: 'Punto verde Costanera', direccion: 'Costanera sur', distancia: '1,5 km', recibe: ['plasticos', 'papel'], horario: '08:00 - 20:00', x: 281, y: 501, lat: -28.545, lng: -57.166 },
 ]
+// Reportes de la usuaria (API de reportes) convertidos a pines del mapa. Los resueltos no se muestran.
+const ESTADOS_REPORTE = { pendiente: 'Pendiente', en_revision: 'En revisión', resuelto: 'Resuelto' }
+const aPin = r => ({ id: `api-${r.id}`, variant: 'report', nombre: r.titulo, direccion: `Tu reporte #${String(r.numero).padStart(3, '0')}`,
+  estado: ESTADOS_REPORTE[r.estado] || r.estado, descripcion: r.descripcion || 'Sin descripción.', lat: Number(r.lat), lng: Number(r.lng) })
 const FILTERS = [{ id: 'green', label: 'Puntos verdes' }, { id: 'report', label: 'Reportes' }]
 
 const mapsUrl = m => `https://www.google.com/maps/search/?api=1&query=${m.lat},${m.lng}`
@@ -87,19 +93,32 @@ export default function Mapa() {
   const goBack = useBack('/inicio', { section: true })
   const [filter, setFilter] = useState(null) // null: se ve todo; tocar un filtro deja solo ese tipo, tocarlo otra vez vuelve a todo
   const [selected, setSelected] = useState(null)
-  const current = MARKERS.find(m => m.id === selected)
+  const [propios, setPropios] = useState([])
+  // Si la API no responde (servidor apagado o dormido), el mapa sigue con los pines de ejemplo.
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch(`${API_URL}/api/reportes?autorId=${encodeURIComponent(USER.id)}`, { signal: controller.signal })
+      .then(res => res.ok ? res.json() : [])
+      .then(lista => { if (Array.isArray(lista)) setPropios(lista.filter(r => r.estado !== 'resuelto' && Number.isFinite(Number(r.lat)) && Number.isFinite(Number(r.lng))).map(aPin)) })
+      .catch(() => {})
+    return () => controller.abort()
+  }, [])
+  const markers = useMemo(() => [...MARKERS, ...propios], [propios])
+  const current = markers.find(m => m.id === selected)
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') setSelected(null) }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
   function changeFilter(id) { setFilter(filter === id ? null : id); setSelected(null) }
+  const pines = useMemo(() => markers.filter(m => !filter || m.variant === filter).map(m => ({ id: m.id, lat: m.lat, lng: m.lng, label: m.nombre, seleccionado: selected === m.id,
+    iconos: m.variant === 'report' ? [pinReporte, pinReporteIcono] : [pinVerde] })), [markers, filter, selected])
   return (
     <PhoneFrame title="Mapa">
       <div className="mapa-c">
         <StatusBar />
         <main className="mapa-c__content">
-          <img className="mapa-c__bg" src={mapa} alt="" aria-hidden="true" onClick={() => setSelected(null)} />
+          <MapaReal className="mapa-c__mapa" pines={pines} onSelect={id => setSelected(selected === id ? null : id)} onFondo={() => setSelected(null)} />
           <header className="mapa-c__header">
             <button type="button" className="mapa-c__back" aria-label="Volver" onClick={goBack}><ArrowLeft size={22} strokeWidth={1.8} aria-hidden="true" /></button>
             <h1>Mapa</h1>
@@ -108,12 +127,6 @@ export default function Mapa() {
             {FILTERS.map(f => <button key={f.id} type="button" aria-pressed={filter === f.id} className={filter === f.id ? 'is-active' : ''} onClick={() => changeFilter(f.id)}>{f.label}</button>)}
           </div>
           <div className="mapa-c__legend"><span className="mapa-c__chip mapa-c__chip--green">● Punto verde</span><span className="mapa-c__chip mapa-c__chip--red">● Reporte</span></div>
-          {MARKERS.filter(m => !filter || m.variant === filter).map(m => (
-            <button key={m.id} type="button" className={`mapa-c__pin${selected === m.id ? ' is-selected' : ''}`} style={{ left: m.x, top: m.y }} aria-label={`Ver ${m.nombre}`} aria-pressed={selected === m.id} onClick={() => setSelected(selected === m.id ? null : m.id)}>
-              <img src={m.variant === 'report' ? pinReporte : pinVerde} alt="" />
-              {m.variant === 'report' && <img className="mapa-c__pin-icon" src={pinReporteIcono} alt="" />}
-            </button>
-          ))}
           {current && <Info key={current.id} m={current} />}
         </main>
         <BottomNav />
