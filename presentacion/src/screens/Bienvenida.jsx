@@ -9,8 +9,8 @@ import '../styles/Bienvenida.css'
  * Pantalla de bienvenida (Figma "01 Bienvenida", nodo 22:34016).
  *
  * - Fondo: muelle sobre los esteros al atardecer (la misma foto que los portales de Municipio y Comercio).
- * - Logo: logo nuevo en SVG + "GUARDIANES" (Montserrat) + "Iberá" (Bilbo Swash Caps), como en
- *   el Figma (Page 2, "Marca"). Es texto real, así se ve nítido en cualquier pantalla.
+ * - Marca "GUARDIANES x Iberá": logo en SVG + "GUARDIANES" (Montserrat) + "x Iberá" (Bilbo Swash Caps).
+ *   Es texto real, así se ve nítido en cualquier pantalla.
  * - Lema y botón son elementos reales, centrados en columna.
  */
 export default function Bienvenida() {
@@ -23,9 +23,9 @@ export default function Bienvenida() {
         <StatusBar />
 
         <main className="bienvenida__contenido">
-          <h1 className="bienvenida__marca" aria-label="Guardianes del Iberá">
+          <h1 className="bienvenida__marca" aria-label="Guardianes x Iberá">
             <img className="bienvenida__emblema" src={emblema} alt="" aria-hidden="true" />
-            <span className="bienvenida__nombre" aria-hidden="true">GUARDIANES<span className="bienvenida__ibera">Iberá</span></span>
+            <span className="bienvenida__nombre" aria-hidden="true">GUARDIANES<span className="bienvenida__ibera">x Iberá</span></span>
           </h1>
           <p className="bienvenida__lema">Naturaleza que nos une</p>
 
