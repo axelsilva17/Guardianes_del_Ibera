@@ -40,6 +40,7 @@ import MuniResuelto from './screens/Municipio/Resuelto.jsx'
 import MuniEstadisticas from './screens/Municipio/Estadisticas.jsx'
 import MuniPuntosVerdes from './screens/Municipio/PuntosVerdes.jsx'
 import MuniPerfil from './screens/Municipio/Perfil.jsx'
+import { MunicipioExtraMovil } from './screens/Municipio/MunicipioDesktop.jsx'
 import { ComercioRoot, ComercioLogin, ComercioPanel, ComercioBeneficios, ComercioCanjes, ComercioRetiros, ComercioAporte, ComercioPerfil } from './screens/Comercio/Comercio.jsx'
 
 export default function App() {
@@ -80,6 +81,8 @@ export default function App() {
           <Route path="estadisticas" element={<MuniEstadisticas />} />
           <Route path="puntos-verdes" element={<MuniPuntosVerdes />} />
           <Route path="perfil" element={<MuniPerfil />} />
+          <Route path="beneficios" element={<MunicipioExtraMovil page="beneficios" />} />
+          <Route path="recoleccion" element={<MunicipioExtraMovil page="recoleccion" />} />
         </Route>
         <Route path="/comercio" element={<ComercioRoot />}>
           <Route index element={<ComercioLogin />} />

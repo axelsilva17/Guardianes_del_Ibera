@@ -152,3 +152,7 @@ El backend escucha en `process.env.PORT` (por defecto `3000`). En desarrollo el 
 Acceso: /comercio. Incluye panel, beneficios, canjes con QR, solicitudes de retiro, aporte ambiental y perfil. El acceso abre el panel al tocar Entrar, sin exigir usuario ni contraseña; los campos se conservan para una futura autenticación. Las propuestas, solicitudes y datos del comercio se guardan en este navegador (localStorage); no se envían al municipio. Los indicadores ambientales y el historial inicial son datos de ejemplo. El QR identifica al comercio y todavía no valida ni registra canjes en el servidor. El perfil completa la navegación; no se proporcionó una captura de esa pantalla.
 
 
+
+## Vistas del municipio
+
+El selector Escritorio / Celular permite comparar el portal basado en las capturas de escritorio con las pantallas móviles existentes. La elección se recuerda en el navegador; inicialmente se elige por el ancho de pantalla. Reportes y puntos verdes comparten el mismo estado durante la sesión al cambiar de vista, y siguen siendo datos del prototipo en memoria. Beneficios permite aprobar o rechazar propuestas; las propuestas de comercio guardadas en este navegador se leen desde su almacenamiento local. No hay conexión a una base de datos ni sincronización entre dispositivos. Recolección muestra un recorrido de ejemplo y las solicitudes de comercio locales; no utiliza ubicación en vivo. Las estadísticas usan los reportes existentes, con tiempos mensuales de ejemplo.

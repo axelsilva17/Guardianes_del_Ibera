@@ -40,6 +40,47 @@ export const REPORTES = [
   { numero: 33, titulo: 'Electrodoméstico abandonado', tipo: 'otros', ubicacion: 'Acceso al pueblo', fecha: '08/10', hora: '12:00', estado: 'resuelto', prioridad: 'media', area: 'Higiene Urbana', resuelto: '09/10 16:00', x: 40, y: 380 },
 ]
 
+// Historial adicional de ejemplo para explorar estadísticas y filtros.
+// Generación determinista: los datos no cambian aleatoriamente al recargar.
+const ZONAS_DEMO = [
+  ['Barrio Centro', 'Calle San Martín'], ['Barrio Norte', 'Calle Yacaré'],
+  ['Barrio Sur', 'Costanera sur'], ['Barrio Oeste', 'Acceso al pueblo'],
+  ['Barrio Este', 'Calle Carayá'], ['Colonia Pellegrini', 'Ruta 40'],
+]
+const TITULOS_DEMO = {
+  plasticos: ['Envases en la cuneta', 'Bolsas junto al muelle', 'Botellas en el sendero', 'Plásticos en la costa'],
+  organicos: ['Restos de poda acumulados', 'Residuos orgánicos en la vereda', 'Ramas obstruyendo el paso', 'Restos vegetales en la plaza'],
+  papel: ['Cartones fuera del contenedor', 'Papeles en el mirador', 'Cajas acumuladas en la esquina', 'Embalajes junto al punto verde'],
+  vidrio: ['Botellas rotas en la plaza', 'Vidrios en el sendero', 'Frascos fuera del contenedor', 'Vidrios junto a la costanera'],
+  otros: ['Neumáticos abandonados', 'Electrodoméstico en la vía pública', 'Microbasural junto al camino', 'Escombros en terreno baldío'],
+}
+const idsDemo = Array.from({ length: 128 }, (_, i) => 128 - i).filter(n => !REPORTES.some(r => r.numero === n))
+REPORTES.push(...idsDemo.map((n, i) => {
+  const tipoValor = (i * 17) % 100
+  const tipo = tipoValor < 38 ? 'plasticos' : tipoValor < 62 ? 'organicos' : tipoValor < 80 ? 'papel' : tipoValor < 92 ? 'vidrio' : 'otros'
+  const estadoValor = (i * 37) % 118
+  const estado = estadoValor < 33 ? 'pendiente' : estadoValor < 42 ? 'en_curso' : 'resuelto'
+  const prioridad = ['alta', 'media', 'media', 'baja', 'baja', 'media', 'alta'][i % 7]
+  const [zona, calle] = ZONAS_DEMO[i % ZONAS_DEMO.length]
+  const mes = 4 + (i % 7), dia = 1 + ((i * 11) % (mes === 10 ? 13 : 27))
+  const fecha = `${String(dia).padStart(2, '0')}/${String(mes).padStart(2, '0')}/2026`
+  const hora = `${String(7 + (i % 11)).padStart(2, '0')}:${String((i * 13) % 60).padStart(2, '0')}`
+  const area = AREAS[i % AREAS.length]
+  const pasos = estado === 'pendiente' ? undefined : { Asignado: `${fecha} ${hora}` }
+  if (estado === 'resuelto') {
+    pasos['En camino'] = `${fecha} 18:00`
+    pasos.Intervención = `${fecha} 18:30`
+  }
+  return {
+    numero: n, titulo: TITULOS_DEMO[tipo][Math.floor(i / 7) % 4], tipo,
+    ubicacion: `${calle} ${100 + (i % 12) * 50} · ${zona}`, zona,
+    fecha, fechaISO: `2026-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`,
+    hora, estado, prioridad, ...(pasos ? { area, pasos } : {}),
+    ...(estado === 'resuelto' ? { resuelto: `${fecha} 19:00` } : {}),
+    x: 25 + ((i * 47) % 300), y: 70 + ((i * 83) % 510),
+  }
+}))
+
 export const PUNTOS_VERDES = [
   { id: 'pellegrini', nombre: 'Punto verde Carlos Pellegrini', direccion: 'Colonia Carlos Pellegrini', activo: true, x: 42, y: 160 },
   { id: 'centro', nombre: 'Centro de reciclaje municipal', direccion: 'Av. San Martín 450', activo: true, x: 286, y: 216 },
