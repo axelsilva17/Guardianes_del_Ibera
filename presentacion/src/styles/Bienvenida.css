@@ -23,10 +23,11 @@ div.bienvenida .statusbar { color: var(--color-text); }
 
 /* Accesos a los portales institucionales, debajo del botón principal: la pregunta
    hace de etiqueta del grupo y los enlaces van subrayados con la tipografía del lema.
-   Color medido sobre la foto del pie (que es casi negra, #1E270E): el ámbar del sistema
-   da 7.1:1 y pasa AAA. El verde del botón (#336c2c) daría 2.5:1 y se perdería. */
+   Todo el bloque va en el ámbar del sistema, medido sobre la foto del pie (que es casi
+   negra, #1E270E): da 7.1:1 y pasa AAA incluso en el texto de 12px. El verde del botón
+   (#336c2c) daría 2.5:1 y se perdería. */
 .bienvenida__accesos { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.bienvenida__accesos-titulo { margin: 0; font-family: var(--font-display); font-size: 12px; font-weight: 400; letter-spacing: .3px; color: var(--white); text-shadow: 0 1px 4px rgba(0, 0, 0, .45); }
+.bienvenida__accesos-titulo { margin: 0; font-family: var(--font-display); font-size: 12px; font-weight: 400; letter-spacing: .3px; color: var(--color-amber); text-shadow: 0 1px 4px rgba(0, 0, 0, .45); }
 .bienvenida__accesos-enlaces { display: flex; align-items: center; justify-content: center; gap: 24px; }
 .bienvenida__acceso { padding: 8px 4px; font-family: var(--font-display); font-size: 13px; font-weight: 400; letter-spacing: .3px; color: var(--color-amber); text-decoration: underline; text-underline-offset: 3px; text-shadow: 0 1px 4px rgba(0, 0, 0, .45); transition: opacity .18s ease; }
 .bienvenida__acceso:hover { opacity: .82; }
