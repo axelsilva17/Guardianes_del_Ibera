@@ -185,15 +185,21 @@
   .com-canjes{gap:20px}
   .com-table tbody tr{border-color:var(--color-border);border-radius:var(--radius-md)}
   .com-table tbody td{font-size:13px}
-  .com-login{padding:0;background:var(--surface)}
-  .com-login-card{position:relative;min-height:100dvh;border-radius:0;box-shadow:none;background:transparent;display:flex;flex-direction:column;justify-content:space-between;padding:24px 20px;gap:35px}
-  .com-login-photo{position:static;min-height:230px;display:grid;place-items:center;flex:1}
+  /* En celular el formulario quedaba pegado al fondo y, en pantallas de 667px o menos,
+     cortado: la card crecía a 758px dentro de un viewport de 667 y, con body{overflow:hidden},
+     el botón Entrar no se podía alcanzar ni scrolleando.
+     Ahora la foto no se come todo el aire sobrante, los márgenes automáticos centran el
+     conjunto (valen cero cuando no hay lugar, así que nunca recortan) y .com-login
+     scrollea como red de seguridad. */
+  .com-login{padding:0;background:var(--surface);height:100dvh;overflow-y:auto;overscroll-behavior:contain}
+  .com-login-card{position:relative;min-height:100%;border-radius:0;box-shadow:none;background:transparent;display:flex;flex-direction:column;justify-content:flex-start;padding:24px 20px;gap:24px}
+  .com-login-photo{position:static;min-height:0;display:grid;place-items:center;flex:0 1 auto;margin-top:auto}
   .com-login-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;z-index:0;opacity:.85}
-  .com-login-photo .com-marca{position:relative;top:auto;left:auto;z-index:1;flex-direction:column;gap:20px;padding:45px 0}
+  .com-login-photo .com-marca{position:relative;top:auto;left:auto;z-index:1;flex-direction:column;gap:20px;padding:24px 0}
   .com-login-photo .com-marca img{width:90px;height:102px}
   .com-login-photo .com-marca>span{font-size:32px}
   .com-login-photo .com-marca i{font-size:36px;top:23px;right:30px}
-  .com-login-card form{position:relative;z-index:1;background:var(--white);border-radius:var(--radius-md);padding:20px;width:100%;max-width:440px;align-self:center}
+  .com-login-card form{position:relative;z-index:1;background:var(--white);border-radius:var(--radius-md);padding:20px;width:100%;max-width:440px;align-self:center;margin-bottom:auto}
   .com-login h1{font-size:18px}
   .com-login label{margin-bottom:14px}
   .com-login input{min-height:48px;background:#f0f5f3;border-radius:var(--radius-sm)}

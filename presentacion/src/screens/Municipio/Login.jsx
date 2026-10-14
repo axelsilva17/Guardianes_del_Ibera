@@ -2,7 +2,9 @@ import { useNavigate } from 'react-router-dom'
 import PhoneFrame from '../../components/PhoneFrame.jsx'
 import { StatusBar } from './MuniScreen.jsx'
 import fondo from '../../assets/images/portada-estero.jpg'
-import emblema from '../../assets/municipio/emblema.svg'
+// Misma marca que usan la Bienvenida y el login del ciudadano, para que el municipio no
+// quede con el emblema viejo. Es el vector: nítido a cualquier tamaño y pesa 4 KB.
+import emblema from '../../assets/images/logo-guardianes.svg'
 
 // Figma, Page 3: "Login municipal". Prototipo: cualquier usuario entra al panel.
 export default function Login() {
