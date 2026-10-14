@@ -40,6 +40,7 @@ import MuniResuelto from './screens/Municipio/Resuelto.jsx'
 import MuniEstadisticas from './screens/Municipio/Estadisticas.jsx'
 import MuniPuntosVerdes from './screens/Municipio/PuntosVerdes.jsx'
 import MuniPerfil from './screens/Municipio/Perfil.jsx'
+import { ComercioRoot, ComercioLogin, ComercioPanel, ComercioBeneficios, ComercioCanjes, ComercioRetiros, ComercioAporte, ComercioPerfil } from './screens/Comercio/Comercio.jsx'
 
 export default function App() {
   return (
@@ -79,6 +80,15 @@ export default function App() {
           <Route path="estadisticas" element={<MuniEstadisticas />} />
           <Route path="puntos-verdes" element={<MuniPuntosVerdes />} />
           <Route path="perfil" element={<MuniPerfil />} />
+        </Route>
+        <Route path="/comercio" element={<ComercioRoot />}>
+          <Route index element={<ComercioLogin />} />
+          <Route path="panel" element={<ComercioPanel />} />
+          <Route path="beneficios" element={<ComercioBeneficios />} />
+          <Route path="canjes" element={<ComercioCanjes />} />
+          <Route path="retiros" element={<ComercioRetiros />} />
+          <Route path="aporte" element={<ComercioAporte />} />
+          <Route path="perfil" element={<ComercioPerfil />} />
         </Route>
         <Route path="/juego" element={<Juego />} />
         <Route path="/juego/compostar" element={<QuizCompostar />} />

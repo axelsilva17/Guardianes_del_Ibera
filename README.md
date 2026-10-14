@@ -146,3 +146,9 @@ El backend escucha en `process.env.PORT` (por defecto `3000`). En desarrollo el 
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — modelo de capas, responsabilidades y la regla de flujo de datos.
 - [`logica/README.md`](logica/README.md) — como ejecutar la API y la lista de endpoints.
+
+## Portal de comercios
+
+Acceso: /comercio. Incluye panel, beneficios, canjes con QR, solicitudes de retiro, aporte ambiental y perfil. El acceso abre el panel al tocar Entrar, sin exigir usuario ni contraseña; los campos se conservan para una futura autenticación. Las propuestas, solicitudes y datos del comercio se guardan en este navegador (localStorage); no se envían al municipio. Los indicadores ambientales y el historial inicial son datos de ejemplo. El QR identifica al comercio y todavía no valida ni registra canjes en el servidor. El perfil completa la navegación; no se proporcionó una captura de esa pantalla.
+
+
