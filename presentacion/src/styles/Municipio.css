@@ -157,3 +157,7 @@
 .muni-login__intro { margin-top: -6px; font-size: 13px; line-height: 1.4; color: var(--color-muted); }
 .muni-login__form label { display: grid; gap: 7px; font-size: 13px; font-weight: 400; color: var(--color-text); }
 .muni-login__form label > span { display: flex; align-items: center; gap: 6px; }
+
+/* En el celular la pantalla ocupa todo, como la app del ciudadano y el portal de comercios:
+   sin el borde ni las esquinas redondeadas del marco (mismo corte que .phone-frame en components.css). */
+@media (max-width: 480px) { .muni { border: 0; border-radius: 0; } }
