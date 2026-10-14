@@ -1,8 +1,5 @@
-.municipio-preview{min-height:100vh;padding-top:54px}
-.municipio-view-switch{position:fixed;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:center;gap:6px;background:#f3f7f5;border-bottom:1px solid var(--color-border);z-index:50}
-.municipio-view-switch button{padding:7px 18px;min-height:36px;border:1px solid var(--color-border);border-radius:24px;background:white;font-size:13px}
-.municipio-view-switch button[aria-pressed=true]{background:var(--color-primary-dark);color:white;border-color:var(--color-primary-dark)}
-.municipio-preview--celular .phone-stage{min-height:calc(100vh - 54px)}
+.municipio-preview{min-height:100vh}
+.municipio-preview--celular .phone-stage{min-height:100vh}
 .md-shell,.md-login,.md-mobile-extra{--md-bg:#e8f2ed;--md-dark:#204b2a;--md-muted:#7a999c;color:var(--color-text);font-size:14px}
 .md-shell{display:flex;min-height:calc(100dvh - 54px);background:var(--md-bg)}
 .md-shell input,.md-shell select,.md-shell button,.md-login input,.md-login button,.md-mobile-extra input,.md-mobile-extra button,.md-mobile-extra select{font:inherit}

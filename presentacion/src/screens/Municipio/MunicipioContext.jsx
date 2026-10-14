@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useSyncExternalStore } from 'react'
 import { Outlet } from 'react-router-dom'
 import { REPORTES, PUNTOS_VERDES, AREAS } from './data.js'
 import '../../styles/Municipio.css'
@@ -9,10 +9,15 @@ const Ctx = createContext(null)
 
 const ahora = () => `Hoy ${new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`
 
+const CONSULTA_ESCRITORIO = '(min-width: 900px)'
+const suscribirAlAncho = onCambio => { const mq = window.matchMedia(CONSULTA_ESCRITORIO); mq.addEventListener('change', onCambio); return () => mq.removeEventListener('change', onCambio) }
+const esEscritorio = () => window.matchMedia(CONSULTA_ESCRITORIO).matches
+
 /** Estado compartido por todas las pantallas del municipio (en memoria: se pierde al recargar). */
 export function MunicipioRoot() {
-  const [vista, setVista] = useState(() => { try { const v = localStorage.getItem('guardianes-municipio-vista'); if (v === 'desktop' || v === 'celular') return v } catch {} return window.matchMedia('(min-width: 900px)').matches ? 'desktop' : 'celular' })
-  const cambiarVista = v => { setVista(v); try { localStorage.setItem('guardianes-municipio-vista', v) } catch {} }
+  // La vista sale del ancho real de la ventana y reacciona al redimensionar: no hay botones
+  // de Escritorio/Celular ni preferencia guardada que pise la detección automática.
+  const vista = useSyncExternalStore(suscribirAlAncho, esEscritorio) ? 'desktop' : 'celular'
   const [reportes, setReportes] = useState(REPORTES)
   const [puntos, setPuntos] = useState(PUNTOS_VERDES)
   const [perfilMunicipal, guardarPerfil] = useState({ nombre: 'Sofía Martínez', municipio: 'Colonia Carlos Pellegrini' })
@@ -30,7 +35,7 @@ export function MunicipioRoot() {
     resolver: n => update(n, () => ({ estado: 'resuelto', resuelto: ahora() })),
     guardarPunto: punto => setPuntos(list => list.some(p => p.id === punto.id) ? list.map(p => p.id === punto.id ? punto : p) : [...list, punto]),
   }
-  return <Ctx.Provider value={value}><div className={`municipio-preview municipio-preview--${vista}`}><div className="municipio-view-switch" role="group" aria-label="Vista del municipio"><button aria-pressed={vista === 'desktop'} onClick={() => cambiarVista('desktop')}>Escritorio</button><button aria-pressed={vista === 'celular'} onClick={() => cambiarVista('celular')}>Celular</button></div>{vista === 'desktop' ? <MunicipioDesktop /> : <Outlet />}</div></Ctx.Provider>
+  return <Ctx.Provider value={value}><div className={`municipio-preview municipio-preview--${vista}`}>{vista === 'desktop' ? <MunicipioDesktop /> : <Outlet />}</div></Ctx.Provider>
 }
 
 export const useMunicipio = () => useContext(Ctx)
