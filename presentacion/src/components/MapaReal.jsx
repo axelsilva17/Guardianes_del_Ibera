@@ -14,14 +14,16 @@ import '../styles/MapaReal.css'
  *   `iconos`: imágenes del pin (SVG); `html`: un pin propio de 28×28 centrado; `tono` colorea su grupo.
  * agrupar: junta los pines cercanos en un círculo con la cantidad (para cuando hay muchos).
  *   Los pines con `suelto: true` (p. ej. puntos verdes) nunca se agrupan: siempre quedan a la vista.
- * centro: [lat, lng] para arrancar ahí con zoom (en el celular un poco más alejado). Sin `centro`,
+ * centro: [lat, lng] y zoom para arrancar ahí (en el celular medio punto más alejado). Sin `centro`,
  *   el mapa se encuadra para mostrar todos los pines.
  */
 const MOSAICOS = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 const CREDITOS = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>'
 
-// Centro de Colonia Carlos Pellegrini: vista inicial de los mapas.
+// Centro de Colonia Carlos Pellegrini: vista inicial de los mapas del municipio.
 export const CENTRO_PUEBLO = [-28.5355, -57.1690]
+// Polideportivo de Colonia Carlos Pellegrini (calle Tuyuyú, OpenStreetMap): vista inicial del mapa del ciudadano.
+export const CENTRO_POLIDEPORTIVO = [-28.5338, -57.1756]
 
 // Círculo de un grupo de pines: rojo si tiene algún reporte, verde si son solo puntos verdes.
 const iconoGrupo = grupo => {
@@ -30,7 +32,7 @@ const iconoGrupo = grupo => {
   return L.divIcon({ html: `<span>${hijos.length}</span>`, className: `mapa-real-grupo${verde ? ' mapa-real-grupo--verde' : ''}`, iconSize: [36, 36] })
 }
 
-export default function MapaReal({ className, pines, onSelect, onFondo, agrupar = false, centro }) {
+export default function MapaReal({ className, pines, onSelect, onFondo, agrupar = false, centro, zoom = 15 }) {
   const caja = useRef(null)
   const mapa = useRef(null)
   const capa = useRef(null)
@@ -45,7 +47,7 @@ export default function MapaReal({ className, pines, onSelect, onFondo, agrupar 
     L.tileLayer(MOSAICOS, { attribution: CREDITOS, maxZoom: 19 }).addTo(m)
     L.control.zoom({ position: 'bottomright', zoomInTitle: 'Acercar', zoomOutTitle: 'Alejar' }).addTo(m)
     m.attributionControl.setPrefix(false)
-    m.setView(centro || [-28.536, -57.17], centro && caja.current.clientWidth >= 500 ? 15 : centro ? 14.5 : 15)
+    m.setView(centro || [-28.536, -57.17], !centro ? 15 : caja.current.clientWidth >= 500 ? zoom : zoom - .5)
     if (centro) encuadre.current.movido = true // vista fija: no se reencuadra al llegar los pines
     m.on('dragstart', () => { encuadre.current.movido = true })
     m.on('click', () => callbacks.current.onFondo?.())

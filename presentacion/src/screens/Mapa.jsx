@@ -5,7 +5,7 @@ import useBack from '../hooks/useBack.js'
 import PhoneFrame from '../components/PhoneFrame.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 import StatusBar from '../components/StatusBar.jsx'
-import MapaReal, { CENTRO_PUEBLO } from '../components/MapaReal.jsx'
+import MapaReal, { CENTRO_POLIDEPORTIVO } from '../components/MapaReal.jsx'
 import { API_URL } from '../data/api.js'
 import { USER } from '../data/usuario.js'
 import pinReporte from '../assets/mapa/pin-reporte.svg'
@@ -40,7 +40,7 @@ const MARKERS = [
   { id: 'green-1', variant: 'green', nombre: 'Punto verde Carlos Pellegrini', direccion: 'Colonia Carlos Pellegrini', distancia: '0,8 km', recibe: ['plasticos', 'papel', 'vidrios', 'metales'], horario: '08:00 - 21:00', x: 42, y: 204, lat: -28.537, lng: -57.172 },
   { id: 'green-2', variant: 'green', nombre: 'Centro de reciclaje municipal', direccion: 'Av. San Martín 450', distancia: '1,2 km', recibe: ['plasticos', 'papel', 'vidrios', 'metales'], horario: '07:00 - 19:00', x: 286, y: 260, lat: -28.534, lng: -57.165 },
   { id: 'green-3', variant: 'green', nombre: 'Punto verde Iberá', direccion: 'Acceso al pueblo', distancia: '2,1 km', recibe: ['plasticos', 'vidrios'], horario: '09:00 - 18:00', x: 97, y: 434, lat: -28.541, lng: -57.179 },
-  { id: 'green-4', variant: 'green', nombre: 'Punto verde Costanera', direccion: 'Costanera sur', distancia: '1,5 km', recibe: ['plasticos', 'papel'], horario: '08:00 - 20:00', x: 281, y: 501, lat: -28.545, lng: -57.166 },
+  { id: 'green-4', variant: 'green', nombre: 'Punto verde Costanera', direccion: 'Calle Capibara, costanera', distancia: '1,1 km', recibe: ['plasticos', 'papel'], horario: '08:00 - 20:00', x: 281, y: 501, lat: -28.5405, lng: -57.1745 },
 ]
 // Reportes de la usuaria (API de reportes) convertidos a pines del mapa. Los resueltos no se muestran.
 const ESTADOS_REPORTE = { pendiente: 'Pendiente', en_revision: 'En revisión', resuelto: 'Resuelto' }
@@ -118,7 +118,7 @@ export default function Mapa() {
       <div className="mapa-c">
         <StatusBar />
         <main className="mapa-c__content">
-          <MapaReal className="mapa-c__mapa" pines={pines} onSelect={id => setSelected(selected === id ? null : id)} onFondo={() => setSelected(null)} centro={CENTRO_PUEBLO} />
+          <MapaReal className="mapa-c__mapa" pines={pines} onSelect={id => setSelected(selected === id ? null : id)} onFondo={() => setSelected(null)} centro={CENTRO_POLIDEPORTIVO} zoom={14.5} />
           <header className="mapa-c__header">
             <button type="button" className="mapa-c__back" aria-label="Volver" onClick={goBack}><ArrowLeft size={22} strokeWidth={1.8} aria-hidden="true" /></button>
             <h1>Mapa</h1>
