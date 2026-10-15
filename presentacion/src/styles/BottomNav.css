@@ -1,0 +1,4 @@
+/* Menú de abajo: el mismo en todas las pantallas (medidas del Figma, como en Aprender y Perfil). */
+.bottomnav.bottomnav { display: flex; justify-content: space-between; align-items: flex-start; flex: none; height: 74px; padding: 12px 6px 16px; border-top: 1px solid var(--color-track); background: var(--white); }
+.bottomnav .bottomnav__item { width: 64px; gap: 5px; padding: 0; font-size: 10px; line-height: normal; }
+.bottomnav .bottomnav__item.is-active { font-weight: 700; }
